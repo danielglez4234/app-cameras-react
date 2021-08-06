@@ -32,7 +32,7 @@ class App extends Component {
     this.state = {
       connection: connection,
       idCam: [],
-      idCamTest: [],
+      idCamTest: ['xdfxsd', 'sfsdf', 'sdf', 'sfdsf', 'sdf', 'sfdsf', 'sdf', 'sfdsf', 'sfdsf'],
       loading: true,
       connectionError: false,
       apiRestConnectioError: false,
@@ -84,8 +84,11 @@ class App extends Component {
         //onError('Unrecognized message', parsedMessage);
       }
     }
+
     this.state.connection.onopen = function(event) {
-      cp.connect();
+      // setTimeout(function () {
+        cp.connect();
+      // }, 5000);
       console.log("Successfully connected to the websocket server...")
     }
     this.state.connection.onclose = function(event) {
@@ -141,7 +144,6 @@ class App extends Component {
           configuration : { iceServers: [this.state.data.stun, this.state.data.turn]}
         }
 
-
         mapKms.set(camera.id , new kurentoUtils.WebRtcPeer.WebRtcPeerRecvonly(options,  function (error) {
 
           if(error) {
@@ -161,6 +163,7 @@ class App extends Component {
             cp.sendMessage(message);
           });
         })
+
       );
 
     }
@@ -211,6 +214,7 @@ class App extends Component {
 
       <Provider value={{
         idCam: this.state.idCam,
+        idCamTest: this.state.idCamTest,
         loading: this.state.loading,
         connectionError: this.state.connectionError,
         apiRestConnectioError: this.state.apiRestConnectioError
