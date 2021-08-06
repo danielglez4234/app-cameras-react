@@ -2,31 +2,19 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Consumer } from './context';
 
+import logoSrc from '../img/logo.png';
 
 const Nav = () => {
     return(
-      // <nav className="main-nav">
-      //   <ul>
-      //     <li>{/*the "to" sends the :query value to <gallery> to display the text in the title*/}
-      //     <NavLink to="//mountain" onClick={handleSearch}>Mountain</NavLink>
-      //     </li>
-      //     <li>
-      //     <NavLink to="/search/starry%20sky" onClick={handleSearch}>Starry Sky</NavLink>
-      //     </li>
-      //     <li>
-      //     <NavLink to="/search/rivers" onClick={handleSearch}>Rivers</NavLink>
-      //     </li>
-      //   </ul>
-      // </nav>
 
       <nav className="main-menu">
         <div>
           <a href="/">
-            <img className="logo" src="/static/img/logo.png" alt="Gran Telescopio de Canarias" />
+            <img className="logo" src={ logoSrc } alt="Gran Telescopio de Canarias" />
           </a>
        </div>
 
-        <div className="scrollbar.style-1">
+        <div className="scrollbar style-1">
 
           <ul>
 
@@ -51,7 +39,7 @@ const Nav = () => {
               </a>
             </li>
 
-            <li className="darkerli.darkerlishadow">
+            <li className="darkerli darkerlishadow">
               <a href="/create">
                 <i className="fa fa-plus-square fa-lg"></i>
                 <span className="nav-text"> Create Camera </span>
@@ -65,7 +53,7 @@ const Nav = () => {
               </a>
             </li>
 
-            <li className="darkerli.darkerlishadowdown">
+            <li className="darkerli darkerlishadowdown">
               <a href="#">
                 <i className="fa fa-minus-square fa-lg"></i>
                 <span className="nav-text"> Delete Camera </span>

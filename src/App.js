@@ -8,16 +8,22 @@ import {
   Redirect,
   Switch
 } from 'react-router-dom';
-import logo from './logo.svg';
-import './css/App.css';
+
+import loadingSrc from './img/loading.svg';
+import apiNotResponding from './img/apiNotResponding.png';
+// import './css/style.css';
 
 import Nav from './components/Nav';
-// import CotainerVideo from './components/CotainerVideo';
+import ContainerVideo from './components/ContainerVideo';
+import PageNotFound from './components/PageNotFound';
+import ConnectionError from './components/ConnectionError';
+import UpdateCamera from './components/UpdateCamera';
 
 
 
 var connection = new WebSocket('wss://161.72.123.211:8443/kurento');
-const map1 = new Map();
+const mapKms = new Map();
+const mapIdCamTest = new Map();
 
 class App extends Component {
 
@@ -26,8 +32,10 @@ class App extends Component {
     this.state = {
       connection: connection,
       idCam: [],
-      name: 'CamCam',
+      idCamTest: [],
       loading: true,
+      connectionError: false,
+      apiRestConnectioError: false,
       data: {
           count: 0,
           kms : [],
@@ -45,6 +53,7 @@ class App extends Component {
 
 
   componentDidMount() {
+    const cp = this;
     console.log(this.state.data.stun);
     console.log("Starting connection to WebSocket Server")
     var start_vis = this;
@@ -64,7 +73,7 @@ class App extends Component {
         //stop();
         break;
       case 'iceCandidate':
-        map1.get(parsedMessage.idCam).addIceCandidate(parsedMessage.candidate, function (error) {
+        mapKms.get(parsedMessage.idCam).addIceCandidate(parsedMessage.candidate, function (error) {
               if (error) {
               console.error("Error adding candidate: " + error);
               return;
@@ -76,8 +85,14 @@ class App extends Component {
       }
     }
     this.state.connection.onopen = function(event) {
-      //console.log(this.state.data);
-      console.log("Successfully connected to the echo websocket server...")
+      cp.connect();
+      console.log("Successfully connected to the websocket server...")
+    }
+    this.state.connection.onclose = function(event) {
+      cp.setState({ //save the current state of the data
+        connectionError: true
+      });
+      console.log("Failed to connect to the websocket server...")
     }
   }
 
@@ -112,10 +127,6 @@ class App extends Component {
       });
 
 
-    var video1 = document.getElementById('gtcInt');
-    var video2 = document.getElementById('gtcExt');
-    const gtcIntVideo = [video1, video2];
-
     var idCameras = cp.state.idCam;
 
       var i;
@@ -123,7 +134,7 @@ class App extends Component {
 
         console.log(idCameras[i]);
         const camera = idCameras[i];
-        const video = gtcIntVideo[i];
+
         const options = {
           remoteVideo: document.getElementById(camera.id),
           onicecandidate: this.onIceCandidate,
@@ -131,14 +142,14 @@ class App extends Component {
         }
 
 
-        map1.set(camera.id , new kurentoUtils.WebRtcPeer.WebRtcPeerRecvonly(options,  function (error) {
+        mapKms.set(camera.id , new kurentoUtils.WebRtcPeer.WebRtcPeerRecvonly(options,  function (error) {
 
           if(error) {
             return console.error(error);
           }
 
           console.log(camera + ' dentro');
-          const id = camera.id;
+
           this.generateOffer (function (error, offerSdp) {
             if (error) return console.error (error);
 
@@ -157,6 +168,9 @@ class App extends Component {
     })
     .catch(error => {
       console.log('Error fetching and parsing data', error);
+      this.setState({ //save the current state of the data
+        apiRestConnectioError: true
+      });
     });
 
 
@@ -175,10 +189,12 @@ class App extends Component {
 
   startVisualice = (message) => {
     console.log("SDP answer received from server. Processing ...");
-    map1.get(message.idCam).processAnswer (message.sdpAnswer, function (error) {
+    mapKms.get(message.idCam).processAnswer (message.sdpAnswer, function (error) {
       if (error) return console.error (error);
     });
   }
+
+
 
 
   componentWillUnmount(){
@@ -190,30 +206,32 @@ class App extends Component {
 
 
   render() {
+
     return (
 
       <Provider value={{
-        data: this.state.idCam,
-        loading: this.state.loading
+        idCam: this.state.idCam,
+        loading: this.state.loading,
+        connectionError: this.state.connectionError,
+        apiRestConnectioError: this.state.apiRestConnectioError
       }}>
-      // <BrowserRouter>
-      //   <Switch>
-        <div className="App">
-          <Nav />
-            <header className="App-header">
+      <BrowserRouter>
+        <Nav />
+        <div className="rep_prub_cont">
+          <Switch>
+            <Route exact path="/" render={() => // if loading is true h3 is displayed, else the gallery is shown
+              (this.state.connectionError) ? <ConnectionError /> :
+              (this.state.apiRestConnectioError) ? <p><img className="loading connection_error" src={ apiNotResponding } alt="loading"/><span class="message_connection_error api_error">APi REST server is not responding...</span></p> :
+              (this.state.loading) ? <img className="loading connection_error" src={ loadingSrc } alt="loading"/> : <ContainerVideo />
+            } />
+            <Route path="/list" render={() => <ContainerVideo /> } />
+            <Route path="/update" render={() => <UpdateCamera /> } />
 
-            <div className="App-Body">
+            <Route component={PageNotFound} /> {/*only appears when no route matches*/}
 
-            <video id="gtcInt" autoPlay width="500px"></video>
-            <video id="gtcExt" autoPlay width="500px"></video>
-
-            <button className="button_to_show" onClick={this.connect}>show</button>
-
-            </div>
-            </header>
+          </Switch>
         </div>
-      // </Switch>
-      // </BrowserRouter>
+      </BrowserRouter>
     </Provider>
     );
   }
