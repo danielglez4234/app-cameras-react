@@ -46,7 +46,6 @@ class ContainerVideo extends Component {
         return(
           <div>
 
-          {/*This condition is also here so that the text "loading .." appears when a Navlink is clicked or a search is performed*/}
           { (context.connectionError) ? <ConnectionError /> :
             (context.apiRestConnectioError) ? <p><img className="loading connection_error" src={ apiNotResponding } alt="loading"/><span class="message_connection_error api_error">APi REST server is not responding...</span></p> :
             (context.loading) ? <div className="rep_prub_cont"><img className="loading connection_error" src={ loadingSrc } alt="loading"/></div> : videos }

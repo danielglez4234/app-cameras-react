@@ -387,7 +387,7 @@ height: 100%;
   top: 5px;
   right: 5px;
   transition: all .3s ease-out;
-  opacity: 1;
+  opacity: 0;
 }
     .rep_prub:hover .expandir_cont{
       opacity: 1;
@@ -402,42 +402,53 @@ height: 100%;
 }
 
 
-.expandir{
+.expandirIcon{
   position: absolute;
   width: 25px;
   height: 25px;
   margin-top: 3px;
   margin-right: 4px;
   right: 0px;
-  opacity: 1;
+  opacity: 0;
   z-index: 4;
 }
-    .mark_of_top_right_buttons{
+.zoomInIcon{
+  margin-right: 34px;
+}
+.moreInfoIcon{
+  position: absolute;
+  width: 23px;
+  height: 23px;
+  margin-top: 3px;
+  margin-left: 4px;
+  left: 0px;
+  opacity: 0;
+  z-index: 4;
+}
+    .mark_of_top_buttons{
       right: 0px;
       opacity: 0;
       position: absolute;
-      border-right: 30px solid #655f5f;
-      border-top: 30px solid #655f5f;
-      border-left: 30px solid transparent;
-      border-bottom: 30px solid transparent;
+      height: 30px;
+      width: 100%;
+      background-color: #655f5f;
       transition: all .3s ease-out;
     }
-        .rep_prub:hover .mark_of_top_right_buttons{
+        .rep_prub:hover .mark_of_top_buttons{
           opacity: 0.4;
           transition: all .3s ease-out;
+        }
+        .rep_prub:hover .expandirIcon{
+          opacity: 1;
+          transition: all .2s ease-out;
+        }
+        .rep_prub:hover .moreInfoIcon{
+          opacity: 1;
+          transition: all .2s ease-out;
         }
 
 
 
-.button_to_show{
-  position: absolute;
-  left: 50%;
-  height: 200px;
-  width: 200px;
-  margin-left: -100px;
-  margin-top: -100px;
-  top: 50%;
-}
 
 
 
