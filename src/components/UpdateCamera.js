@@ -1,15 +1,21 @@
-import React from 'react';
+import React, { Component }  from 'react';
+import { withRouter } from 'react-router-dom';
+import * as $ from 'jquery';
 
-const UpdateCamera = () => {
+class UpdateCamera extends Component {
+
+  componentDidMount() {
+    $(".update_container").hide().slideDown();
+  }
+
+  render(){
   return(
 
-    <b>
-
-      <div className="update_container update_container_appear_right">
-
-      <h4 className="title_update_cameras"> Update Cameras </h4>
-
-        <form>
+      <div className="update_container">
+        <div className="mark_title_update">
+       <h4 className="title_update_cameras"> Update Cameras </h4>
+       </div>
+        <form className="formCameras">
 
           <div className="omrs-input-group">
             <label className="omrs-input-underlined">
@@ -42,7 +48,7 @@ const UpdateCamera = () => {
           <div className="omrs-input-group">
             <label className="omrs-input-underlined">
               <input required />
-              <span className="omrs-input-label"> Name </span>
+              <span className="omrs-input-label"> Id-Camera </span>
             </label>
           </div>
 
@@ -54,11 +60,17 @@ const UpdateCamera = () => {
                 <span className="cancel"> Cancel </span>
             </button>
           </div>
-          </form>
-        </div>
-    </b>
+      </form>
+
+      <div className="decoration-bottomleftUpdate decoration-bottomLeft1"></div>
+      <div className="decoration-bottomleftUpdate decoration-bottomLeft2"></div>
+      <div className="decoration-bottomRightUpdate decoration-bottomRight1"></div>
+      <div className="decoration-bottomRightUpdate decoration-bottomRight2"></div>
+    </div>
+
 
   );
+  }
 }
 
 

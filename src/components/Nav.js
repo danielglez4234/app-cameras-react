@@ -1,13 +1,30 @@
-import React from 'react';
+import React, { Component }  from 'react';
+import { withRouter } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 import { Consumer } from './context';
+import * as $ from 'jquery';
 
 import logoSrc from '../img/logo.png';
 
-const Nav = () => {
+class Nav extends Component {
+
+
+
+  render(){
     return(
 
-      <nav className="main-menu">
+      <div>
+        <div className="showOrHideButton-div">
+          <a onClick={ this.hideNavBar } className="button-hideNavBar">
+            <i className="fa fa-angle-left fa-lg"></i>
+          </a>
+          <a onClick={ this.expandNavBar } className="button-expandNavBar">
+            <i className="fa fa-angle-double-right fa-lg"></i>
+          </a>
+        </div>
+        <div onClick={ this.unExpandNavArea } className="unExpandNavArea"></div>
+      <nav id="navBar" className="main-menu">
+
         <div>
           <a href="/">
             <img className="logo" src={ logoSrc } alt="Gran Telescopio de Canarias" />
@@ -78,7 +95,34 @@ const Nav = () => {
           </ul>
         </div>
       </nav>
+      </div>
     );
-}
+  }
 
+  hideNavBar = () => {
+    $(".unExpandNavArea").hide();
+    $("#navBar").toggle().removeClass("button-expandNavBar timetransition25s");
+    $(".showOrHideButton-div").toggleClass("moveAlong").removeClass("moveAlongExpand timetransition25s");
+        $(".fa-angle-left").toggleClass("rotate-arrow");
+        $(".fa-angle-double-right").removeClass("rotate-arrow");
+
+    $(".rep_prub_cont").toggleClass("marginLeftCont");
+    
+  }
+  expandNavBar = () => {
+    $(".unExpandNavArea").toggle();
+    $("#navBar").show().addClass("timetransition25s").toggleClass("button-expandNavBar");
+    $(".showOrHideButton-div").removeClass("moveAlong").addClass("timetransition25s").toggleClass("moveAlongExpand");
+        $(".fa-angle-double-right").toggleClass("rotate-arrow");
+        $(".fa-angle-left").removeClass("rotate-arrow");
+
+    $(".rep_prub_cont").removeClass("marginLeftCont");
+  }
+  unExpandNavArea = () => {
+    $(".unExpandNavArea").hide();
+    $("#navBar").removeClass("button-expandNavBar");
+    $(".showOrHideButton-div").removeClass("moveAlongExpand");
+    $(".fa-angle-double-right").removeClass("rotate-arrow");
+  }
+}
 export default Nav;
