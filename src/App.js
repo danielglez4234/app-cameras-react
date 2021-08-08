@@ -18,7 +18,7 @@ import ContainerVideo from './components/ContainerVideo';
 import PageNotFound from './components/PageNotFound';
 import ConnectionError from './components/ConnectionError';
 import UpdateCamera from './components/UpdateCamera';
-
+import CreateCamera from './components/CreateCamera';
 
 
 var connection = new WebSocket('wss://161.72.123.211:8443/kurento');
@@ -33,7 +33,7 @@ class App extends Component {
       connection: connection,
       idCam: [],
       idCamTest: ['xdfxsd', 'sfsdf', 'sdf', 'sfdsf', 'sdf', 'sfdsf', 'sdf', 'sfdsf', 'sfdsf'],
-      loading: true,
+      loading: false,
       connectionError: false,
       apiRestConnectioError: false,
       data: {
@@ -93,7 +93,7 @@ class App extends Component {
     }
     this.state.connection.onclose = function(event) {
       cp.setState({ //save the current state of the data
-        connectionError: true
+        connectionError: false
       });
       console.log("Failed to connect to the websocket server...")
     }
@@ -172,7 +172,7 @@ class App extends Component {
     .catch(error => {
       console.log('Error fetching and parsing data', error);
       this.setState({ //save the current state of the data
-        apiRestConnectioError: true
+        apiRestConnectioError: false
       });
     });
 
@@ -229,6 +229,7 @@ class App extends Component {
               (this.state.loading) ? <img className="loading connection_error" src={ loadingSrc } alt="loading"/> : <ContainerVideo />
             } />
             <Route path="/list" render={() => <ContainerVideo /> } />
+            <Route path="/create" render={() => <CreateCamera /> } />
             <Route path="/update" render={() => <UpdateCamera /> } />
 
             <Route component={PageNotFound} /> {/*only appears when no route matches*/}
