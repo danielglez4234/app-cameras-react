@@ -7,6 +7,7 @@ import './css/foundation.min.css';
 
 import './js/scripts.js';
 
+import './includes/bootstrap.js';
 
 import App from './App';
 import reportWebVitals from './reportWebVitals';
