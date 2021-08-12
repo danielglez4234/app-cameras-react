@@ -5,7 +5,7 @@ import * as $ from 'jquery';
 class UpdateCamera extends Component {
 
   componentDidMount() {
-    $(".update_container").hide().slideDown();
+    // $(".update_container").hide().slideDown();
   }
 
   render(){
@@ -62,10 +62,7 @@ class UpdateCamera extends Component {
           </div>
       </form>
 
-      <div className="decoration-bottomleftUpdate decoration-bottomLeft1"></div>
-      <div className="decoration-bottomleftUpdate decoration-bottomLeft2"></div>
-      <div className="decoration-bottomRightUpdate decoration-bottomRight1"></div>
-      <div className="decoration-bottomRightUpdate decoration-bottomRight2"></div>
+
     </div>
 
 

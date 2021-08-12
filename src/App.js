@@ -33,7 +33,7 @@ class App extends Component {
       connection: connection,
       idCam: [],
       idCamTest: ['xdfxsd', 'sfsdf', 'sdf', 'sfdsf', 'sdf', 'sfdsf', 'sdf', 'sfdsf', 'sfdsf'],
-      loading: false,
+      loading: true,
       connectionError: false,
       apiRestConnectioError: false,
       data: {
@@ -54,12 +54,12 @@ class App extends Component {
 
   componentDidMount() {
     const cp = this;
-    console.log(this.state.data.stun);
+    // console.log(this.state.data.stun);
     console.log("Starting connection to WebSocket Server")
     var start_vis = this;
     this.state.connection.onmessage = function(event){
 
-      console.info('Received message: ' + event);
+      // console.info('Received message: ' + event);
       var parsedMessage = JSON.parse(event.data);
 
       switch (parsedMessage.id) {
@@ -93,7 +93,7 @@ class App extends Component {
     }
     this.state.connection.onclose = function(event) {
       cp.setState({ //save the current state of the data
-        connectionError: false
+        connectionError: true
       });
       console.log("Failed to connect to the websocket server...")
     }
@@ -109,7 +109,7 @@ class App extends Component {
     if (this.state.connection == null) {
       console.log('Connection is null');
     } else {
-      console.log('Sending message: ' + jsonMessage);
+      // console.log('Sending message: ' + jsonMessage);
       this.state.connection.send(jsonMessage);
     }
   }
@@ -135,7 +135,7 @@ class App extends Component {
       var i;
       for (i = 0; i < 2; i++) {
 
-        console.log(idCameras[i]);
+        // console.log(idCameras[i]);
         const camera = idCameras[i];
 
         const options = {
@@ -150,7 +150,7 @@ class App extends Component {
             return console.error(error);
           }
 
-          console.log(camera + ' dentro');
+          // console.log(camera + ' dentro');
 
           this.generateOffer (function (error, offerSdp) {
             if (error) return console.error (error);
@@ -172,7 +172,7 @@ class App extends Component {
     .catch(error => {
       console.log('Error fetching and parsing data', error);
       this.setState({ //save the current state of the data
-        apiRestConnectioError: false
+        apiRestConnectioError: true
       });
     });
 
@@ -181,7 +181,7 @@ class App extends Component {
 
 
   onIceCandidate = (candidate) => {
-    console.log("Local candidate" + JSON.stringify(candidate));
+    // console.log("Local candidate" + JSON.stringify(candidate));
     var message = {
       id: 'onIceCandidate',
       candidate: candidate

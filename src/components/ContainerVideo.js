@@ -17,7 +17,7 @@ class ContainerVideo extends Component {
       <Consumer>
       { context => {
         let videos;
-        const result = context.idCamTest; //we save the data in the result variable
+        const result = context.idCam; //we save the data in the result variable
         // console.log(result.length + 'totalPages');
 
         if (result === undefined){

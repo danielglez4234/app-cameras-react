@@ -19,7 +19,12 @@ body
 .displayBlock{
   display: block !important;
 }
-
+.marginleft_alignErrorMessageIcon{
+  margin-left:-82px !important;
+}
+.marginleft_alignErrorMessageText{
+  margin-left: -171px !important;
+}
 
 /* @import url(//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
 }
@@ -501,24 +506,24 @@ height: 100%;
     .connection_error{
       width: 100px;
       height: 100px;
-      margin-left: -116px;
+      margin-left: -16px;
       margin-top: -50px;
     }
     .message_connection_error{
       left: 50%;
       position: absolute;
       text-align: center;
-      margin-left: -123px;
+      margin-left: -23px;
       top: 50%;
       margin-top: 59px;
       color: #8a8a8a;
     }
 .error_kurento{
-  margin-left:-205px;
+  margin-left:-105px;
 }
 
 .api_error{
-  margin-left: -177px;
+  margin-left: -77px;
 }
 
 .bar-bottom{
@@ -625,7 +630,6 @@ height: 100%;
 	justify-content: space-around;
 	margin-top: 30px;
 	padding: 21px;
-	border-radius: 4px;
   box-shadow: 2px 2px 20px #1f1f21;
   background-color: #424448;
   transition: all .3s ease-out;
@@ -635,17 +639,15 @@ height: 100%;
 
 
 .mark_title_update{
-  background-color: #658d98;
+  background-color: #62adc1;
   margin-right: -21px;
   margin-left: -21px;
   padding: 1px 0px;
   margin-top: -21px;
-  border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
   margin-bottom: 18px;
 }
 .mark_title_create{
-  background-color: #659876 !important;
+  background-color: #658d98 !important;
 }
 .title_update_cameras{
   color: #f7f7f7;
@@ -747,7 +749,7 @@ height: 100%;
   display: block;
   width: 150px;
   height: 100%;
-  background-color: #0f161d;
+  background-color: #313338;
   cursor: pointer;
   color: #e0e0e0;
   transition: all 0.15s ease;

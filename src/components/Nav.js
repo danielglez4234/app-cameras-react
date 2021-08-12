@@ -107,7 +107,9 @@ class Nav extends Component {
         $(".fa-angle-double-right").removeClass("rotate-arrow");
 
     $(".rep_prub_cont").toggleClass("marginLeftCont");
-    
+    $(".connection_error").toggleClass("marginleft_alignErrorMessageIcon");
+    $(".message_connection_error").toggleClass("marginleft_alignErrorMessageText");
+
   }
   expandNavBar = () => {
     $(".unExpandNavArea").toggle();
