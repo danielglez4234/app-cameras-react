@@ -4,6 +4,12 @@ import * as $ from 'jquery';
 import axios from 'axios';
 import NGSI from 'ngsijs';
 import '../setProxy.js';
+// import notifee from '@notifee/react-native';
+
+// async function onDisplayNotification() {
+//   await notifee.displayNotification({
+//   });
+// }
 
 // import { v4 as uuidv4 } from 'uuid';
 //
@@ -21,6 +27,7 @@ import '../setProxy.js';
 
 
 const options = {
+    'Accept': 'application/json',
     'Content-Type': 'application/json'
 };
 const body = {
@@ -36,9 +43,10 @@ const body = {
     "notification": {
     "onlyChangedAttrs":true,
       "http": {
-      "url": "http://localhost:3000/"
+      "url": "http://localhost:1028/"
       }
     },
+    "duration":"PT10S",
     "throttling": 1
   };
 
@@ -55,65 +63,21 @@ class CreateCamera extends Component {
     };
   }
 
+  getTriggerNotificationIds = () => {
+    var data = Notification.data
+    console.log(data  + ' la data??? ;-;');
+  };
+
   componentDidMount() {
 
 
-
     // $(".update_container").hide().slideDown();
-    console.log(this.state.subscriptionId);
+    console.log(this.state.subscriptionId + 'actual');
 
     // window.removeEventListener('beforeunload', this.deleteSubscription);
     window.addEventListener('beforeunload', this.deleteSubscription);
-    this.createSubscription();
-    // this.deleteSubscription(this.state.subscriptionId);
-
-    // axios.get("http://161.72.123.211:1026/v2/subscriptions", { headers: options	})
-    //   .then(response => {
-    //       this.setState({ //save the current state of the data
-    //         sds: response.headers['location'].split('/')[3]
-    //       });
-    //       console.log(response.data.id);
-    //       console.log(this.state.subscriptionId + " dentro creación");
-    //   })
-    //   .catch(error => {
-    //     console.log('Error fetching and parsing data on the ORION context brocker', error);
-    //     console.log('ghhjhhj', error);
-    //   });
-
-    // axios.get("http://161.72.123.211:1026/v2/subscriptions", { headers: options	})
-    //   .then(response => {
-    //     console.log(response.data[0].id);
-    //   })
-    //   .catch(error => {
-    //     console.log('Error fetching and parsing data on the ORION context brocker', error);
-    //     console.log('ghhjhhj', error);
-    //   });
-
-
-
-                        const createBodyEntities = {
-                          "id":"Room7",
-                          "type":"Room",
-                          "pressure": {
-                            "type":"Integer",
-                            "value":14434340000,
-                            "metadata":{}
-                          },
-                          "temperature": {
-                            "type":"Float",
-                            "value":123123123123,
-                            "metadata":{}
-                          }
-                        };
-                        axios.post("http://161.72.123.211:1026/v2/entities", createBodyEntities, { headers: options	})
-                          .then(response => {
-                            console.log('GET ENTITIES BY ID = ' + response.data[3].temperature.type);
-
-                          })
-                          .catch(error => {
-                            console.log('Error fetching and parsing data on the ORION context brocker', error);
-                            console.log('ghhjhhj', error);
-                          });
+    // this.createSubscription();
+    this.deleteSubscription(this.state.subscriptionId);
 
 
 
@@ -121,32 +85,68 @@ class CreateCamera extends Component {
 
 
 
-
+                        // const createBodyEntities = {
+                        //   "id":"Room7",
+                        //   "type":"Room",
+                        //   "pressure": {
+                        //     "type":"Integer",
+                        //     "value":14434340000,
+                        //     "metadata":{}
+                        //   },
+                        //   "temperature": {
+                        //     "type":"Float",
+                        //     "value":123123123123,
+                        //     "metadata":{}
+                        //   }
+                        // };
+                        // axios.post("http://161.72.123.211:1026/v2/entities", createBodyEntities, { headers: options	})
+                        //   .then(response => {
+                        //     console.log('GET ENTITIES BY ID = ' + response.data[3].temperature.type);
                         //
-                        //   const updateBodyEntities = {
-                        //     "id":"Room3",
-                        //     "type":"Room",
-                        //     "pressure": {
-                        //       "type":"Integer",
-                        //       "value":800000000000,
-                        //       "metadata":{}
-                        //     },
-                        //     "temperature": {
-                        //       "type":"Float",
-                        //       "value":4400000000,
-                        //       "metadata":{}
-                        //     }
-                        //   };
-                        //   axios.put("http://161.72.123.211:1026/v2/entities", updateBodyEntities, { headers: options	})
-                        //     .then(response => {
-                        //       console.log('GET SUBSCRIPTION BY URL = ' + response.data.description);
-                        //       console.log('GET NOTIFICATION BY CHANGE = ' + response.data.id + ' ' + response.data.id);
-                        //     })
-                        //     .catch(error => {
-                        //       console.log('Error fetching and parsing data on the ORION context brocker', error);
-                        //       console.log('ghhjhhj', error);
-                        //     });
-                        //
+                        //   })
+                        //   .catch(error => {
+                        //     console.log('Error fetching and parsing data on the ORION context brocker', error);
+                        //     console.log('ghhjhhj', error);
+                        //   });
+
+                          const pressureValue = 777;
+                          const temperatureValue = 666;
+                          const idEntities = "Room6";
+                          const updateBodyEntities = {
+                            "pressure": {
+                              "type":"Integer",
+                              "value":pressureValue,
+                              "metadata":{}
+                            },
+                            "temperature": {
+                              "type":"Float",
+                              "value": temperatureValue,
+                              "metadata":{}
+                            }
+                          };
+                          axios.put("http://161.72.123.211:1026/v2/entities/"+ idEntities +"/attrs?options=append", updateBodyEntities, { headers: options	})
+                            .then(response => {
+                              console.log('GET SUBSCRIPTION BY URL = ' + response.data.description);
+                              console.log('GET NOTIFICATION BY CHANGE = ' + response.data.id + ' ' + response.data.id);
+                            })
+                            .catch(error => {
+                              console.log('Error fetching and parsing data on the ORION context brocker', error);
+                              console.log('ghhjhhj', error);
+                            });
+
+
+                          // const deleteEntityId = "Room7";
+                          // const deleteEntityType = "Room";
+                          // axios.delete("http://161.72.123.211:1026/v2/entities/"+ deleteEntityId +"?type="+ deleteEntityType +"", { headers: options	})
+                          //   .then(response => {
+                          //     console.log('GET SUBSCRIPTION BY URL = ' + response.data.description);
+                          //     console.log('GET NOTIFICATION BY CHANGE = ' + response.data.id + ' ' + response.data.id);
+                          //   })
+                          //   .catch(error => {
+                          //     console.log('Error fetching and parsing data on the ORION context brocker', error);
+                          //     console.log('ghhjhhj', error);
+                          //   });
+
 
 
   }
