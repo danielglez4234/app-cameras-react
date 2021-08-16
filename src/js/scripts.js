@@ -1,4 +1,4 @@
-// import * as $ from 'jquery';
+import * as $ from 'jquery';
 
 
   // alert( "Handler for .click() called." );
@@ -16,3 +16,13 @@
 
 
 console.log('script.js is working');
+
+setTimeout(function(){
+  console.log($('.rep_prub').length);
+
+
+}, 1);
+
+
+
+// -----------------------
