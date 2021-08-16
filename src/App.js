@@ -32,8 +32,8 @@ class App extends Component {
     this.state = {
       connection: connection,
       idCam: [],
-      idCamTest: ['xdfxsd', 'sfsdf', 'sdf', 'sfdsf', 'sdf', 'sfdsf', 'sdf', 'sfdsf', 'sfdsf'],
-      loading: true,
+      idCamTest: ['abc'],
+      loading: false,
       connectionError: false,
       apiRestConnectioError: false,
       data: {
@@ -93,7 +93,7 @@ class App extends Component {
     }
     this.state.connection.onclose = function(event) {
       cp.setState({ //save the current state of the data
-        connectionError: true
+        connectionError: false
       });
       console.log("Failed to connect to the websocket server...")
     }
@@ -172,7 +172,7 @@ class App extends Component {
     .catch(error => {
       console.log('Error fetching and parsing data', error);
       this.setState({ //save the current state of the data
-        apiRestConnectioError: true
+        apiRestConnectioError: false
       });
     });
 
