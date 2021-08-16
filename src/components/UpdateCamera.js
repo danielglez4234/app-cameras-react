@@ -53,15 +53,19 @@ class UpdateCamera extends Component {
           </div>
 
           <div className="buttons-cont">
-            <button className="btn-6">
-              <span className="submit"> Update </span>
-            </button>
-            <button className="btn-6">
-                <span className="cancel"> Cancel </span>
-            </button>
-          </div>
-      </form>
+          <button className="btn-6">
+            <i className="fa fa-undo fa-lg icon-FormButton"></i>
+            <span className="submit"> Update </span>
+          </button>
 
+          <a  href="/" className="btn-6 btn-6-cancel">
+              <i className="fa fa-arrow-circle-left fa-lg icon-FormButton-cancel"></i>
+              <span className="cancel"> Cancel </span>
+          </a>
+          </div>
+
+      </form>
+      <div className="buttonsDiv-background"></div>
 
     </div>
 

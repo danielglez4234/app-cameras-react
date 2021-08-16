@@ -256,14 +256,22 @@ class CreateCamera extends Component {
 
           <div className="buttons-cont">
             <button className="btn-6">
+              <i className="fa fa-folder-open fa-lg icon-FormButton"></i>
               <span className="submit"> Create </span>
             </button>
-            <button className="btn-6">
-                <span className="cancel"> Cancel </span>
-            </button>
-          </div>
-      </form>
 
+            <a  href="/" className="btn-6 btn-6-cancel">
+                <i className="fa fa-arrow-circle-left fa-lg icon-FormButton-cancel"></i>
+                <span className="cancel"> Cancel </span>
+            </a>
+          </div>
+          <button type="reset" className="btn-6 btn-6-reset">
+            <i className="fa fa-reply fa-lg icon-FormButton-reset"></i>
+            <span className="reset"> Reset </span>
+          </button>
+
+      </form>
+      <div className="buttonsDiv-background"></div>
 
     </div>
 
