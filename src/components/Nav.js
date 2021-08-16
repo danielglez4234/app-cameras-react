@@ -102,11 +102,12 @@ class Nav extends Component {
   hideNavBar = () => {
     $(".unExpandNavArea").hide();
     $("#navBar").toggle().removeClass("button-expandNavBar timetransition25s");
-    $(".showOrHideButton-div").toggleClass("moveAlong").removeClass("moveAlongExpand timetransition25s");
+    $(".showOrHideButton-div").toggleClass("moveAlong").removeClass("moveAlongExpand timetransition25s").addClass("timetransition0s");
         $(".fa-angle-left").toggleClass("rotate-arrow");
         $(".fa-angle-double-right").removeClass("rotate-arrow");
 
-    $(".rep_prub_cont").toggleClass("marginLeftCont");
+    $(".rep_prub_cont").toggleClass("marginLeft-0-Cont");
+    $(".rep_prub_cont_inside").toggleClass("paddinfLeft-0");
     $(".connection_error").toggleClass("marginleft_alignErrorMessageIcon");
     $(".message_connection_error").toggleClass("marginleft_alignErrorMessageText");
 
@@ -114,11 +115,12 @@ class Nav extends Component {
   expandNavBar = () => {
     $(".unExpandNavArea").toggle();
     $("#navBar").show().addClass("timetransition25s").toggleClass("button-expandNavBar");
-    $(".showOrHideButton-div").removeClass("moveAlong").addClass("timetransition25s").toggleClass("moveAlongExpand");
+    $(".showOrHideButton-div").removeClass("moveAlong timetransition0s").addClass("timetransition25s").toggleClass("moveAlongExpand");
         $(".fa-angle-double-right").toggleClass("rotate-arrow");
         $(".fa-angle-left").removeClass("rotate-arrow");
 
-    $(".rep_prub_cont").removeClass("marginLeftCont");
+    $(".rep_prub_cont").removeClass("marginLeft-0-Cont");
+    $(".rep_prub_cont_inside").removeClass("paddinfLeft-0");
   }
   unExpandNavArea = () => {
     $(".unExpandNavArea").hide();
