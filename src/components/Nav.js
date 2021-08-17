@@ -8,7 +8,9 @@ import logoSrc from '../img/logo.png';
 
 class Nav extends Component {
 
-
+   editCameras = () => {
+     $('updateCameraButton').toggle()
+   }
 
   render(){
     return(
@@ -57,31 +59,24 @@ class Nav extends Component {
             </li>
 
             <li className="darkerli darkerlishadow">
-              <a href="/create">
+              <NavLink to="/create">
                 <i className="fa fa-plus-square fa-lg"></i>
-                <span className="nav-text"> Create Camera </span>
-              </a>
-            </li>
-
-            <li className="darkerli">
-              <a href="/update">
-                <i className="fa fa-edit fa-lg"></i>
-                <span className="nav-text"> Update Camera </span>
-              </a>
+                <span className="nav-text"> Add Camera </span>
+              </NavLink>
             </li>
 
             <li className="darkerli darkerlishadowdown">
-              <a href="#">
-                <i className="fa fa-minus-square fa-lg"></i>
-                <span className="nav-text"> Delete Camera </span>
-              </a>
+              <NavLink to="/" onClick={this.editCameras}>
+                <i className="fa fa-edit fa-lg"></i>
+                <span className="nav-text"> Edit </span>
+              </NavLink>
             </li>
 
             <li>
-              <a href="#">
+              <NavLink to="#">
                 <i className="fa fa-filter fa-lg"></i>
                 <span className="nav-text"> Filter </span>
-              </a>
+              </NavLink>
             </li>
 
           </ul>
