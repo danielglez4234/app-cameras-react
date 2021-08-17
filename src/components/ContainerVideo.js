@@ -21,21 +21,21 @@ class ContainerVideo extends Component {
   }
 
     adjustVideoContainer = (countvideos) => {
-      if (countvideos == 1) {
-        $('.rep_prub').addClass('with-height-1')
-          .removeClass('with-height-2 with-height-3 with-height-5 with-height-7');
-      }else if (countvideos == 2) {
-        $('.rep_prub').addClass('with-height-2')
-          .removeClass('with-height-1 with-height-3 with-height-5 with-height-7');
-      }else if (countvideos == 3 || countvideos == 4) {
-        $('.rep_prub').addClass('with-height-3')
-          .removeClass('with-height-1 with-height-2 with-height-5 with-height-7');
-      }else if (countvideos == 5 || countvideos == 6) {
-        $('.rep_prub').addClass('with-height-5')
-          .removeClass('with-height-1 with-height-2 with-height-3 with-height-7');
-      }else if (countvideos == 7 || countvideos == 8 || countvideos == 9) {
-        $('.rep_prub').addClass('with-height-7')
-          .removeClass('with-height-1 with-height-2 with-height-3 with-height-5');
+      if (countvideos === 1) {
+        $('.rep_prub').addClass('width-height-1')
+          .removeClass('width-height-2 width-height-3 width-height-5 width-height-7');
+      }else if (countvideos === 2) {
+        $('.rep_prub').addClass('width-height-2')
+          .removeClass('width-height-1 width-height-3 width-height-5 width-height-7');
+      }else if (countvideos === 3 || countvideos === 4) {
+        $('.rep_prub').addClass('width-height-3')
+          .removeClass('width-height-1 width-height-2 width-height-5 width-height-7');
+      }else if (countvideos === 5 || countvideos === 6) {
+        $('.rep_prub').addClass('width-height-5')
+          .removeClass('width-height-1 width-height-2 width-height-3 width-height-7');
+      }else if (countvideos === 7 || countvideos === 8 || countvideos === 9) {
+        $('.rep_prub').addClass('width-height-7')
+          .removeClass('width-height-1 width-height-2 width-height-3 width-height-5');
       }
     }
 
@@ -45,7 +45,7 @@ class ContainerVideo extends Component {
       <Consumer>
       { context => {
         let videos;
-        const result = context.idCamTest; //we save the data in the result variable
+        const result = context.idCam; //we save the data in the result variable
         // console.log(result.length + 'totalPages');
 
         if (result === undefined){

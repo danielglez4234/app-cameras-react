@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import kurentoUtils from 'kurento-utils';
 import { Provider } from './components/context';
 import axios from 'axios';
+import * as $ from 'jquery';
 import {
   BrowserRouter,
   Route,
@@ -19,6 +20,7 @@ import PageNotFound from './components/PageNotFound';
 import ConnectionError from './components/ConnectionError';
 import UpdateCamera from './components/UpdateCamera';
 import CreateCamera from './components/CreateCamera';
+import AddCamera from './components/AddCamera';
 
 
 var connection = new WebSocket('wss://161.72.123.211:8443/kurento');
@@ -32,13 +34,13 @@ class App extends Component {
     this.state = {
       connection: connection,
       idCam: [],
-      idCamTest: ['abc'],
-      loading: false,
+      idCamTest: ['abc','abc','abc'],
+      loading: true,
       connectionError: false,
       apiRestConnectioError: false,
       data: {
           count: 0,
-          kms : [],
+          kms : ['abc'],
           stun : {
             "urls" : "stun:161.72.123.211:3478"
           },
@@ -86,14 +88,14 @@ class App extends Component {
     }
 
     this.state.connection.onopen = function(event) {
-      // setTimeout(function () {
-        cp.connect();
-      // }, 5000);
+
+      cp.connect();
+
       console.log("Successfully connected to the websocket server...")
     }
     this.state.connection.onclose = function(event) {
       cp.setState({ //save the current state of the data
-        connectionError: false
+        connectionError: true
       });
       console.log("Failed to connect to the websocket server...")
     }
@@ -118,7 +120,7 @@ class App extends Component {
 
 
   connect = () => {
-    var cp = this;
+    var _this = this;
 
     axios.get(`https://161.72.123.211:8443/cameras`)
     .then(response => {
@@ -130,49 +132,64 @@ class App extends Component {
       });
 
 
-    var idCameras = cp.state.idCam;
-
-      var i;
-      for (i = 0; i < 2; i++) {
-
-        // console.log(idCameras[i]);
-        const camera = idCameras[i];
-
-        const options = {
-          remoteVideo: document.getElementById(camera.id),
-          onicecandidate: this.onIceCandidate,
-          configuration : { iceServers: [this.state.data.stun, this.state.data.turn]}
-        }
-
-        mapKms.set(camera.id , new kurentoUtils.WebRtcPeer.WebRtcPeerRecvonly(options,  function (error) {
-
-          if(error) {
-            return console.error(error);
-          }
-
-          // console.log(camera + ' dentro');
-
-          this.generateOffer (function (error, offerSdp) {
-            if (error) return console.error (error);
-
-            var message = {
-              id : 'sdpOffer',
-              idCam : camera.id,
-              sdpOffer : offerSdp
+      var checkExists= setInterval(function () {
+        
+        if (_this.state.idCam.length > 0) {
+          var videoReady = true;
+          for (var i = 0; i < _this.state.idCam.length; i++) {
+            if (!videoReady || !$(_this.state.idCam[i].id)) {
+              videoReady = false;
             }
-            cp.sendMessage(message);
-          });
-        })
+          }
+          if (videoReady) {
 
-      );
+            console.log('paso??');
+            var idCameras = _this.state.idCam;
 
+              var i;
+              for (i = 0; i < idCameras.length; i++) {
+
+                // console.log(idCameras[i]);
+                const camera = idCameras[i];
+
+                const options = {
+                  remoteVideo: document.getElementById(camera.id),
+                  onicecandidate: _this.onIceCandidate,
+                  configuration : { iceServers: [_this.state.data.stun, _this.state.data.turn]}
+                }
+
+                mapKms.set(camera.id , new kurentoUtils.WebRtcPeer.WebRtcPeerRecvonly(options,  function (error) {
+
+                  if(error) {
+                    return console.error(error);
+                  }
+
+                  // console.log(camera + ' dentro');
+
+                  this.generateOffer (function (error, offerSdp) {
+                    if (error) return console.error (error);
+
+                    var message = {
+                      id : 'sdpOffer',
+                      idCam : camera.id,
+                      sdpOffer : offerSdp
+                    }
+                    _this.sendMessage(message);
+                  });
+                })
+              );
+            }
+
+            clearInterval(checkExists);
+      }
     }
 
+  }, 1000);
     })
     .catch(error => {
       console.log('Error fetching and parsing data', error);
       this.setState({ //save the current state of the data
-        apiRestConnectioError: false
+        apiRestConnectioError: true
       });
     });
 
@@ -230,7 +247,9 @@ class App extends Component {
             } />
             <Route path="/list" render={() => <ContainerVideo /> } />
             <Route path="/create" render={() => <CreateCamera /> } />
+            <Route path="/add" render={() => <AddCamera /> } />
             <Route path="/update" render={() => <UpdateCamera /> } />
+
 
             <Route component={PageNotFound} /> {/*only appears when no route matches*/}
 

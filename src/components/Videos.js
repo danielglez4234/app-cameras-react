@@ -1,8 +1,14 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 
 import expandirPng from '../img/expand.png';
 import moreInfo from '../img/moreInfo.png';
 import zoomIn from '../img/zoomIn.png';
+
+
+import vidon from '../img/vid.mp4';
+
+
 
 const Videos = ({ name }) => {
   return(
@@ -19,7 +25,9 @@ const Videos = ({ name }) => {
       <img src={ expandirPng } alt="expand" className="expandIcon" />
       <img src={ zoomIn } alt="zoom in" className="expandIcon zoomInIcon" />
       <img src={ moreInfo } alt="more info" className="moreInfoIcon" />
-      <video id={ name.id } autoPlay className="video_stream"></video>
+
+      <video id={ name.id } autoPlay muted className="video_stream"></video>
+      {/*<video src={vidon} autoPlay muted className="video_stream" />*/}
 
       <div className="rep_prub-info">
         <hr className="info_separator" />
