@@ -63,68 +63,58 @@ class CreateCamera extends Component {
     };
   }
 
-  getTriggerNotificationIds = () => {
-    var data = Notification.data
-    console.log(data  + ' la data??? ;-;');
-  };
+  // getTriggerNotificationIds = () => {
+  //   var data = Notification.data
+  //   console.log(data  + ' la data??? ;-;');
+  // };
 
   componentDidMount() {
+    $('#userForcamera').hide();
+    $('#pwdForCamera').hide();
+    console.log($('#userForcamera'))
+    //
+    // // $(".update_container").hide().slideDown();
+    // console.log(this.state.subscriptionId + 'actual');
+    //
+    // // window.removeEventListener('beforeunload', this.deleteSubscription);
+    // window.addEventListener('beforeunload', this.deleteSubscription);
+    // // this.createSubscription();
+    // this.deleteSubscription(this.state.subscriptionId);
 
 
-    // $(".update_container").hide().slideDown();
-    console.log(this.state.subscriptionId + 'actual');
-
-    // window.removeEventListener('beforeunload', this.deleteSubscription);
-    window.addEventListener('beforeunload', this.deleteSubscription);
-    // this.createSubscription();
-    this.deleteSubscription(this.state.subscriptionId);
 
 
 
 
+                          // const pressureValue = 777;
+                          // const temperatureValue = 666;
+                          // const idEntities = "Room6";
+                          // const updateBodyEntities = {
+                          //   "pressure": {
+                          //     "type":"Integer",
+                          //     "value":pressureValue,
+                          //     "metadata":{}
+                          //   },
+                          //   "temperature": {
+                          //     "type":"Float",
+                          //     "value": temperatureValue,
+                          //     "metadata":{}
+                          //   }
+                          // };
+                          // axios.put("http://161.72.123.211:1026/v2/entities/"+ idEntities +"/attrs?options=append", updateBodyEntities, { headers: options	})
+                          //   .then(response => {
+                          //     console.log('GET SUBSCRIPTION BY URL = ' + response.data.description);
+                          //     console.log('GET NOTIFICATION BY CHANGE = ' + response.data.id + ' ' + response.data.id);
+                          //   })
+                          //   .catch(error => {
+                          //     console.log('Error fetching and parsing data on the ORION context brocker', error);
+                          //     console.log('ghhjhhj', error);
+                          //   });
 
-
-
-                        // const createBodyEntities = {
-                        //   "id":"Room7",
-                        //   "type":"Room",
-                        //   "pressure": {
-                        //     "type":"Integer",
-                        //     "value":14434340000,
-                        //     "metadata":{}
-                        //   },
-                        //   "temperature": {
-                        //     "type":"Float",
-                        //     "value":123123123123,
-                        //     "metadata":{}
-                        //   }
-                        // };
-                        // axios.post("http://161.72.123.211:1026/v2/entities", createBodyEntities, { headers: options	})
-                        //   .then(response => {
-                        //     console.log('GET ENTITIES BY ID = ' + response.data[3].temperature.type);
-                        //
-                        //   })
-                        //   .catch(error => {
-                        //     console.log('Error fetching and parsing data on the ORION context brocker', error);
-                        //     console.log('ghhjhhj', error);
-                        //   });
-
-                          const pressureValue = 777;
-                          const temperatureValue = 666;
-                          const idEntities = "Room6";
-                          const updateBodyEntities = {
-                            "pressure": {
-                              "type":"Integer",
-                              "value":pressureValue,
-                              "metadata":{}
-                            },
-                            "temperature": {
-                              "type":"Float",
-                              "value": temperatureValue,
-                              "metadata":{}
-                            }
-                          };
-                          axios.put("http://161.72.123.211:1026/v2/entities/"+ idEntities +"/attrs?options=append", updateBodyEntities, { headers: options	})
+                          //
+                          const deleteEntityId = "gtcInt3";
+                          const deleteEntityType = "Camera";
+                          axios.delete("http://161.72.123.211:1026/v2/entities/"+ deleteEntityId +"?type="+ deleteEntityType +"", { headers: options	})
                             .then(response => {
                               console.log('GET SUBSCRIPTION BY URL = ' + response.data.description);
                               console.log('GET NOTIFICATION BY CHANGE = ' + response.data.id + ' ' + response.data.id);
@@ -135,58 +125,37 @@ class CreateCamera extends Component {
                             });
 
 
-                          // const deleteEntityId = "Room7";
-                          // const deleteEntityType = "Room";
-                          // axios.delete("http://161.72.123.211:1026/v2/entities/"+ deleteEntityId +"?type="+ deleteEntityType +"", { headers: options	})
-                          //   .then(response => {
-                          //     console.log('GET SUBSCRIPTION BY URL = ' + response.data.description);
-                          //     console.log('GET NOTIFICATION BY CHANGE = ' + response.data.id + ' ' + response.data.id);
-                          //   })
-                          //   .catch(error => {
-                          //     console.log('Error fetching and parsing data on the ORION context brocker', error);
-                          //     console.log('ghhjhhj', error);
-                          //   });
-
-
 
   }
 
 
 
-
-        deleteSubscription = () => {
-          console.log(this.state.subscriptionId + " dentro delete");
-          axios.delete("http://161.72.123.211:1026/v2/subscriptions/" + this.state.subscriptionId, body, { headers: options	})
-            .then(response => {
-              console.log("subscription was reset successfully");
-            })
-            .catch(error => {
-              console.log('Error fetching and parsing data on the ORION context brocker', error);
-              console.log('ghhjhhj', error);
-            });
-        }
-
-        createSubscription = () => {
-          axios.post("http://161.72.123.211:1026/v2/subscriptions", body, { headers: options	})
-            .then(response => {
-                this.setState({ //save the current state of the data
-                  subscriptionId: response.headers['location'].split('/')[3]
-                });
-                console.log(response.headers['location'].split('/')[3]);
-                console.log(this.state.subscriptionId + " dentro creación");
-            })
-            .catch(error => {
-              console.log('Error fetching and parsing data on the ORION context brocker', error);
-              console.log('ghhjhhj', error);
-            });
-        }
-
-
-
         //
-        // componentDidUpdate() {
-        //   console.log('macarena');
-        //   /* ... */
+        // deleteSubscription = () => {
+        //   console.log(this.state.subscriptionId + " dentro delete");
+        //   axios.delete("http://161.72.123.211:1026/v2/subscriptions/" + this.state.subscriptionId, body, { headers: options	})
+        //     .then(response => {
+        //       console.log("subscription was reset successfully");
+        //     })
+        //     .catch(error => {
+        //       console.log('Error fetching and parsing data on the ORION context brocker', error);
+        //       console.log('ghhjhhj', error);
+        //     });
+        // }
+        //
+        // createSubscription = () => {
+        //   axios.post("http://161.72.123.211:1026/v2/subscriptions", body, { headers: options	})
+        //     .then(response => {
+        //         this.setState({ //save the current state of the data
+        //           subscriptionId: response.headers['location'].split('/')[3]
+        //         });
+        //         console.log(response.headers['location'].split('/')[3]);
+        //         console.log(this.state.subscriptionId + " dentro creación");
+        //     })
+        //     .catch(error => {
+        //       console.log('Error fetching and parsing data on the ORION context brocker', error);
+        //       console.log('ghhjhhj', error);
+        //     });
         // }
 
 
@@ -215,42 +184,58 @@ class CreateCamera extends Component {
 
       <div className="update_container">
         <div className="mark_title_update mark_title_create">
-       <h4 className="title_update_cameras"> Create New Camera </h4>
+       <h4 className="title_update_cameras"> Add New Camera </h4>
        </div>
-        <form className="formCameras">
+        <form className="formCameras" action="/add" method="get">
 
-          <div className="omrs-input-group">
-            <label className="omrs-input-underlined">
-              <input required />
-              <span className="omrs-input-label"> Name </span>
+          <div className="omrs-input-group width-input-1">
+            <label className="omrs-input-underlined label-input-idCamera">
+              <input disabled  className="idicator-input-IdCamera displayInlineBlock" value="gtc" />
+              <input required name="idCamera" className="width-input-1 border-radius-left-0 displayInlineBlock" />
+              <span className="omrs-input-label margin-left-50"> Id-Camera </span>
             </label>
           </div>
 
-          <div className="omrs-input-group">
+          <div className="omrs-input-group margin-left-50">
             <label className="omrs-input-underlined">
-              <input required />
-              <span className="omrs-input-label"> Location </span>
+              <input required name="nameCamera"/>
+              <span className="omrs-input-label"> Name </span>
+            </label>
+          </div>
+          <br/>
+          <div className="omrs-input-group displayInlineBlock">
+            <label className="omrs-input-underlined">
+              <input required name="urlCamera" className="width-input-x2" />
+              <span className="omrs-input-label"> URL </span>
+            </label>
+          </div>
+
+          <div className="omrs-input-group checkboxUrlCredentials displayInlineBlock">
+            <label className="omrs-input-underlined">
+              <input onClick={this.checkCredentials} required id="checkCreandentials" type="checkbox" className="width-input-1 credentials-input" />
+              <span className="omrs-input-label-Credentials"> Credentials </span>
+            </label>
+          </div>
+          <br/>
+
+          <div id="userForcamera" className="omrs-input-group">
+            <label className="omrs-input-underlined">
+              <input required name="userCamera" />
+              <span className="omrs-input-label"> User </span>
+            </label>
+          </div>
+
+          <div id="pwdForCamera" className="omrs-input-group">
+            <label className="omrs-input-underlined">
+              <input type="password" pattern=".{6,}" required name="pwdCamera" />
+              <span className="omrs-input-label"> Password </span>
             </label>
           </div>
 
           <div className="omrs-input-group displayBlock">
             <label className="omrs-input-underlined">
-              <input required />
-              <span className="omrs-input-label"> URL </span>
-            </label>
-          </div>
-
-          <div className="omrs-input-group">
-            <label className="omrs-input-underlined">
-              <input required />
-              <span className="omrs-input-label"> Model </span>
-            </label>
-          </div>
-
-          <div className="omrs-input-group">
-            <label className="omrs-input-underlined">
-              <input required />
-              <span className="omrs-input-label"> Id-Camera </span>
+              <textarea required name="description"></textarea>
+              <span className="omrs-input-label span-label-input-decription"> Description </span>
             </label>
           </div>
 
@@ -278,6 +263,17 @@ class CreateCamera extends Component {
 
   );
   }
+
+  checkCredentials = () => {
+       if ($('#checkCreandentials:checkbox:checked').length > 0) {
+         $('#userForcamera').fadeIn("fast");
+         $('#pwdForCamera').fadeIn("fast");
+       }else {
+         $('#userForcamera').val('').hide();
+         $('#pwdForCamera').val('').hide();
+       }
+  }
+
 }
 
 

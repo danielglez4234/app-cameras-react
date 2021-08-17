@@ -12,7 +12,9 @@ body
 
 
 .displayBlock{ display: block !important; }
+.displayInlineBlock{ display: inline-block !important;}
 
+.margin-left-50{margin-left: 50px !important;}
 .marginleft_alignErrorMessageIcon{
   margin-left:-82px !important;
 }
@@ -27,11 +29,15 @@ body
 
 .paddinfLeft-0{ padding-left: 0px !important;}
 
-.with-height-1{ width: 100% !important; height: 100% !important}
-.with-height-2{ width: 100% !important; height: 49% !important}
-.with-height-3{ width: 50% !important; height: 49% !important}
-.with-height-5{ width: 33% !important; height: 49% !important}
-.with-height-7{ width: 33% !important; height: 32% !important}
+.width-height-1{ width: 100% !important; height: 100% !important}
+.width-height-2{ width: 100% !important; height: 49% !important}
+.width-height-3{ width: 50% !important; height: 49% !important}
+.width-height-5{ width: 33% !important; height: 49% !important}
+.width-height-7{ width: 33% !important; height: 32% !important}
+
+
+.width-input-1{ width:150px !important;}
+.width-input-x2{ width:350px !important;}
 /* @import url(//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
 }
 @import url(https://fonts.googleapis.com/css?family=Titillium+Web:300);
@@ -370,7 +376,7 @@ height: 100%;
 
 .video_stream{
   /* width: 100%; */
-  /* height: 261px; */
+  height: 461px;
 }
 
 .rep_prub_cont{
@@ -681,12 +687,16 @@ height: 100%;
   padding: 30px 30px;
 }
 
+
+
+
 /** END: Non Openmrs CSS **/
 .omrs-input-group {
   display: inline-block;
   margin-bottom: 1.5rem;
   position: relative;
   width: 20.4375rem;
+  margin-right: 15px;
 }
 
 /* Input*/
@@ -742,6 +752,45 @@ height: 100%;
 }
 
 
+
+.checkboxUrlCredentials{
+  margin-left:23px;
+}
+
+.checkboxUrlCredentials > input{
+  width:10px;
+}
+
+.credentials-input{
+  height:20px !important;
+  width: 15px !important;
+}
+.omrs-input-label-Credentials{
+  font-weight: 700;
+  font-family: "Comfortaa-SemiBold";
+  color: rgba(19, 19, 21, 0.6);
+  vertical-align: text-bottom;
+}
+
+
+.idicator-input-IdCamera{
+  display: inline-block;
+  width: 44px !important;
+  background-color: #bcc5ce !important;
+  cursor: inherit !important;
+  border-top-right-radius:0px !important;
+  border-bottom-right-radius:0px !important;
+}
+      .border-radius-left-0{
+        border-top-left-radius:0px !important;
+        border-bottom-left-radius:0px !important;
+      }
+
+.label-input-idCamera{width: 194px !important;}
+
+.span-label-input-decription{margin-top: -43px !important;; margin-left: -13px !important;;}
+
+
 .buttonsDiv-background{
   height: 42px;
   background-color: #575a6f;
@@ -794,7 +843,7 @@ height: 100%;
         }
         .btn-6-reset{
           position: absolute;
-          margin-top: 89px;
+          margin-top: 9px;
           z-index: 2;
           right: 0px;
           margin-right: 15px;
