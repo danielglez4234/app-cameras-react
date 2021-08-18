@@ -1,6 +1,6 @@
 import React, { Component }  from 'react';
 import { Consumer } from './context';
-import { withRouter } from 'react-router-dom';
+import { Redirect, withRouter } from 'react-router-dom';
 import * as $ from 'jquery';
 
 import noCameaSrc from '../img/noCamera.png';
@@ -20,22 +20,33 @@ class ContainerVideo extends Component {
     };
   }
 
+
     adjustVideoContainer = (countvideos) => {
       if (countvideos === 1) {
         $('.rep_prub').addClass('width-height-1')
           .removeClass('width-height-2 width-height-3 width-height-5 width-height-7');
+        $('.video_stream').addClass('adjustWidthVideo-x1')
+          .removeClass('adjustWidthVideo-x2 adjustWidthVideo-x3 adjustWidthVideo-x5 adjustWidthVideo-x7');
       }else if (countvideos === 2) {
         $('.rep_prub').addClass('width-height-2')
           .removeClass('width-height-1 width-height-3 width-height-5 width-height-7');
+        $('.video_stream').addClass('adjustWidthVideo-x2')
+          .removeClass('adjustWidthVideo-x1 adjustWidthVideo-x3 adjustWidthVideo-x5 adjustWidthVideo-x7');
       }else if (countvideos === 3 || countvideos === 4) {
         $('.rep_prub').addClass('width-height-3')
           .removeClass('width-height-1 width-height-2 width-height-5 width-height-7');
+        $('.video_stream').addClass('adjustWidthVideo-x3')
+          .removeClass('adjustWidthVideo-x1 adjustWidthVideo-x2 adjustWidthVideo-x5 adjustWidthVideo-x7');
       }else if (countvideos === 5 || countvideos === 6) {
         $('.rep_prub').addClass('width-height-5')
           .removeClass('width-height-1 width-height-2 width-height-3 width-height-7');
+        $('.video_stream').addClass('adjustWidthVideo-x5')
+          .removeClass('adjustWidthVideo-x1 adjustWidthVideo-x2 adjustWidthVideo-x3 adjustWidthVideo-x7');
       }else if (countvideos === 7 || countvideos === 8 || countvideos === 9) {
         $('.rep_prub').addClass('width-height-7')
           .removeClass('width-height-1 width-height-2 width-height-3 width-height-5');
+        $('.video_stream').addClass('adjustWidthVideo-x7')
+          .removeClass('adjustWidthVideo-x1 adjustWidthVideo-x2 adjustWidthVideo-x3 adjustWidthVideo-x5');
       }
     }
 
@@ -59,6 +70,7 @@ class ContainerVideo extends Component {
                <Videos
                 key={ video.id }
                 name={ video }
+
               //  url={ `https://farm${video.farm}.staticflickr.com/${video.server}/${video.id}_${video.secret}.jpg` }
               //  title= { video.title }
                 />

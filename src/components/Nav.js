@@ -61,7 +61,7 @@ class Nav extends Component {
             <li className="darkerli darkerlishadow">
               <NavLink to="/create">
                 <i className="fa fa-plus-square fa-lg"></i>
-                <span className="nav-text"> Add Camera </span>
+                <span className="nav-text"> Add New Camera </span>
               </NavLink>
             </li>
 

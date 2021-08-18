@@ -43,7 +43,7 @@ const body = {
     "notification": {
     "onlyChangedAttrs":true,
       "http": {
-      "url": "http://localhost:1028/"
+      "url": "http://localhost:3000/"
       }
     },
     "duration":"PT10S",
@@ -71,14 +71,14 @@ class CreateCamera extends Component {
   componentDidMount() {
     $('#userForcamera').hide();
     $('#pwdForCamera').hide();
-    console.log($('#userForcamera'))
+    // console.log($('#userForcamera'))
     //
     // // $(".update_container").hide().slideDown();
     // console.log(this.state.subscriptionId + 'actual');
     //
-    // // window.removeEventListener('beforeunload', this.deleteSubscription);
+    // window.removeEventListener('beforeunload', this.deleteSubscription);
     // window.addEventListener('beforeunload', this.deleteSubscription);
-    // // this.createSubscription();
+    // this.createSubscription();
     // this.deleteSubscription(this.state.subscriptionId);
 
 
@@ -112,17 +112,17 @@ class CreateCamera extends Component {
                           //   });
 
                           //
-                          const deleteEntityId = "gtcInt3";
-                          const deleteEntityType = "Camera";
-                          axios.delete("http://161.72.123.211:1026/v2/entities/"+ deleteEntityId +"?type="+ deleteEntityType +"", { headers: options	})
-                            .then(response => {
-                              console.log('GET SUBSCRIPTION BY URL = ' + response.data.description);
-                              console.log('GET NOTIFICATION BY CHANGE = ' + response.data.id + ' ' + response.data.id);
-                            })
-                            .catch(error => {
-                              console.log('Error fetching and parsing data on the ORION context brocker', error);
-                              console.log('ghhjhhj', error);
-                            });
+                          // const deleteEntityId = "gtcInt3";
+                          // const deleteEntityType = "Camera";
+                          // axios.delete("http://161.72.123.211:1026/v2/entities/"+ deleteEntityId +"?type="+ deleteEntityType +"", { headers: options	})
+                          //   .then(response => {
+                          //     console.log('GET SUBSCRIPTION BY URL = ' + response.data.description);
+                          //     console.log('GET NOTIFICATION BY CHANGE = ' + response.data.id + ' ' + response.data.id);
+                          //   })
+                          //   .catch(error => {
+                          //     console.log('Error fetching and parsing data on the ORION context brocker', error);
+                          //     console.log('ghhjhhj', error);
+                          //   });
 
 
 
@@ -142,15 +142,15 @@ class CreateCamera extends Component {
         //       console.log('ghhjhhj', error);
         //     });
         // }
-        //
+        // //
         // createSubscription = () => {
         //   axios.post("http://161.72.123.211:1026/v2/subscriptions", body, { headers: options	})
         //     .then(response => {
         //         this.setState({ //save the current state of the data
         //           subscriptionId: response.headers['location'].split('/')[3]
         //         });
-        //         console.log(response.headers['location'].split('/')[3]);
-        //         console.log(this.state.subscriptionId + " dentro creación");
+        //         // console.log(response.headers['location'].split('/')[3]);
+        //         // console.log(this.state.subscriptionId + " dentro creación");
         //     })
         //     .catch(error => {
         //       console.log('Error fetching and parsing data on the ORION context brocker', error);
