@@ -38,24 +38,24 @@ class Nav extends Component {
           <ul>
 
             <li>
-              <a href="/">
+              <NavLink to="/">
                 <i className="fa fa-home fa-lg"></i>
                 <span className="nav-text"> Home </span>
-              </a>
+              </NavLink>
             </li>
 
             <li>
-              <a href="#">
+              <NavLink to="#">
                 <i className="fa fa-user fa-lg"></i>
                 <span className="nav-text"> Log in </span>
-              </a>
+              </NavLink>
             </li>
 
             <li>
-              <a href="/list">
+              <NavLink to="/list">
                 <i className="fa fa-list fa-lg"></i>
                 <span className="nav-text"> Show All </span>
-              </a>
+              </NavLink>
             </li>
 
             <li className="darkerli darkerlishadow">

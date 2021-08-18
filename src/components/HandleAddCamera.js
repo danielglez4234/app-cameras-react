@@ -20,7 +20,6 @@ class HandleAddCamera extends Component {
     const nameCamera = queryParams.get('nameCamera');
     const descriptionCamera = queryParams.get('description');
 
-
     const urlCamera = queryParams.get('urlCamera');
     const userCamera = queryParams.get('userCamera');
     const pwdCamera = queryParams.get('pwdCamera');
@@ -63,9 +62,7 @@ class HandleAddCamera extends Component {
         this.setState({ //save the current state of the data
           connectionError: true
         });
-
         console.log('Error fetching and parsing data on the ORION context brocker', error);
-        console.log('ghhjhhj', error);
       });
 
   }
@@ -76,7 +73,6 @@ class HandleAddCamera extends Component {
   }
 
   render() {
-    const videos = <div>holo</div>;
     const error = <div>pero que?</div>
     return (
       <div className="">

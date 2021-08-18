@@ -11,25 +11,19 @@ import vidon from '../img/vid.mp4';
 
 
 
-const Videos = ({ key, name }) => {
+const Videos = ({ key, name, numeroPrueba }) => {
   return(
     <div className="rep_prub">
 
       {/*Delete and update Buttons*/}
       <div className="buttonsDeleteUpdate">
         <div className="updateCameraButton">
-        <NavLink to={{
-           pathname:'/update',
-           updateId: key 
-          }}>
+        <NavLink to={`/update?idCam=${numeroPrueba}`}>
             <img src={ editIcon } alt="expand" className="updateCameraButtonIcon" />
           </NavLink>
         </div>
         <div className="deleteCameraButton">
-        <NavLink to={{
-           pathname:'/delete',
-           deleteId: key
-         }}>
+        <NavLink to={`/delete?idCam=${numeroPrueba}`}>
           <img src={ deleteIcon } alt="expand" className="deleteCameraButtonIcon" />
         </NavLink>
         </div>

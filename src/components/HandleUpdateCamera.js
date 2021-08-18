@@ -9,12 +9,25 @@ class HandleUpdateCamera extends Component {
   constructor() {
     super();
     this.state = {
-      loadingCreate: true,
+      loadingUpdate: true,
       connectionError: false
     };
   }
 
-  handleUpdate = (idCamera, nameCamera, urlCamera, descriptionCamera) => {
+  handleUpdate = () => {
+    const queryParams = new URLSearchParams(window.location.search);
+    const idCamera = queryParams.get('idCamera');
+    const nameCamera = queryParams.get('nameCamera');
+    const descriptionCamera = queryParams.get('description');
+
+
+    const urlCamera = queryParams.get('urlCamera');
+    const userCamera = queryParams.get('userCamera');
+    const pwdCamera = queryParams.get('pwdCamera');
+
+    const urlpath = userCamera + ':' + pwdCamera + '@' + urlCamera;
+
+    console.log(idCamera, nameCamera, descriptionCamera, urlpath);
     const options = {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
@@ -40,6 +53,9 @@ class HandleUpdateCamera extends Component {
         console.log('camera updated successfully');
       })
       .catch(error => {
+        this.setState({ //save the current state of the data
+          connectionError: true
+        });
         console.log('Error fetching and parsing data on the ORION context brocker', error);
       });
   }
@@ -51,13 +67,12 @@ class HandleUpdateCamera extends Component {
 
 
   render() {
-    const videos = <div>holo</div>;
     const error = <div>pero que?</div>
     return (
       <div className="">
 
       { (this.state.connectionError) ? error :
-        (this.state.loadingCreate) ? <img className="loading connection_error" src={ loadingSrc } alt="loading"/> : <Redirect to="/" /> }
+        (this.state.loadingUpdate) ? <img className="loading connection_error" src={ loadingSrc } alt="loading"/> : <Redirect to="/" /> }
       </div>
     );
   }

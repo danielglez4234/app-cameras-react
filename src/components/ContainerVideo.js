@@ -70,7 +70,7 @@ class ContainerVideo extends Component {
                <Videos
                 key={ video.id }
                 name={ video }
-
+                numeroPrueba="1"
               //  url={ `https://farm${video.farm}.staticflickr.com/${video.server}/${video.id}_${video.secret}.jpg` }
               //  title= { video.title }
                 />

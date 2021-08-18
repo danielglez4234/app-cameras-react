@@ -23,7 +23,7 @@ import CreateCamera from './components/CreateCamera';
 import HandleAddCamera from './components/HandleAddCamera';
 import HandleUpdateCamera from './components/HandleUpdateCamera';
 import HandleDeleteCamera from './components/HandleDeleteCamera';
-import AccumulateNotifications from './components/AccumulateNotifications';
+// import AccumulateNotifications from './components/AccumulateNotifications';
 
 
 var connection = new WebSocket('wss://161.72.123.211:8443/kurento');
@@ -37,13 +37,13 @@ class App extends Component {
     this.state = {
       connection: connection,
       idCam: [],
-      idCamTest: ['abc','abc','abc'],
+      idCamTest: ['test','test','test'],
       loading: true,
       connectionError: false,
       apiRestConnectioError: false,
       data: {
           count: 0,
-          kms : ['abc'],
+          kms : [],
           stun : {
             "urls" : "stun:161.72.123.211:3478"
           },
@@ -252,8 +252,10 @@ class App extends Component {
             <Route path="/create" render={() => <CreateCamera /> } />
             <Route path="/add" render={() => <HandleAddCamera /> } />
             <Route path="/update" render={() => <UpdateCamera /> } />
+            <Route path="/selectedCamera" render={() => <HandleUpdateCamera /> } />
+            <Route path="/delete" render={() => <HandleDeleteCamera /> } />
 
-            <Route path="/accumulate" render={() => <AccumulateNotifications /> } />
+            {/*<Route path="/accumulate" render={() => <AccumulateNotifications /> } />*/}
 
 
             <Route component={PageNotFound} /> {/*only appears when no route matches*/}
