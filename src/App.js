@@ -20,7 +20,10 @@ import PageNotFound from './components/PageNotFound';
 import ConnectionError from './components/ConnectionError';
 import UpdateCamera from './components/UpdateCamera';
 import CreateCamera from './components/CreateCamera';
-import AddCamera from './components/AddCamera';
+import HandleAddCamera from './components/HandleAddCamera';
+import HandleUpdateCamera from './components/HandleUpdateCamera';
+import HandleDeleteCamera from './components/HandleDeleteCamera';
+import AccumulateNotifications from './components/AccumulateNotifications';
 
 
 var connection = new WebSocket('wss://161.72.123.211:8443/kurento');
@@ -133,7 +136,7 @@ class App extends Component {
 
 
       var checkExists= setInterval(function () {
-        
+
         if (_this.state.idCam.length > 0) {
           var videoReady = true;
           for (var i = 0; i < _this.state.idCam.length; i++) {
@@ -247,8 +250,10 @@ class App extends Component {
             } />
             <Route path="/list" render={() => <ContainerVideo /> } />
             <Route path="/create" render={() => <CreateCamera /> } />
-            <Route path="/add" render={() => <AddCamera /> } />
+            <Route path="/add" render={() => <HandleAddCamera /> } />
             <Route path="/update" render={() => <UpdateCamera /> } />
+
+            <Route path="/accumulate" render={() => <AccumulateNotifications /> } />
 
 
             <Route component={PageNotFound} /> {/*only appears when no route matches*/}

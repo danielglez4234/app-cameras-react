@@ -1,18 +1,41 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, NavLink } from 'react-router-dom';
 
-import expandirPng from '../img/expand.png';
-import moreInfo from '../img/moreInfo.png';
-import zoomIn from '../img/zoomIn.png';
-
+import expandIcon from '../img/expand.png';
+import moreInfoIcon from '../img/moreInfo.png';
+import zoomInIcon from '../img/zoomIn.png';
+import editIcon from '../img/edit.png';
+import deleteIcon from '../img/delete.png';
 
 import vidon from '../img/vid.mp4';
 
 
 
-const Videos = ({ name }) => {
+const Videos = ({ key, name }) => {
   return(
     <div className="rep_prub">
+
+      {/*Delete and update Buttons*/}
+      <div className="buttonsDeleteUpdate">
+        <div className="updateCameraButton">
+        <NavLink to={{
+           pathname:'/update',
+           updateId: key 
+          }}>
+            <img src={ editIcon } alt="expand" className="updateCameraButtonIcon" />
+          </NavLink>
+        </div>
+        <div className="deleteCameraButton">
+        <NavLink to={{
+           pathname:'/delete',
+           deleteId: key
+         }}>
+          <img src={ deleteIcon } alt="expand" className="deleteCameraButtonIcon" />
+        </NavLink>
+        </div>
+      </div>
+
+
       <div className="mark_of_top_buttons"></div>
 
       {/*
@@ -22,9 +45,9 @@ const Videos = ({ name }) => {
         </a>
       </div>
       */}
-      <img src={ expandirPng } alt="expand" className="expandIcon" />
-      <img src={ zoomIn } alt="zoom in" className="expandIcon zoomInIcon" />
-      <img src={ moreInfo } alt="more info" className="moreInfoIcon" />
+      <img src={ expandIcon } alt="expand" className="expandIcon" />
+      <img src={ zoomInIcon } alt="zoom in" className="expandIcon zoomInIcon" />
+      <img src={ moreInfoIcon } alt="more info" className="moreInfoIcon" />
 
       <video id={ name.id } autoPlay muted className="video_stream"></video>
       {/*<video src={vidon} autoPlay muted className="video_stream" />*/}

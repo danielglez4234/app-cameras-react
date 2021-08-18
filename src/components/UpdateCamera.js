@@ -4,9 +4,14 @@ import * as $ from 'jquery';
 
 class UpdateCamera extends Component {
 
-  componentDidMount() {
-    // $(".update_container").hide().slideDown();
+  constructor(props) {
+    super(props);
+    console.log(props.location);
   }
+
+  // componentDidMount() {
+  //   console.log(this.props.location.state.);
+  // }
 
   render(){
   return(

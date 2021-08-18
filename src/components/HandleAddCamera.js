@@ -4,7 +4,7 @@ import axios from 'axios';
 
 import loadingSrc from '../img/loading.svg';
 
-class AddCamera extends Component {
+class HandleAddCamera extends Component {
 
   constructor() {
     super();
@@ -14,7 +14,7 @@ class AddCamera extends Component {
     };
   }
 
-  handleAddCamera = () => {
+  addCamera = () => {
     const queryParams = new URLSearchParams(window.location.search);
     const idCamera = queryParams.get('idCamera');
     const nameCamera = queryParams.get('nameCamera');
@@ -49,30 +49,30 @@ class AddCamera extends Component {
         "value": descriptionCamera
       }
     };
-    // axios.post("http://161.72.123.211:1026/v2/entities", createBodyEntities, { headers: options	})
-    //   .then(response => {
-    //     const _this = this;
-    //     setTimeout(function(){
-    //     _this.setState({ //save the current state of the data
-    //       loadingCreate: false
-    //     });
-    //     }, 1000);
-    //   })
-    //   .catch(error => {
-    //
-    //     this.setState({ //save the current state of the data
-    //       connectionError: true
-    //     });
-    //
-    //     console.log('Error fetching and parsing data on the ORION context brocker', error);
-    //     console.log('ghhjhhj', error);
-    //   });
+    axios.post("http://161.72.123.211:1026/v2/entities", createBodyEntities, { headers: options	})
+      .then(response => {
+        const _this = this;
+        setTimeout(function(){
+        _this.setState({ //save the current state of the data
+          loadingCreate: false
+        });
+        }, 1000);
+      })
+      .catch(error => {
+
+        this.setState({ //save the current state of the data
+          connectionError: true
+        });
+
+        console.log('Error fetching and parsing data on the ORION context brocker', error);
+        console.log('ghhjhhj', error);
+      });
 
   }
 
 
   componentDidMount() {
-    this.handleAddCamera();
+    this.addCamera();
   }
 
   render() {
@@ -88,4 +88,4 @@ class AddCamera extends Component {
   }
 }
 
-export default AddCamera;
+export default HandleAddCamera;
