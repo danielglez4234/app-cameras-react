@@ -10,37 +10,65 @@ class HandleDeleteCamera extends Component {
     super();
     this.state = {
       loadingDelete: true,
-      connectionError: false
+      loadingDeleteServer: true,
+      connectionError: false,
+      connectionErrorServer: false
     };
   }
 
-  handleDelete = () =>{
+  handleDelete= () => {
+    const _this = this;
     const queryParams = new URLSearchParams(window.location.search);
 
-    const idCamera = queryParams.get('idCamera');
-    const typeCam = "Camara";
+    const idCamera = queryParams.get('idCamForDelete');
+    const typeCam = "Camera";
+
+    console.log(idCamera);
 
     const options = {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
     };
-    axios.delete("http://161.72.123.211:1026/v2/entities/"+ idCamera +"?type="+ typeCam +"", { headers: options	})
-      .then(response => {
-        console.log('GET SUBSCRIPTION BY URL = ' + response.data.description);
-        console.log('GET NOTIFICATION BY CHANGE = ' + response.data.id + ' ' + response.data.id);
-      })
-      .catch(error => {
-        this.setState({ //save the current state of the data
-          connectionError: true
+
+      axios.delete("http://161.72.123.211:1026/v2/entities/"+ idCamera +"?type="+ typeCam +"", { headers: options	})
+        .then(response => {
+          this.setState({ //save the current state of the data
+            loadingDelete: false
+          });
+          console.log('Camera deleted successfully....');
+        })
+        .catch(error => {
+          this.setState({ //save the current state of the data
+            connectionError: true
+          });
+          console.log('Error fetching and parsing data on the ORION context brocker', error);
         });
-        console.log('Error fetching and parsing data on the ORION context brocker', error);
-      });
-  }
+
+      async function deletePost() {
+        await axios.delete("https://161.72.123.211:8443/camera/"+ idCamera, { headers: options	})
+          .then(response => {
+            setTimeout(function(){
+            _this.setState({ //save the current state of the data
+              loadingDeleteServer: false
+            });
+          }, 1000);
+            console.log('Camera deleted on sever successfully....');
+          })
+          .catch(error => {
+            _this.setState({ //save the current state of the data
+              connectionErrorServer: true
+            });
+            console.log('Error fetching and parsing data on the ORION context brocker', error);
+          });
+        }
+      deletePost();
+}
 
 
   componentDidMount() {
     this.handleDelete();
   }
+
 
 
   render() {
@@ -49,7 +77,9 @@ class HandleDeleteCamera extends Component {
       <div className="">
 
       { (this.state.connectionError) ? error :
-        (this.state.loadingDelete) ? <img className="loading connection_error" src={ loadingSrc } alt="loading"/> : <Redirect to="/" /> }
+        (this.state.connectionErrorServer) ? error :
+        (this.state.loadingDelete) ? <img className="loading connection_error" src={ loadingSrc } alt="loading"/> :
+        (this.state.loadingDeleteServer) ? <img className="loading connection_error" src={ loadingSrc } alt="loading"/> : <p>Delete Succesfully.. go to <a href="/">Home</a></p> }
       </div>
     );
   }

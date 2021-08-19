@@ -1,16 +1,10 @@
 import React, { Component }  from 'react';
-import { withRouter } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
-import { Consumer } from './context';
 import * as $ from 'jquery';
 
 import logoSrc from '../img/logo.png';
 
 class Nav extends Component {
-
-   editCameras = () => {
-     $('updateCameraButton').toggle()
-   }
 
   render(){
     return(
@@ -38,10 +32,10 @@ class Nav extends Component {
           <ul>
 
             <li>
-              <NavLink to="/">
+              <a href="/">
                 <i className="fa fa-home fa-lg"></i>
                 <span className="nav-text"> Home </span>
-              </NavLink>
+              </a>
             </li>
 
             <li>
@@ -52,10 +46,10 @@ class Nav extends Component {
             </li>
 
             <li>
-              <NavLink to="/list">
+              <a href="/list">
                 <i className="fa fa-list fa-lg"></i>
                 <span className="nav-text"> Show All </span>
-              </NavLink>
+              </a>
             </li>
 
             <li className="darkerli darkerlishadow">
@@ -66,10 +60,10 @@ class Nav extends Component {
             </li>
 
             <li className="darkerli darkerlishadowdown">
-              <NavLink to="/" onClick={this.editCameras}>
+              <a href="#" onClick={this.showEditDelteButtons}>
                 <i className="fa fa-edit fa-lg"></i>
                 <span className="nav-text"> Edit </span>
-              </NavLink>
+              </a>
             </li>
 
             <li>
@@ -84,7 +78,7 @@ class Nav extends Component {
             <li>
               <a href="#">
                 <i className="fa fa-crop fa-lg"></i>
-                <span className="nav-text"> opción 9 </span>
+                <span className="nav-text"> Opción 9 </span>
               </a>
             </li>
           </ul>
@@ -92,6 +86,11 @@ class Nav extends Component {
       </nav>
       </div>
     );
+  }
+
+  showEditDelteButtons = () =>{
+    $(".deleteCameraButton").toggle();
+    $(".updateCameraButton").toggle();
   }
 
   hideNavBar = () => {

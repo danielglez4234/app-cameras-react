@@ -25,16 +25,21 @@ class HandleUpdateCamera extends Component {
     const userCamera = queryParams.get('userCamera');
     const pwdCamera = queryParams.get('pwdCamera');
 
-    const urlpath = userCamera + ':' + pwdCamera + '@' + urlCamera;
+    var urlpath;
+    if (userCamera || pwdCamera) {
+       urlpath = userCamera + ':' + pwdCamera + '@' + urlCamera;
+    }else {
+      urlpath = urlCamera;
+    }
+    // console.log(urlpath);
 
-    console.log(idCamera, nameCamera, descriptionCamera, urlpath);
+
+    console.log(idCamera, nameCamera, descriptionCamera, urlCamera);
     const options = {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
     };
     const updateBodyEntities = {
-      "id": idCamera,
-      "type": "Camera",
       "name": {
         "type": "String",
         "value": nameCamera
@@ -48,9 +53,12 @@ class HandleUpdateCamera extends Component {
         "value": descriptionCamera
       }
     };
-    axios.put("http://161.72.123.211:1026/v2/entities/"+ idCamera +"/attrs?options=append", updateBodyEntities, { headers: options	})
+    axios.patch("http://161.72.123.211:1026/v2/entities/"+ idCamera +"/attrs?options=append", updateBodyEntities, { headers: options	})
       .then(response => {
-        console.log('camera updated successfully');
+        this.setState({ //save the current state of the data
+          loadingUpdate: false
+        });
+        console.log('Camera updated successfully....');
       })
       .catch(error => {
         this.setState({ //save the current state of the data

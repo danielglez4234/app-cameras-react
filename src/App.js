@@ -6,7 +6,6 @@ import * as $ from 'jquery';
 import {
   BrowserRouter,
   Route,
-  Redirect,
   Switch
 } from 'react-router-dom';
 
@@ -28,7 +27,6 @@ import HandleDeleteCamera from './components/HandleDeleteCamera';
 
 var connection = new WebSocket('wss://161.72.123.211:8443/kurento');
 const mapKms = new Map();
-const mapIdCamTest = new Map();
 
 class App extends Component {
 
@@ -58,7 +56,7 @@ class App extends Component {
 
 
   componentDidMount() {
-    const cp = this;
+    const _this = this;
     // console.log(this.state.data.stun);
     console.log("Starting connection to WebSocket Server")
     var start_vis = this;
@@ -91,20 +89,16 @@ class App extends Component {
     }
 
     this.state.connection.onopen = function(event) {
-
-      cp.connect();
-
+      _this.connect();
       console.log("Successfully connected to the websocket server...")
     }
-    this.state.connection.onclose = function(event) {
-      cp.setState({ //save the current state of the data
+    this.state.connection.error = function(event) {
+      _this.setState({ //save the current state of the data
         connectionError: true
       });
-      console.log("Failed to connect to the websocket server...")
+      console.log("Failed to connect to the websocket server...");
     }
   }
-
-
 
 
 
@@ -134,7 +128,6 @@ class App extends Component {
 
       });
 
-
       var checkExists= setInterval(function () {
 
         if (_this.state.idCam.length > 0) {
@@ -146,7 +139,6 @@ class App extends Component {
           }
           if (videoReady) {
 
-            console.log('paso??');
             var idCameras = _this.state.idCam;
 
               var i;
@@ -223,9 +215,11 @@ class App extends Component {
   componentWillUnmount(){
     if (this.state.connection != null) {
       this.state.connection.close();
-      console.log("Disconnected...")
+      console.log("Disconnected...");
     }
   }
+
+
 
 
   render() {

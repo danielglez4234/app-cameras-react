@@ -16,46 +16,73 @@ class HandleAddCamera extends Component {
 
   addCamera = () => {
     const queryParams = new URLSearchParams(window.location.search);
-    const idCamera = queryParams.get('idCamera');
-    const nameCamera = queryParams.get('nameCamera');
-    const descriptionCamera = queryParams.get('description');
+    const id = queryParams.get('idCamera');
+    const name = queryParams.get('nameCamera');
+    const group = queryParams.get('groupCamera');
+    const description = queryParams.get('descriptionCamera');
 
-    const urlCamera = queryParams.get('urlCamera');
-    const userCamera = queryParams.get('userCamera');
-    const pwdCamera = queryParams.get('pwdCamera');
 
-      const urlpath = userCamera + ':' + pwdCamera + '@' + urlCamera;
+    const recordImagesStatus = queryParams.get('recordImages');
+    var recordStatus;
+      if (recordImagesStatus === 'on') {
 
-    console.log(idCamera, nameCamera, descriptionCamera, urlpath);
+        recordStatus  = "enable";
+      }else {
+
+        recordStatus  = "disabled";
+      }
+
+    const processImageStatus = queryParams.get('processImages');
+    var processStatus;
+      if (processImageStatus === 'on') {
+
+        processStatus  = "enable";
+      }else {
+
+        processStatus  = "disabled";
+      }
+
+    const url = queryParams.get('urlCamera');
+    const user = queryParams.get('userCamera');
+    const pwd = queryParams.get('pwdCamera');
+
+      const urlpath = user + ':' + pwd + '@' + url;
+
+
 
     const options = {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
     };
     const createBodyEntities = {
-      "id":"gtc" + idCamera,
+      "id": id,
       "type": "Camera",
+      "group": {
+        "type": "String",
+        "value": group
+      },
       "name": {
         "type": "String",
-        "value": nameCamera
+        "value": name
       },
       "url": {
         "type": "String",
-        "value": urlCamera
+        "value": url
+      },
+      "record": {
+        "type": "String",
+        "value": recordStatus
       },
       "description": {
         "type": "String",
-        "value": descriptionCamera
+        "value": description
       }
     };
     axios.post("http://161.72.123.211:1026/v2/entities", createBodyEntities, { headers: options	})
       .then(response => {
-        const _this = this;
-        setTimeout(function(){
-        _this.setState({ //save the current state of the data
+        this.setState({ //save the current state of the data
           loadingCreate: false
         });
-        }, 1000);
       })
       .catch(error => {
 
@@ -78,7 +105,7 @@ class HandleAddCamera extends Component {
       <div className="">
 
       { (this.state.connectionError) ? error :
-        (this.state.loadingCreate) ? <img className="loading connection_error" src={ loadingSrc } alt="loading"/> : <Redirect to="/" /> }
+        (this.state.loadingCreate) ? <img className="loading connection_error" src={ loadingSrc } alt="loading"/> : <p>Creation Succesfully.. go to <a href="/">Home</a></p> }
       </div>
     );
   }

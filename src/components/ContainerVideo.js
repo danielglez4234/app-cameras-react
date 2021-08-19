@@ -1,6 +1,5 @@
 import React, { Component }  from 'react';
 import { Consumer } from './context';
-import { Redirect, withRouter } from 'react-router-dom';
 import * as $ from 'jquery';
 
 import noCameaSrc from '../img/noCamera.png';
@@ -8,7 +7,7 @@ import loadingSrc from '../img/loading.svg';
 import apiNotResponding from '../img/apiNotResponding.png';
 
 import Videos from './Videos';
-import NotFound from './NotFound';
+// import NotFound from './NotFound';
 import ConnectionError from './ConnectionError';
 
 class ContainerVideo extends Component {
@@ -68,9 +67,8 @@ class ContainerVideo extends Component {
           if (result.length > 0) { // if the results found are greater than 0 the images are displayed
             videos = result.map(video =>
                <Videos
-                key={ video.id }
+                key= {video.id}
                 name={ video }
-                numeroPrueba="1"
               //  url={ `https://farm${video.farm}.staticflickr.com/${video.server}/${video.id}_${video.secret}.jpg` }
               //  title= { video.title }
                 />

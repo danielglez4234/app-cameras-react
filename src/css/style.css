@@ -44,7 +44,7 @@ body
 
 
 .width-input-1{ width:150px !important;}
-.width-input-x2{ width:350px !important;}
+.width-input-x2{ width:450px !important;}
 /* @import url(//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
 }
 @import url(https://fonts.googleapis.com/css?family=Titillium+Web:300);
@@ -197,7 +197,7 @@ overflow-x: hidden;
   vertical-align: middle;
   width: 186px;
   font-family: "Comfortaa-Light";
-  font-size: 12px;
+  font-size: 13px;
   bottom: -4px;
 }
 
@@ -342,7 +342,6 @@ background: #e2e2e2;
 width: 100%;
 height: 100%;
 }
-
 
 
 
@@ -563,7 +562,9 @@ height: 100%;
       margin-left:5px;
     }
 
-
+.hideUpdateAndDeleteButtons{
+  display:none !important;
+}
 
 
   .loading{
@@ -574,6 +575,13 @@ height: 100%;
     margin-left: -100px;
     margin-top: -100px;
     top: 50%;
+  }
+
+  .loadingUpdate{
+    position: relative;
+    left: 50%;
+    margin-left: -75px;
+    height: 150px;
   }
 
     .connection_error{
@@ -704,7 +712,7 @@ height: 100%;
 	margin-top: 30px;
 	padding: 21px;
   box-shadow: 2px 2px 20px #1f1f21;
-  background-color: #edeef1;
+  background-color:  #f1f2f3;
   transition: all .3s ease-out;
   width: 99%;
   border-top: 2px dotted #8a8a8a;
@@ -798,10 +806,19 @@ height: 100%;
   color: #495057;
 }
 
+.description-input-textarea{
+  width: 595px;
+  height: 100px;
+  background-color: #d3d7dc;
+  font-family: "Comfortaa-SemiBold";
+}
+    .description-input-textarea:focus{
+      background-color: #e0e3e6;
+    }
 
 
 .checkboxUrlCredentials{
-  margin-left:23px;
+  margin-left:135px;
 }
 
 .checkboxUrlCredentials > input{
@@ -812,13 +829,16 @@ height: 100%;
   height:20px !important;
   width: 15px !important;
 }
-.omrs-input-label-Credentials{
-  font-weight: 700;
-  font-family: "Comfortaa-SemiBold";
-  color: rgba(19, 19, 21, 0.6);
-  vertical-align: text-bottom;
-}
+    .omrs-input-label-Credentials{
+      font-weight: 700;
+      font-family: "Comfortaa-SemiBold";
+      color: rgba(19, 19, 21, 0.6);
+      vertical-align: text-bottom;
+    }
 
+.checkbox-record-images-input{
+   margin-left: 0px;
+}
 
 .idicator-input-IdCamera{
   display: inline-block;

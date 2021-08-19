@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Redirect, NavLink } from 'react-router-dom';
+import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 import expandIcon from '../img/expand.png';
 import moreInfoIcon from '../img/moreInfo.png';
@@ -7,23 +7,23 @@ import zoomInIcon from '../img/zoomIn.png';
 import editIcon from '../img/edit.png';
 import deleteIcon from '../img/delete.png';
 
-import vidon from '../img/vid.mp4';
+// import vidon from '../img/vid.mp4';
 
 
 
-const Videos = ({ key, name, numeroPrueba }) => {
+const Videos = ({ name }) => {
   return(
     <div className="rep_prub">
 
       {/*Delete and update Buttons*/}
       <div className="buttonsDeleteUpdate">
         <div className="updateCameraButton">
-        <NavLink to={`/update?idCam=${numeroPrueba}`}>
+        <NavLink to={`/update?idCam=${name.id}`}>
             <img src={ editIcon } alt="expand" className="updateCameraButtonIcon" />
           </NavLink>
         </div>
         <div className="deleteCameraButton">
-        <NavLink to={`/delete?idCam=${numeroPrueba}`}>
+        <NavLink to={`/delete?idCamForDelete=${name.id}`}>
           <img src={ deleteIcon } alt="expand" className="deleteCameraButtonIcon" />
         </NavLink>
         </div>
@@ -32,7 +32,9 @@ const Videos = ({ key, name, numeroPrueba }) => {
 
       <div className="mark_of_top_buttons"></div>
 
-      {/*
+      {
+
+        /*
       <div>
         <a className="fancybox expand_linkToGalley" href="" data-fancybox="gallery1">
           <img src={moreInfo} alt="expand" className="expandirIcon prev_grallery_hidden"/>
@@ -48,11 +50,11 @@ const Videos = ({ key, name, numeroPrueba }) => {
 
       <div className="rep_prub-info">
         <hr className="info_separator" />
-        <span> Location: ... </span>
+        <span> Location: { name.name } </span>
         <br />
-        <span> Preassure: .. Type: .. Value: .. </span>
+        <span> Id-Camera: { name.id } Group: {name.group}</span>
         <br />
-        <span> More info: ... </span>
+        <span> More info: { name.description } </span>
       </div>
 
 

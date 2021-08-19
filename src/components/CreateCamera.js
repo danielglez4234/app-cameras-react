@@ -1,8 +1,7 @@
 import React, { Component }  from 'react';
-import { withRouter } from 'react-router-dom';
 import * as $ from 'jquery';
 import axios from 'axios';
-import NGSI from 'ngsijs';
+// import NGSI from 'ngsijs';
 import '../setProxy.js';
 // import notifee from '@notifee/react-native';
 
@@ -51,7 +50,7 @@ const body = {
   };
 
 
-let subscriptionIdA;
+
 class CreateCamera extends Component {
 
   constructor() {
@@ -82,7 +81,58 @@ class CreateCamera extends Component {
     // this.deleteSubscription(this.state.subscriptionId);
 
 
-
+    // const options = {
+    //     'Accept': 'application/json',
+    //     'Content-Type': 'application/json'
+    // };
+    // const createBodyEntities = {
+    //   "id":"gtc",
+    //   "type": "Camera",
+    //   "name": {
+    //     "type": "String",
+    //     "value": "ho"
+    //   },
+    //   "url": {
+    //     "type": "String",
+    //     "value": [
+    //       {
+    //         "id": "procesado",
+    //         "status": "active",
+    //         "roi": {}
+    //       },
+    //       {
+    //         "id": "procesado",
+    //         "status": "active",
+    //         "roi": {}
+    //       },
+    //       {
+    //         "id": "algomas",
+    //         "status": "disable",
+    //         "roi": {}
+    //       }
+    //     ]
+    //   },
+    //   "description": {
+    //     "type": "String",
+    //     "value": "descriptionCamera"
+    //   }
+    // };
+    // axios.post("http://161.72.123.211:1026/v2/entities", createBodyEntities, { headers: options	})
+    //   .then(response => {
+    //     const _this = this;
+    //     setTimeout(function(){
+    //     _this.setState({ //save the current state of the data
+    //       loadingCreate: false
+    //     });
+    //     }, 1000);
+    //   })
+    //   .catch(error => {
+    //
+    //     this.setState({ //save the current state of the data
+    //       connectionError: true
+    //     });
+    //     console.log('Error fetching and parsing data on the ORION context brocker', error);
+    //   });
 
 
 
@@ -130,33 +180,33 @@ class CreateCamera extends Component {
 
 
 
+
+        deleteSubscription = () => {
+          console.log(this.state.subscriptionId + " dentro delete");
+          axios.delete("http://161.72.123.211:1026/v2/subscriptions/" + this.state.subscriptionId, body, { headers: options	})
+            .then(response => {
+              console.log("subscription was reset successfully");
+            })
+            .catch(error => {
+              console.log('Error fetching and parsing data on the ORION context brocker', error);
+              console.log('ghhjhhj', error);
+            });
+        }
         //
-        // deleteSubscription = () => {
-        //   console.log(this.state.subscriptionId + " dentro delete");
-        //   axios.delete("http://161.72.123.211:1026/v2/subscriptions/" + this.state.subscriptionId, body, { headers: options	})
-        //     .then(response => {
-        //       console.log("subscription was reset successfully");
-        //     })
-        //     .catch(error => {
-        //       console.log('Error fetching and parsing data on the ORION context brocker', error);
-        //       console.log('ghhjhhj', error);
-        //     });
-        // }
-        // //
-        // createSubscription = () => {
-        //   axios.post("http://161.72.123.211:1026/v2/subscriptions", body, { headers: options	})
-        //     .then(response => {
-        //         this.setState({ //save the current state of the data
-        //           subscriptionId: response.headers['location'].split('/')[3]
-        //         });
-        //         // console.log(response.headers['location'].split('/')[3]);
-        //         // console.log(this.state.subscriptionId + " dentro creación");
-        //     })
-        //     .catch(error => {
-        //       console.log('Error fetching and parsing data on the ORION context brocker', error);
-        //       console.log('ghhjhhj', error);
-        //     });
-        // }
+        createSubscription = () => {
+          axios.post("http://161.72.123.211:1026/v2/subscriptions", body, { headers: options	})
+            .then(response => {
+                this.setState({ //save the current state of the data
+                  subscriptionId: response.headers['location'].split('/')[3]
+                });
+                // console.log(response.headers['location'].split('/')[3]);
+                // console.log(this.state.subscriptionId + " dentro creación");
+            })
+            .catch(error => {
+              console.log('Error fetching and parsing data on the ORION context brocker', error);
+              console.log('ghhjhhj', error);
+            });
+        }
 
 
 
@@ -202,6 +252,13 @@ class CreateCamera extends Component {
               <span className="omrs-input-label"> Name </span>
             </label>
           </div>
+
+          <div className="omrs-input-group margin-left-50">
+            <label className="omrs-input-underlined">
+              <input required name="groupCamera"/>
+              <span className="omrs-input-label"> Group </span>
+            </label>
+          </div>
           <br/>
           <div className="omrs-input-group displayInlineBlock">
             <label className="omrs-input-underlined">
@@ -212,7 +269,7 @@ class CreateCamera extends Component {
 
           <div className="omrs-input-group checkboxUrlCredentials displayInlineBlock">
             <label className="omrs-input-underlined">
-              <input onClick={this.checkCredentials} required id="checkCreandentials" type="checkbox" className="width-input-1 credentials-input" />
+              <input onClick={this.checkCredentials} id="checkCreandentials" type="checkbox" className="width-input-1 credentials-input" />
               <span className="omrs-input-label-Credentials"> Credentials </span>
             </label>
           </div>
@@ -220,22 +277,36 @@ class CreateCamera extends Component {
 
           <div id="userForcamera" className="omrs-input-group">
             <label className="omrs-input-underlined">
-              <input required name="userCamera" />
+              <input name="userCamera" />
               <span className="omrs-input-label"> User </span>
             </label>
           </div>
 
           <div id="pwdForCamera" className="omrs-input-group">
             <label className="omrs-input-underlined">
-              <input type="password" pattern=".{6,}" required name="pwdCamera" />
+              <input type="password" pattern=".{6,}" name="pwdCamera" />
               <span className="omrs-input-label"> Password </span>
             </label>
           </div>
 
           <div className="omrs-input-group displayBlock">
             <label className="omrs-input-underlined">
-              <textarea required name="description"></textarea>
+              <textarea required name="descriptionCamera" className="description-input-textarea"></textarea>
               <span className="omrs-input-label span-label-input-decription"> Description </span>
+            </label>
+          </div>
+          <br />
+          <div className="omrs-input-group checkbox-record-images-input displayInlineBlock">
+            <label className="omrs-input-underlined">
+              <input  id="checkCreandentials" type="checkbox" name="recordImages" className="width-input-1 credentials-input" />
+              <span className="omrs-input-label-Credentials"> Record images </span>
+            </label>
+          </div>
+          <br />
+          <div className="omrs-input-group checkbox-record-images-input displayInlineBlock">
+            <label className="omrs-input-underlined">
+              <input  id="checkCreandentials" type="checkbox" name="processImages" className="width-input-1 credentials-input" />
+              <span className="omrs-input-label-Credentials"> Process images </span>
             </label>
           </div>
 
