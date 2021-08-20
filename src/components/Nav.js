@@ -39,10 +39,10 @@ class Nav extends Component {
             </li>
 
             <li>
-              <NavLink to="#">
+              <a href="#">
                 <i className="fa fa-user fa-lg"></i>
                 <span className="nav-text"> Log in </span>
-              </NavLink>
+              </a>
             </li>
 
             <li>
@@ -53,10 +53,10 @@ class Nav extends Component {
             </li>
 
             <li className="darkerli darkerlishadow">
-              <NavLink to="/create">
+              <a href="/create">
                 <i className="fa fa-plus-square fa-lg"></i>
                 <span className="nav-text"> Add New Camera </span>
-              </NavLink>
+              </a>
             </li>
 
             <li className="darkerli darkerlishadowdown">
@@ -67,10 +67,10 @@ class Nav extends Component {
             </li>
 
             <li>
-              <NavLink to="#">
+              <a href="#">
                 <i className="fa fa-filter fa-lg"></i>
                 <span className="nav-text"> Filter </span>
-              </NavLink>
+              </a>
             </li>
 
           </ul>

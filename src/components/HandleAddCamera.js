@@ -10,13 +10,18 @@ class HandleAddCamera extends Component {
     super();
     this.state = {
       loadingCreate: true,
-      connectionError: false
+      connectionError: false,
+      id: null
     };
   }
+
 
   addCamera = () => {
     const queryParams = new URLSearchParams(window.location.search);
     const id = queryParams.get('idCamera');
+    this.setState({
+      showId: id
+    });
     const name = queryParams.get('nameCamera');
     const group = queryParams.get('groupCamera');
     const description = queryParams.get('descriptionCamera');
@@ -25,21 +30,17 @@ class HandleAddCamera extends Component {
     const recordImagesStatus = queryParams.get('recordImages');
     var recordStatus;
       if (recordImagesStatus === 'on') {
-
-        recordStatus  = "enable";
+        recordStatus = true;
       }else {
-
-        recordStatus  = "disabled";
+        recordStatus = false;
       }
 
     const processImageStatus = queryParams.get('processImages');
     var processStatus;
       if (processImageStatus === 'on') {
-
-        processStatus  = "enable";
+        processStatus  = true;
       }else {
-
-        processStatus  = "disabled";
+        processStatus  = false;
       }
 
     const url = queryParams.get('urlCamera');
@@ -55,7 +56,7 @@ class HandleAddCamera extends Component {
         'Content-Type': 'application/json'
     };
     const createBodyEntities = {
-      "id": id,
+      "id": "gtc" + id,
       "type": "Camera",
       "group": {
         "type": "String",
@@ -69,9 +70,14 @@ class HandleAddCamera extends Component {
         "type": "String",
         "value": url
       },
-      "record": {
-        "type": "String",
-        "value": recordStatus
+      "kurentoConfig": {
+        "type": "Boolean",
+        "value": {
+          "record": recordStatus,
+          "process": processStatus,
+          "addressLocality": false,
+          "postalCode": false
+        },
       },
       "description": {
         "type": "String",
@@ -105,7 +111,7 @@ class HandleAddCamera extends Component {
       <div className="">
 
       { (this.state.connectionError) ? error :
-        (this.state.loadingCreate) ? <img className="loading connection_error" src={ loadingSrc } alt="loading"/> : <p>Creation Succesfully.. go to <a href="/">Home</a></p> }
+        (this.state.loadingCreate) ? <img className="loading connection_error" src={ loadingSrc } alt="loading"/> : <p>The camera <b>{this.state.showId}</b> was created successfully.. go to <a href="/">Home</a></p> }
       </div>
     );
   }

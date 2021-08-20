@@ -233,36 +233,36 @@ class CreateCamera extends Component {
   return(
 
       <div className="update_container">
-        <div className="mark_title_update mark_title_create">
-       <h4 className="title_update_cameras"> Add New Camera </h4>
-       </div>
-        <form className="formCameras" action="/add" method="get">
-
+        <div id="title_container" className="mark_title_update mark_title_create">
+          <h4 className="title_update_cameras"> Add New Camera </h4>
+        </div>
+        <form className="formCameras formCamerasCreate" action="/add" method="get">
+<div className="formInputsfields">
           <div className="omrs-input-group width-input-1">
             <label className="omrs-input-underlined label-input-idCamera">
               <input disabled  className="idicator-input-IdCamera displayInlineBlock" value="gtc" />
-              <input required name="idCamera" className="width-input-1 border-radius-left-0 displayInlineBlock" />
+              <input id="idCamera" name="idCamera" className="width-input-1 border-radius-left-0 displayInlineBlock" />
               <span className="omrs-input-label margin-left-50"> Id-Camera </span>
             </label>
           </div>
 
           <div className="omrs-input-group margin-left-50">
             <label className="omrs-input-underlined">
-              <input required name="nameCamera"/>
+              <input id="nameCamera" name="nameCamera"/>
               <span className="omrs-input-label"> Name </span>
             </label>
           </div>
 
           <div className="omrs-input-group margin-left-50">
             <label className="omrs-input-underlined">
-              <input required name="groupCamera"/>
+              <input id="groupCamera" name="groupCamera"/>
               <span className="omrs-input-label"> Group </span>
             </label>
           </div>
           <br/>
           <div className="omrs-input-group displayInlineBlock">
             <label className="omrs-input-underlined">
-              <input required name="urlCamera" className="width-input-x2" />
+              <input id="urlCamera" type="url" name="urlCamera" className="width-input-x2" />
               <span className="omrs-input-label"> URL </span>
             </label>
           </div>
@@ -277,39 +277,39 @@ class CreateCamera extends Component {
 
           <div id="userForcamera" className="omrs-input-group">
             <label className="omrs-input-underlined">
-              <input name="userCamera" />
+              <input id="userCamera" name="userCamera" />
               <span className="omrs-input-label"> User </span>
             </label>
           </div>
 
           <div id="pwdForCamera" className="omrs-input-group">
             <label className="omrs-input-underlined">
-              <input type="password" pattern=".{6,}" name="pwdCamera" />
+              <input id="pwdCamera" type="password" pattern=".{6,}" name="pwdCamera" />
               <span className="omrs-input-label"> Password </span>
             </label>
           </div>
 
           <div className="omrs-input-group displayBlock">
             <label className="omrs-input-underlined">
-              <textarea required name="descriptionCamera" className="description-input-textarea"></textarea>
+              <textarea id="descriptionCamera" name="descriptionCamera" className="description-input-textarea"></textarea>
               <span className="omrs-input-label span-label-input-decription"> Description </span>
             </label>
           </div>
           <br />
           <div className="omrs-input-group checkbox-record-images-input displayInlineBlock">
             <label className="omrs-input-underlined">
-              <input  id="checkCreandentials" type="checkbox" name="recordImages" className="width-input-1 credentials-input" />
+              <input type="checkbox" name="recordImages" className="width-input-1 credentials-input" />
               <span className="omrs-input-label-Credentials"> Record images </span>
             </label>
           </div>
           <br />
           <div className="omrs-input-group checkbox-record-images-input displayInlineBlock">
             <label className="omrs-input-underlined">
-              <input  id="checkCreandentials" type="checkbox" name="processImages" className="width-input-1 credentials-input" />
+              <input type="checkbox" name="processImages" className="width-input-1 credentials-input" />
               <span className="omrs-input-label-Credentials"> Process images </span>
             </label>
           </div>
-
+  </div>
           <div className="buttons-cont">
             <button className="btn-6">
               <i className="fa fa-folder-open fa-lg icon-FormButton"></i>
@@ -320,14 +320,15 @@ class CreateCamera extends Component {
                 <i className="fa fa-arrow-circle-left fa-lg icon-FormButton-cancel"></i>
                 <span className="cancel"> Cancel </span>
             </a>
+
+            <button type="reset" className="btn-6 btn-6-reset">
+              <i className="fa fa-reply fa-lg icon-FormButton-reset"></i>
+              <span className="reset"> Reset </span>
+            </button>
           </div>
-          <button type="reset" className="btn-6 btn-6-reset">
-            <i className="fa fa-reply fa-lg icon-FormButton-reset"></i>
-            <span className="reset"> Reset </span>
-          </button>
+
 
       </form>
-      <div className="buttonsDiv-background"></div>
 
     </div>
 

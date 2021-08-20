@@ -19,7 +19,10 @@ class ContainerVideo extends Component {
     };
   }
 
+    warningDelete = () =>{
 
+    }
+    
     adjustVideoContainer = (countvideos) => {
       if (countvideos === 1) {
         $('.rep_prub').addClass('width-height-1')
@@ -69,6 +72,7 @@ class ContainerVideo extends Component {
                <Videos
                 key= {video.id}
                 name={ video }
+                warningDelete={this.warningDelete}
               //  url={ `https://farm${video.farm}.staticflickr.com/${video.server}/${video.id}_${video.secret}.jpg` }
               //  title= { video.title }
                 />

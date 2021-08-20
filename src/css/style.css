@@ -711,6 +711,7 @@ height: 100%;
 	justify-content: space-around;
 	margin-top: 30px;
 	padding: 21px;
+  padding-bottom: 0px;
   box-shadow: 2px 2px 20px #1f1f21;
   background-color:  #f1f2f3;
   transition: all .3s ease-out;
@@ -739,9 +740,11 @@ height: 100%;
 }
 
 .formCameras{
+
+}
+.formInputsfields{
   padding: 30px 30px;
 }
-
 
 
 
@@ -858,25 +861,13 @@ height: 100%;
 .span-label-input-decription{margin-top: -43px !important;; margin-left: -13px !important;;}
 
 
-.buttonsDiv-background{
-  height: 42px;
-  background-color: #575a6f;
-  position: relative;
-  margin: -21px;
-}
-
 
 .buttons-cont{
-  position: absolute;
-  margin-top: 9px;
-  margin-left: -51px;
+  background-color: #575a6f;
+  position: relative;
+  margin-left: -21px;
+  margin-right: -21px;
   z-index: 2;
-}
-
-.buttons-cont:active{
-  box-shadow: 0 0 0 0 transparent;
-  background-color: transparent;
-  border:none;
 }
 
 .btn-6 {
@@ -910,10 +901,7 @@ height: 100%;
         }
         .btn-6-reset{
           position: absolute;
-          margin-top: 9px;
-          z-index: 2;
           right: 0px;
-          margin-right: 15px;
         }
 
         .reset{
@@ -1158,4 +1146,64 @@ height: 100%;
 @font-face {
   font-family: "Comfortaa-Bold";
   src: url("../fonts/comfortaa/static/Comfortaa-Bold.ttf");
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.contein_error_message{
+  position: relative;
+  height: 60px;
+}.error_message{
+  color: white;
+  background-color: #ff4d4d;
+  text-align: center;
+  padding: 10px 10px;
+  position: absolute;
+  margin-top: -5px;
+  font-family: "Comfortaa-Light";
+  font-size: 13px;
+}.error_message:after {
+      bottom: 100%;
+      left: 7%;
+      border: solid transparent;
+      content: " ";
+      height: 0;
+      width: 0;
+      position: absolute;
+      pointer-events: none;
+      border-bottom-color: #ff4d4d;
+      border-width: 10px;
+      margin-left: -10px;
+    }
+.error_message_submit{
+  color: white;
+  background-color: #f84242;
+  text-align: center;
+  padding: 5px 0px;
+  font-size: 18px;
+  margin-right: -21px;
+  margin-left: -21px;
+  margin-top: -18px;
+  font-family: "Comfortaa-Light";
+}
+
+.margin-top-15px{ margin-top: 15px !important;}
+.margin-top-10px{ margin-top: 10px !important;}
+
+
+
+
+
+.warning-delete{
+  display:none;
 }
