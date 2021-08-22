@@ -231,6 +231,7 @@ class CreateCamera extends Component {
 
   render(){
   return(
+<div className="rep_prub_cont">
 
       <div className="update_container">
         <div id="title_container" className="mark_title_update mark_title_create">
@@ -332,6 +333,7 @@ class CreateCamera extends Component {
 
     </div>
 
+</div>
 
   );
   }

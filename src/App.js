@@ -235,7 +235,7 @@ class App extends Component {
       }}>
       <BrowserRouter>
         <Nav />
-        <div className="rep_prub_cont">
+
           <Switch>
             <Route exact path="/" render={() => // if loading is true h3 is displayed, else the gallery is shown
               (this.state.connectionError) ? <ConnectionError /> :
@@ -255,7 +255,7 @@ class App extends Component {
             <Route component={PageNotFound} /> {/*only appears when no route matches*/}
 
           </Switch>
-        </div>
+
       </BrowserRouter>
     </Provider>
     );

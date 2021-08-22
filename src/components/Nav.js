@@ -60,10 +60,10 @@ class Nav extends Component {
             </li>
 
             <li className="darkerli darkerlishadowdown">
-              <a href="#" onClick={this.showEditDelteButtons}>
+              <button className="menu-nav-button" onClick={() => {this.showEditDelteButtons()}}>
                 <i className="fa fa-edit fa-lg"></i>
-                <span className="nav-text"> Edit </span>
-              </a>
+                <span className="nav-text menu-nav-button-text"> Edit </span>
+              </button>
             </li>
 
             <li>
@@ -89,8 +89,8 @@ class Nav extends Component {
   }
 
   showEditDelteButtons = () =>{
-    $(".deleteCameraButton").toggle();
-    $(".updateCameraButton").toggle();
+    $(".updateDeleteCameraButtons").toggleClass('displayInlineBlock');
+    $('.moreInfoCameraButton').toggleClass('border-bottom-left-radius-0');
   }
 
   hideNavBar = () => {
