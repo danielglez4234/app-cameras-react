@@ -10,7 +10,7 @@ class UpdateCamera extends Component {
     super();
     this.state = {
       loadingUpdate: true,
-      connectionError: false,
+      idNotFound: false,
       camera: []
     };
   }
@@ -38,21 +38,33 @@ class UpdateCamera extends Component {
         console.log(this.state.camera)
       })
       .catch(error => {
+        this.setState({ //save the current state of the data
+          idNotFound: true
+        });
         console.log('Error fetching and parsing data on the ORION context brocker', error);
       });
   }
 
   render(){
+    const error = <div className="message-box message-box-error">
+                    <i className="fa fa-ban fa-2x"></i>
+                    <span className="message-text"><strong>Error:</strong> Internal Server Error - This id cannot be found</span>
+                    <a href="/">
+                      <i className="fa fa-times fa-2x exit-button "></i>
+                    </a>
+                  </div>;
   return(
-
-
+<div className="rep_prub_cont">
+{ (this.state.idNotFound) ? error :
     <div className="update_container">
       <div id="title_container" className="mark_title_update mark_title_create">
         <h4 className="title_update_cameras"> Update Camera </h4>
      </div>
       <form className="formCameras" action="/selectedCamera" method="get">
 <div className="formInputsfields">
+
       { (this.state.loadingUpdate) ? <img className="loadingUpdate" src={ loadingSrc } alt="loading"/> :
+
       <div>
 
         <div className="omrs-input-group width-input-1">
@@ -150,6 +162,9 @@ class UpdateCamera extends Component {
     </form>
 
   </div>
+
+}
+</div>
   );
   }
 }

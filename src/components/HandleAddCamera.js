@@ -106,12 +106,26 @@ class HandleAddCamera extends Component {
   }
 
   render() {
-    const error = <div>pero que?</div>
+    const error = <div className="message-box message-box-error">
+                    <i className="fa fa-ban fa-2x"></i>
+                    <span className="message-text"><strong>Error:</strong> Internal Server Error</span>
+                    <a href="/">
+                      <i className="fa fa-times fa-2x exit-button "></i>
+                    </a>
+                  </div>;
+    const success = <div className="message-box message-box-success">
+                        <i className="fa fa-check fa-2x"></i>
+                        <span className="message-text"><strong>Success:</strong> Camera created correctly</span>
+                        <a href="/">
+                          <i className="fa fa-times fa-2x exit-button "></i>
+                        </a>
+                      </div>;
+    // const success = <p>The camera <b>{this.state.showId}</b> was created successfully.. go to <a href="/">Home</a></p>
     return (
-      <div className="">
+      <div className="rep_prub_cont">
 
       { (this.state.connectionError) ? error :
-        (this.state.loadingCreate) ? <img className="loading connection_error" src={ loadingSrc } alt="loading"/> : <p>The camera <b>{this.state.showId}</b> was created successfully.. go to <a href="/">Home</a></p> }
+        (this.state.loadingCreate) ? <img className="loading connection_error" src={ loadingSrc } alt="loading"/> : success }
       </div>
     );
   }

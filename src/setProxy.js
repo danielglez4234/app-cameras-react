@@ -20,5 +20,3 @@ module.exports = function(app){
       next();
   });
 }
-
-console.log('PROXY sss');
