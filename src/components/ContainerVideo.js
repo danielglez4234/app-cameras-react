@@ -5,9 +5,9 @@ import * as $ from 'jquery';
 import noCameaSrc from '../img/noCamera.png';
 import loadingSrc from '../img/loading.svg';
 import apiNotResponding from '../img/apiNotResponding.png';
+import deleteIcon from '../img/delete.png';
 
 import Videos from './Videos';
-// import NotFound from './NotFound';
 import ConnectionError from './ConnectionError';
 
 class ContainerVideo extends Component {
@@ -15,14 +15,38 @@ class ContainerVideo extends Component {
   constructor() {
     super();
     this.state = {
-      countVideos: 0
+      countVideos: 0,
+      mapTestId: [{id:'1'},{id:'2'},{id:'3'},{id:'4'}]
     };
   }
 
-    warningDelete = () =>{
-
+    warningDelete = (id) =>{
+      $('.warning-delete' + id).fadeIn(100);
+      $('.block-area-for-warning-delete').fadeIn(100);
     }
-    
+    closeWarningDelete = (id) =>{
+      if (id) {
+        $('.warning-delete' + id).fadeOut(100);
+        $('.block-area-for-warning-delete').fadeOut(100);
+      }
+      else {
+        $('.warning-delete').fadeOut(100);
+        $('.block-area-for-warning-delete').fadeOut(100);
+      }
+    }
+
+
+    showMenuItems = (id) =>{
+      $('.menuCameraItem' + id).toggle();
+      $('.menuVideoCameraButton' + id).toggleClass('border-bottom-left-radius-0');
+    }
+
+    coverCamera = (id) =>{
+      $('.rep_prub').toggle();
+      $('.coverCameraButtonIcon').toggleClass('cover-rotate-when-clicked');
+      $('.rep_prub' + id).toggleClass('displayBlock width-height-1');
+    }
+
     adjustVideoContainer = (countvideos) => {
       if (countvideos === 1) {
         $('.rep_prub').addClass('width-height-1')
@@ -58,6 +82,7 @@ class ContainerVideo extends Component {
       <Consumer>
       { context => {
         let videos;
+        let warningDeleteBox;
         const result = context.idCam; //we save the data in the result variable
         // console.log(result.length + 'totalPages');
 
@@ -73,8 +98,9 @@ class ContainerVideo extends Component {
                 key= {video.id}
                 name={ video }
                 warningDelete={this.warningDelete}
-              //  url={ `https://farm${video.farm}.staticflickr.com/${video.server}/${video.id}_${video.secret}.jpg` }
-              //  title= { video.title }
+                closeWaringDelete={this.closeWarningDelete}
+                showMenuItems={this.showMenuItems}
+                coverCamera={this.coverCamera}
                 />
             );
 
@@ -94,6 +120,7 @@ class ContainerVideo extends Component {
 
         return(
           <div className="rep_prub_cont_inside">
+          <div onClick={() => {this.closeWarningDelete()}} className="block-area-for-warning-delete"></div>
 
           { (context.connectionError) ? <ConnectionError /> :
             (context.apiRestConnectioError) ? <p><img className="loading connection_error" src={ apiNotResponding } alt="loading"/><span class="message_connection_error api_error">APi REST server is not responding...</span></p> :
