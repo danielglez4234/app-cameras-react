@@ -93,11 +93,11 @@ const Videos = ({ name, warningDelete, closeWaringDelete, showMenuItems, coverCa
 
       <div className="rep_prub-info">
         <hr className="info_separator" />
-        <span> Location: { name.name } </span>
+        <span> <b>Location:</b> { name.name } </span>
         <br />
-        <span> Id-Camera: { name.id } Group: {name.group}</span>
+        <span> <b>Id-Camera:</b> { name.id } Group: {name.group}</span>
         <br />
-        <span> More info: { name.description } </span>
+        <span> <b>More info:</b> { name.description } </span>
       </div>
 
 

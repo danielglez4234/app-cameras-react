@@ -1,28 +1,14 @@
 import React, { Component }  from 'react';
 import * as $ from 'jquery';
 import axios from 'axios';
-// import NGSI from 'ngsijs';
 import '../setProxy.js';
-// import notifee from '@notifee/react-native';
 
-// async function onDisplayNotification() {
-//   await notifee.displayNotification({
-//   });
-// }
-
-// import { v4 as uuidv4 } from 'uuid';
-//
-// var userSessionId;
-//
-//
-//    if(localStorage.getItem('session_id')){
-//        userSessionId = localStorage.getItem('session_id');
-//    } else {
-//        localStorage.setItem('session_id', uuidv4());
-//        userSessionId = localStorage.getItem('session_id');
-//    }
-// console.log(localStorage.getItem('userSessionId'));
-// console.log(userSessionId);
+import idIcon from '../img/id.png';
+import nameIcon from '../img/name.png';
+import groupIcon from '../img/group.png';
+import urlIcon from '../img/url.png';
+import userIcon from '../img/user.png';
+import pwdIcon from '../img/pwd.png';
 
 
 const options = {
@@ -78,7 +64,7 @@ class CreateCamera extends Component {
     // window.removeEventListener('beforeunload', this.deleteSubscription);
     // window.addEventListener('beforeunload', this.deleteSubscription);
     // this.createSubscription();
-    // this.deleteSubscription(this.state.subscriptionId);
+    this.deleteSubscription(this.state.subscriptionId);
 
 
     // const options = {
@@ -238,79 +224,95 @@ class CreateCamera extends Component {
           <h4 className="title_update_cameras"> Add New Camera </h4>
         </div>
         <form className="formCameras formCamerasCreate" action="/add" method="get">
+
 <div className="formInputsfields">
-          <div className="omrs-input-group width-input-1">
-            <label className="omrs-input-underlined label-input-idCamera">
-              <input disabled  className="idicator-input-IdCamera displayInlineBlock" value="gtc" />
-              <input id="idCamera" name="idCamera" className="width-input-1 border-radius-left-0 displayInlineBlock" />
-              <span className="omrs-input-label margin-left-50"> Id-Camera </span>
+          <div className="cont-input displayInlineBlock">
+            <label for="idCamera" className="label-input">
+              <img src={ idIcon } alt="id-camera" className="iconInput iconInput-idcam" />
+              <span className="input-label-span input-label-idCam">Id-Camera</span>
             </label>
+            <input id="idCamera" name="idCamera" className="input-form input-form-id-camera" placeholder="Id..."/>
           </div>
 
-          <div className="omrs-input-group margin-left-50">
-            <label className="omrs-input-underlined">
-              <input id="nameCamera" name="nameCamera"/>
-              <span className="omrs-input-label"> Name </span>
+          <div className="cont-input cont-input-name displayInlineBlock">
+            <label for="nameCamera" className="label-input" >
+              <img src={ nameIcon } alt="name" className="iconInput iconInput-name" />
+              <span className="input-label-span input-label-name">Name</span>
             </label>
+             <input id="nameCamera" name="nameCamera" className="input-form input-form-name" placeholder="Name..." />
           </div>
 
-          <div className="omrs-input-group margin-left-50">
-            <label className="omrs-input-underlined">
-              <input id="groupCamera" name="groupCamera"/>
-              <span className="omrs-input-label"> Group </span>
+
+          <div className="cont-input cont-input-group">
+            <label for="groupCamera" className="label-input" >
+              <img src={ groupIcon } alt="group" className="iconInput iconInput-group" />
+              <span className="input-label-span input-label-group">Group</span>
+            </label>
+             <input id="groupCamera" name="groupCamera" className="input-form input-form-group" placeholder="Group..." />
+          </div>
+
+          <br/>
+
+          <div className="cont-input cont-input-url displayInlineBlock">
+            <label for="urlCamera" className="label-input" >
+              <img src={ urlIcon } alt="url" className="iconInput iconInput-url" />
+              <span className="input-label-span input-label-url">URL</span>
+            </label>
+             <input id="urlCamera" name="urlCamera" className="input-form input-form-url" placeholder="http://... or https://..." />
+          </div>
+
+
+          <div className="cont-input checkboxUrlCredentials displayInlineBlock">
+            <label for="checkCred" className="omrs-input-underlined">
+              <input id="checkCred" onClick={this.checkCredentials} id="checkCreandentials" type="checkbox" name="credentialsCheck" className="width-input-1 credentials-input" />
+              <span className="input-label-checkCredentials"> Credentials </span>
             </label>
           </div>
           <br/>
-          <div className="omrs-input-group displayInlineBlock">
-            <label className="omrs-input-underlined">
-              <input id="urlCamera" type="url" name="urlCamera" className="width-input-x2" />
-              <span className="omrs-input-label"> URL </span>
+
+          <div id="userForcamera" className="cont-input-user-pwd cont-input-user">
+            <label for="userCamera" className="label-input">
+              <img src={ userIcon } alt="user" className="iconInput iconInput-user" />
+              <span className="input-label-span input-label-user">User</span>
             </label>
+            <input id="userCamera" name="userCamera" className="input-form" placeholder="User name..."/>
           </div>
 
-          <div className="omrs-input-group checkboxUrlCredentials displayInlineBlock">
-            <label className="omrs-input-underlined">
-              <input onClick={this.checkCredentials} id="checkCreandentials" type="checkbox" className="width-input-1 credentials-input" />
-              <span className="omrs-input-label-Credentials"> Credentials </span>
-            </label>
-          </div>
-          <br/>
 
-          <div id="userForcamera" className="omrs-input-group">
-            <label className="omrs-input-underlined">
-              <input id="userCamera" name="userCamera" />
-              <span className="omrs-input-label"> User </span>
+          <div id="pwdForCamera" className="cont-input-user-pwd cont-input-pwd">
+            <label for="pwdCamera" className="label-input">
+              <img src={ pwdIcon } alt="pwd" className="iconInput iconInput-pwd" />
+              <span className="input-label-span input-label-pwd">Password</span>
             </label>
+            <input id="pwdCamera" type="password" pattern=".{6,}" name="pwdCamera" className="input-form" placeholder="Password..."/>
           </div>
 
-          <div id="pwdForCamera" className="omrs-input-group">
-            <label className="omrs-input-underlined">
-              <input id="pwdCamera" type="password" pattern=".{6,}" name="pwdCamera" />
-              <span className="omrs-input-label"> Password </span>
-            </label>
-          </div>
 
-          <div className="omrs-input-group displayBlock">
-            <label className="omrs-input-underlined">
+          <div className="cont-input displayBlock">
+            <span className="input-label-span input-label-description">Description</span>
+            <label className="label-input label-input-description">
               <textarea id="descriptionCamera" name="descriptionCamera" className="description-input-textarea"></textarea>
-              <span className="omrs-input-label span-label-input-decription"> Description </span>
             </label>
           </div>
+
           <br />
-          <div className="omrs-input-group checkbox-record-images-input displayInlineBlock">
+
+          <div className="cont-input displayInlineBlock">
             <label className="omrs-input-underlined">
               <input type="checkbox" name="recordImages" className="width-input-1 credentials-input" />
-              <span className="omrs-input-label-Credentials"> Record images </span>
+              <span className="input-label-checkCredentials"> Record images </span>
             </label>
           </div>
           <br />
-          <div className="omrs-input-group checkbox-record-images-input displayInlineBlock">
+          <div className="cont-input displayInlineBlock">
             <label className="omrs-input-underlined">
               <input type="checkbox" name="processImages" className="width-input-1 credentials-input" />
-              <span className="omrs-input-label-Credentials"> Process images </span>
+              <span className="input-label-checkCredentials"> Process images </span>
             </label>
           </div>
   </div>
+
+
           <div className="buttons-cont">
             <button className="btn-6">
               <i className="fa fa-folder-open fa-lg icon-FormButton"></i>
@@ -340,11 +342,11 @@ class CreateCamera extends Component {
 
   checkCredentials = () => {
        if ($('#checkCreandentials:checkbox:checked').length > 0) {
-         $('#userForcamera').fadeIn("fast");
-         $('#pwdForCamera').fadeIn("fast");
+         $('#userForcamera').addClass('show-cont-input-user-pwd');
+         $('#pwdForCamera').addClass('show-cont-input-user-pwd');
        }else {
-         $('#userForcamera').val('').hide();
-         $('#pwdForCamera').val('').hide();
+         $('#userForcamera').removeClass('show-cont-input-user-pwd');
+         $('#pwdForCamera').removeClass('show-cont-input-user-pwd');
        }
   }
 

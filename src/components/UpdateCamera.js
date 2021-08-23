@@ -3,6 +3,14 @@ import axios from 'axios';
 // import * as $ from 'jquery';
 
 import loadingSrc from '../img/loading-video.svg';
+import idIcon from '../img/id.png';
+import nameIcon from '../img/name.png';
+import groupIcon from '../img/group.png';
+import urlIcon from '../img/url.png';
+import userIcon from '../img/user.png';
+import pwdIcon from '../img/pwd.png';
+
+import updateMark from '../img/updateMark.png';
 
 class UpdateCamera extends Component {
 
@@ -11,14 +19,14 @@ class UpdateCamera extends Component {
     this.state = {
       loadingUpdate: true,
       idNotFound: false,
-      camera: []
+      camera: [],
+      credentials: ""
     };
   }
 
   componentDidMount() {
     const queryParams = new URLSearchParams(window.location.search);
     const idCamera = queryParams.get('idCam');
-    console.log(idCamera);
 
     this.getCameraById(idCamera);
   }
@@ -34,8 +42,23 @@ class UpdateCamera extends Component {
           camera: response.data,
           loadingUpdate: false
         });
-        console.log(response.data);
-        console.log(this.state.camera)
+
+        // var inputURLcredentials;
+        // console.log(response.data.url.value);
+        // if (response.data.url.value) {
+        //   var urlWithoutCredentials;
+        //     inputURLcredentials =  <input id="urlCamera" type="url" defaultValue={response.data.url.value} name="urlCamera" className="width-input-x2" />;
+        //     this.setState({
+        //       credentials: inputURLcredentials
+        //     });
+        //     console.log(this.state.credentials + ' credentials');
+        // }else {
+        //   inputURLcredentials = <input id="urlCamera" type="url" defaultValue={response.data.url.value} name="urlCamera" className="width-input-x2" />;
+        //   this.setState({
+        //     credentials: inputURLcredentials
+        //   });
+        // }
+
       })
       .catch(error => {
         this.setState({ //save the current state of the data
@@ -53,12 +76,14 @@ class UpdateCamera extends Component {
                       <i className="fa fa-times fa-2x exit-button "></i>
                     </a>
                   </div>;
+
   return(
 <div className="rep_prub_cont">
 { (this.state.idNotFound) ? error :
     <div className="update_container">
       <div id="title_container" className="mark_title_update mark_title_create">
         <h4 className="title_update_cameras"> Update Camera </h4>
+        <img src={ updateMark } alt="update mark" className="icon-updateMark" />
      </div>
       <form className="formCameras" action="/selectedCamera" method="get">
 <div className="formInputsfields">
@@ -67,74 +92,82 @@ class UpdateCamera extends Component {
 
       <div>
 
-        <div className="omrs-input-group width-input-1">
-          <label className="omrs-input-underlined label-input-idCamera">
-            <input disabled className="idicator-input-IdCamera displayInlineBlock" value="gtc" />
-            <input id="idCamera" defaultValue={this.state.camera.id} name="idCamera" className="idCamera2 width-input-1 border-radius-left-0 displayInlineBlock" />
-            <span className="omrs-input-label margin-left-50"> Id-Camera </span>
+        <div className="cont-input displayInlineBlock">
+          <label for="idCamera" className="label-input">
+            <img src={ idIcon } alt="id-camera" className="iconInput iconInput-idcam" />
+            <span className="input-label-span input-label-idCam">Id-Camera</span>
           </label>
+          <input defaultValue={this.state.camera.id} id="idCamera" name="idCamera" className="input-form input-form-id-camera" placeholder="Id..."/>
         </div>
 
-        <div className="omrs-input-group margin-left-50">
-          <label className="omrs-input-underlined">
-            <input id="nameCamera" defaultValue={this.state.camera.name.value} name="nameCamera"/>
-            <span className="omrs-input-label"> Name </span>
+        <div className="cont-input cont-input-name displayInlineBlock">
+          <label for="nameCamera" className="label-input" >
+            <img src={ nameIcon } alt="name" className="iconInput iconInput-name" />
+            <span className="input-label-span input-label-name">Name</span>
           </label>
+           <input defaultValue={this.state.camera.name.value} id="nameCamera" name="nameCamera" className="input-form input-form-name" placeholder="Name..." />
         </div>
 
-        <div className="omrs-input-group margin-left-50">
-          <label className="omrs-input-underlined">
-            <input id="groupCamera" name="groupCamera"/>
-            <span className="omrs-input-label"> Group </span>
+        <div className="cont-input cont-input-group">
+          <label for="groupCamera" className="label-input" >
+            <img src={ groupIcon } alt="group" className="iconInput iconInput-group" />
+            <span className="input-label-span input-label-group">Group</span>
+          </label>
+           <input defaultValue={this.state.camera.group.value} id="groupCamera" name="groupCamera" className="input-form input-form-group" placeholder="Group..." />
+        </div>
+        <br/>
+
+        <div className="cont-input cont-input-url displayInlineBlock">
+          <label for="urlCamera" className="label-input" >
+            <img src={ urlIcon } alt="url" className="iconInput iconInput-url" />
+            <span className="input-label-span input-label-url">URL</span>
+          </label>
+           <input defaultValue={this.state.camera.url.value.path} id="urlCamera" name="urlCamera" className="input-form input-form-url" placeholder="http://... or https://..." />
+        </div>
+
+        <div className="cont-input checkboxUrlCredentials displayInlineBlock">
+          <label for="checkCred" className="omrs-input-underlined">
+            <input id="checkCred" onClick={this.checkCredentials} id="checkCreandentials" type="checkbox" name="credentialsCheck" className="width-input-1 credentials-input" />
+            <span className="input-label-checkCredentials"> Credentials </span>
           </label>
         </div>
         <br/>
-        <div className="omrs-input-group displayInlineBlock">
-          <label className="omrs-input-underlined">
-            <input id="urlCamera" type="url" defaultValue={this.state.camera.url.value} name="urlCamera" className="width-input-x2" />
-            <span className="omrs-input-label"> URL </span>
+        <div id="userForcamera" className="cont-input-user-pwd cont-input-user">
+          <label for="userCamera" className="label-input">
+            <img src={ userIcon } alt="user" className="iconInput iconInput-user" />
+            <span className="input-label-span input-label-user">User</span>
+          </label>
+          <input id="userCamera" name="userCamera" className="input-form" placeholder="User name..."/>
+        </div>
+
+        <div id="pwdForCamera" className="cont-input-user-pwd cont-input-pwd">
+          <label for="pwdCamera" className="label-input">
+            <img src={ pwdIcon } alt="pwd" className="iconInput iconInput-pwd" />
+            <span className="input-label-span input-label-pwd">Password</span>
+          </label>
+          <input id="pwdCamera" type="password" pattern=".{6,}" name="pwdCamera" className="input-form" placeholder="Password..."/>
+        </div>
+
+        <div className="cont-input displayBlock">
+          <span className="input-label-span input-label-description">Description</span>
+          <label className="label-input label-input-description">
+            <textarea defaultValue={this.state.camera.description.value} id="descriptionCamera" name="descriptionCamera" className="description-input-textarea"></textarea>
           </label>
         </div>
 
-        <div className="omrs-input-group checkboxUrlCredentials displayInlineBlock">
-          <label className="omrs-input-underlined">
-            <input onClick={this.checkCredentials} id="checkCreandentials" type="checkbox" className="width-input-1 credentials-input" />
-            <span className="omrs-input-label-Credentials"> Credentials </span>
-          </label>
-        </div>
-        <br/>
-        <div id="userForcamera" className="omrs-input-group">
-          <label className="omrs-input-underlined">
-            <input id="userCamera" name="userCamera" />
-            <span className="omrs-input-label"> User </span>
-          </label>
-        </div>
-
-        <div id="pwdForCamera" className="omrs-input-group">
-          <label className="omrs-input-underlined">
-            <input id="pwdCamera" type="password" pattern=".{6,}" name="pwdCamera" />
-            <span className="omrs-input-label"> Password </span>
-          </label>
-        </div>
-
-        <div className="omrs-input-group displayBlock">
-          <label className="omrs-input-underlined">
-            <textarea id="descriptionCamera" defaultValue={this.state.camera.description.value} name="description" className="description-input-textarea"></textarea>
-            <span className="omrs-input-label span-label-input-decription"> Description </span>
-          </label>
-        </div>
         <br />
-        <div className="omrs-input-group checkbox-record-images-input displayInlineBlock">
+
+        <div className="cont-input displayInlineBlock">
           <label className="omrs-input-underlined">
             <input type="checkbox" name="recordImages" className="width-input-1 credentials-input" />
-            <span className="omrs-input-label-Credentials"> Record images </span>
+            <span className="input-label-checkCredentials"> Record images </span>
           </label>
         </div>
         <br />
-        <div className="omrs-input-group checkbox-record-images-input displayInlineBlock">
+        <div className="cont-input displayInlineBlock">
           <label className="omrs-input-underlined">
             <input type="checkbox" name="processImages" className="width-input-1 credentials-input" />
-            <span className="omrs-input-label-Credentials"> Process images </span>
+            <span className="input-label-checkCredentials"> Process images </span>
           </label>
         </div>
 

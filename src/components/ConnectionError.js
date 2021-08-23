@@ -5,12 +5,12 @@ import connectErrorSrc from '../img/connection_error.png';
 const ConnectionError = () => {
   return(
 
-    <p>
+    <div className="rep_prub_cont">
 
       <img className="loading connection_error" src={ connectErrorSrc } alt="loading"/>
       <span className="message_connection_error error_kurento">Failed to connect to the websocket server...</span>
 
-    </p>
+    </div>
 
   );
 }
