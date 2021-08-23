@@ -17,44 +17,86 @@ class HandleUpdateCamera extends Component {
 
   handleUpdate = () => {
     const queryParams = new URLSearchParams(window.location.search);
-    const idCamera = queryParams.get('idCamera');
-    const nameCamera = queryParams.get('nameCamera');
-    const descriptionCamera = queryParams.get('description');
+    const id = queryParams.get('idCamera');
+    const name = queryParams.get('nameCamera');
+    const description = queryParams.get('description');
 
 
-    const urlCamera = queryParams.get('urlCamera');
-    const userCamera = queryParams.get('userCamera');
-    const pwdCamera = queryParams.get('pwdCamera');
+    const recordImagesStatus = queryParams.get('recordImages');
+    var recordStatus;
+      if (recordImagesStatus === 'on') {
+        recordStatus = true;
+      }else {
+        recordStatus = false;
+      }
+
+    const processImageStatus = queryParams.get('processImages');
+    var processStatus;
+      if (processImageStatus === 'on') {
+        processStatus  = true;
+      }else {
+        processStatus  = false;
+      }
+
 
     var urlpath;
-    if (userCamera || pwdCamera) {
-       urlpath = userCamera + ':' + pwdCamera + '@' + urlCamera;
+    const regexhttps = /^https:\/\/+/;
+    const regexhttp = /^http:\/\/+/;
+    var url = queryParams.get('urlCamera');
+    const credentialsCheck = queryParams.get('credentialsCheck');
+      const user = queryParams.get('userCamera');
+      const pwd = queryParams.get('pwdCamera');
+
+    var credentials;
+    if (credentialsCheck === 'on') {
+      credentials = true;
+      if (regexhttps.test(url)) {
+        url = url.slice(8);
+        urlpath = 'https://' + user + ':' + pwd + '@' + url;
+
+      }else{
+        url.replace(regexhttp, ' ');
+        url = url.slice(7);
+        var ela = urlpath = 'http://' + user + ':' + pwd + '@' + url;
+        console.log(ela);
+      }
     }else {
-      urlpath = urlCamera;
+      credentials = false;
+      urlpath = url;
     }
-    // console.log(urlpath);
 
 
-    console.log(idCamera, nameCamera, descriptionCamera, urlCamera);
     const options = {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
     };
-    const updateBodyEntities = {
+    const updateBody = {
       "name": {
         "type": "String",
-        "value": nameCamera
+        "value": name
       },
       "url": {
         "type": "String",
-        "value": urlCamera
+        "value":{
+          "credentials": credentials,
+          "path": urlpath
+         }
+      },
+      "kurentoConfig": {
+        "type": "Boolean",
+        "value": {
+          "record": recordStatus,
+          "process": processStatus,
+          "addressLocality": false,
+          "postalCode": false
+        },
       },
       "description": {
         "type": "String",
-        "value": descriptionCamera
+        "value": description
       }
     };
-    axios.patch("http://161.72.123.211:1026/v2/entities/"+ idCamera +"/attrs?options=append", updateBodyEntities, { headers: options	})
+    axios.patch("http://161.72.123.211:1026/v2/entities/"+ id +"/attrs?options=append", updateBody, { headers: options	})
       .then(response => {
         this.setState({ //save the current state of the data
           loadingUpdate: false

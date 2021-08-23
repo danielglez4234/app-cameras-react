@@ -10,8 +10,7 @@ class HandleAddCamera extends Component {
     super();
     this.state = {
       loadingCreate: true,
-      connectionError: false,
-      id: null
+      connectionError: false
     };
   }
 
@@ -19,9 +18,6 @@ class HandleAddCamera extends Component {
   addCamera = () => {
     const queryParams = new URLSearchParams(window.location.search);
     const id = queryParams.get('idCamera');
-    this.setState({
-      showId: id
-    });
     const name = queryParams.get('nameCamera');
     const group = queryParams.get('groupCamera');
     const description = queryParams.get('descriptionCamera');
@@ -43,11 +39,34 @@ class HandleAddCamera extends Component {
         processStatus  = false;
       }
 
-    const url = queryParams.get('urlCamera');
-    const user = queryParams.get('userCamera');
-    const pwd = queryParams.get('pwdCamera');
+    var urlpath;
+    const regexhttps = /^https:\/\/+/;
+    const regexhttp = /^http:\/\/+/;
+    var url = queryParams.get('urlCamera');
+    const credentialsCheck = queryParams.get('credentialsCheck');
+      const user = queryParams.get('userCamera');
+      const pwd = queryParams.get('pwdCamera');
 
-      const urlpath = user + ':' + pwd + '@' + url;
+    var credentials;
+    if (credentialsCheck === 'on') {
+      credentials = true;
+      if (regexhttps.test(url)) {
+        url = url.slice(8);
+        urlpath = 'https://' + user + ':' + pwd + '@' + url;
+
+      }else{
+        url.replace(regexhttp, ' ');
+        url = url.slice(7);
+        var ela = urlpath = 'http://' + user + ':' + pwd + '@' + url;
+        console.log(ela);
+      }
+    }else {
+      credentials = false;
+      urlpath = url;
+    }
+
+
+
 
 
 
@@ -68,7 +87,10 @@ class HandleAddCamera extends Component {
       },
       "url": {
         "type": "String",
-        "value": url
+        "value":{
+          "credentials": credentials,
+          "path": urlpath
+         }
       },
       "kurentoConfig": {
         "type": "Boolean",
