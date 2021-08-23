@@ -92,7 +92,7 @@ class App extends Component {
       _this.connect();
       console.log("Successfully connected to the websocket server...")
     }
-    this.state.connection.error = function(event) {
+    this.state.connection.onerror = function(event) {
       _this.setState({ //save the current state of the data
         connectionError: true
       });
@@ -239,8 +239,8 @@ class App extends Component {
           <Switch>
             <Route exact path="/" render={() => // if loading is true h3 is displayed, else the gallery is shown
               (this.state.connectionError) ? <ConnectionError /> :
-              (this.state.apiRestConnectioError) ? <p><img className="loading connection_error" src={ apiNotResponding } alt="loading"/><span class="message_connection_error api_error">APi REST server is not responding...</span></p> :
-              (this.state.loading) ? <img className="loading connection_error" src={ loadingSrc } alt="loading"/> : <ContainerVideo />
+              (this.state.apiRestConnectioError) ? <div className="rep_prub_cont"><img className="loading connection_error" src={ apiNotResponding } alt="loading"/><span class="message_connection_error api_error">APi REST server is not responding...</span></div> :
+              (this.state.loading) ? <div className="rep_prub_cont"><img className="loading connection_error" src={ loadingSrc } alt="loading"/></div> : <ContainerVideo />
             } />
             <Route path="/list" render={() => <ContainerVideo /> } />
             <Route path="/create" render={() => <CreateCamera /> } />

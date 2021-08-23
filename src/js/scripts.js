@@ -33,7 +33,7 @@ var $errorGroup = $('<div class="contein_error_message margin-top-10px"><div cla
 $('#groupCamera').after($errorGroup);
 $($errorGroup).hide();
 
-var $errorUrl = $('<div class="contein_error_message"><div class="error_message">Please provide a valid URL. example: http://... or https://...</div></div>');
+var $errorUrl = $('<div class="contein_error_message margin-top-10px"><div class="error_message">Please provide a valid URL. example: http://... or https://...</div></div>');
 $($errorUrl).hide();
 
 var $errorUser = $('<div class="contein_error_message margin-top-10px"><div class="error_message">You have to check at least one activity</div></div>');
