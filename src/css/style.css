@@ -162,6 +162,8 @@ overflow-x: hidden;
 
 }
 .menu-nav-button{
+  /* top: -4px;
+  height: 45px; */
   position:relative;
   width:255px;
   display:inline-flex;
@@ -435,8 +437,7 @@ height: 100%;
   align-content: space-between;
   border: 1px solid #495057;
   display: inline-block;
-  /* overflow-y: hidden;
-  overflow-x: hidden; */
+  overflow: hidden;
   position: relative;
   /* margin: 3px; */
 }
@@ -898,6 +899,9 @@ height: 100%;
   display: flex;
   margin-bottom: 10px;
 }
+  .cont-input-idCam{
+    margin-bottom: 20px;
+  }
   .cont-input-name {
     margin-left:40px;
   }
@@ -907,18 +911,19 @@ height: 100%;
   .cont-input-url {
     margin-bottom:40px;
   }
+  .cont-input-user{
+    margin-bottom:30px;
+  }
   .cont-input-pwd{
+    display:inline-block;
+  }
+  .cont-input-confirm-pwd{
+    display:inline-block;
+    margin-bottom: 30px;
     margin-left:40px;
   }
 
-.cont-input-user-pwd {
-  display: none;
-}
 
-.show-cont-input-user-pwd {
-  display: inline-block !important;
-  margin-bottom: 30px;
-}
 
 .iconInput {
   position: relative;
@@ -934,6 +939,14 @@ height: 100%;
     width: 30px;
     margin-left: -15px;
   }
+  .iconInput-arrowDown{
+    width: 48px;
+    height: 48px;
+    position: absolute;
+    z-index: 3;
+    margin-left: 149px;
+    margin-top: -10px;
+  }
   .iconInput-url{
     width: 24px;
   }
@@ -942,13 +955,18 @@ height: 100%;
     margin-left: -15px;
   }
   .iconInput-pwd{
-    width: 30px;
-    margin-left: -15px;
+    width: 26px;
+    margin-left: -16px;
+  }
+  .iconInput-confirm-pwd{
+    left: 50%;
+    width: 26px;
+    margin-left: -16px;
   }
 
 
 .label-input{
-  background-color: #bcc5ce;
+  background-color: #6a6e88;
   height: 50px;
   width: 50px;
   margin-bottom: 2px;
@@ -986,6 +1004,9 @@ height: 100%;
     font-family: "Comfortaa-SemiBold";
     color: rgba(19, 19, 21, 0.6);
   }
+  .input-label-confirm-pwd{
+    margin-left: -6px;
+   }
 
 
 input:focus, textarea:focus, select:focus{
@@ -1019,9 +1040,11 @@ input:focus, textarea:focus, select:focus{
   .input-form-url{
     width:600px !important;
   }
-        .input-form:focus, .description-input-textarea:focus{
+        .input-form:focus, .description-input-textarea:focus, .input-form[type=password]:focus{
           background-color: #e0e3e6;
           outline:none !important;
+          box-shadow:none;
+          border:none;
         }
 
 
@@ -1065,6 +1088,132 @@ input:focus, textarea:focus, select:focus{
         border-bottom-left-radius:0px !important;
       }
 
+
+.credentials-section{
+  display:none;
+  margin-bottom: 40px;
+  background-color: #e3e7ea;
+  margin-left: -51px;
+  margin-right: -51px;
+  padding-left: 51px;
+  padding-right: 51px;
+  padding-top: 43px;
+  padding-bottom: 1px;
+  box-shadow: inset 0px 4px 5px -4px rgba(50, 50, 50, 0.55), inset 0px -4px 5px -4px rgba(50, 50, 50, 0.55);
+  transition: all 0.15s ease;
+}
+
+  .show-credential-section{
+    display: block !important;
+  }
+
+.change-password-section{
+  display:none;
+  background-color: #f1f2f3;
+  margin-left: -51px;
+  margin-right: -51px;
+  padding-left: 51px;
+  padding-top: 54px;
+  box-shadow: inset 0px 4px 5px -4px rgba(50, 50, 50, 0.55), inset 0px -4px 5px -4px rgba(50, 50, 50, 0.55);
+}
+    .show-password-section{
+      display: block !important;
+    }
+
+.confirmed-green{ border:lightgreen 1px solid !important; }
+.confirmed-red{ border: red 1px solid !important; }
+
+/*----------------------------------------------------------------------------------------------------------------------------------------*/
+.label-input-select{
+  float: right;
+  position: absolute;
+  left: 29px;
+}
+
+.dropdown dd,
+.dropdown dt {
+  margin: 0px;
+  padding: 0px;
+}
+
+.dropdown ul {
+  margin: -1px 0 0 0;
+}
+
+.dropdown ul li label, .dropdown ul li input{
+  cursor:pointer;
+}
+
+.dropdown dd {
+  position: relative;
+}
+
+
+
+.dropdown dt a {
+  display: block;
+  color: #3a3e44;
+  min-height: 25px;
+  line-height: 24px;
+  overflow: hidden;
+  border: none;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  background-color: #d4d7dc;
+  box-shadow: none;
+  width: 400px;
+  height:50px;
+  padding-left: 10px;
+  padding-right: 40px;
+  padding-top: 4px;
+  font-size:14px;
+  font-family: "Comfortaa-Bold";
+}
+
+.dropdown dt a span,
+.multiSel span {
+  cursor: pointer;
+  display: inline-block;
+  padding: 0 3px 2px 0;
+}
+
+.dropdown dd ul {
+  font-family: "Comfortaa-SemiBold";
+  background-color: #e0e3e8;
+  border: 0;
+  color: #7c7c7e;
+  display: none;
+  left: 0px;
+  padding: 2px 15px 2px 5px;
+  position: absolute;
+  top: 2px;
+  width: 400px;
+  list-style: none;
+  height: 150px;
+  overflow: auto;
+  z-index: 2;
+}
+
+.dropdown span.value {
+  display: none;
+}
+
+.dropdown dd ul li a {
+  padding: 5px;
+  display: block;
+}
+
+.dropdown dd ul li a:hover {
+  background-color: #fff;
+}
+
+.hida{
+  padding-top: 10px !important;
+  font-size: 16px;
+  color: #9799a1;
+}
+
+/*--------------------------------------------------------------------------------------------------------------------------*/
 
 
 
@@ -1433,6 +1582,7 @@ input:focus, textarea:focus, select:focus{
     }
 .exit-button{
   float: right;
+  color:#495057;
 }
 .message-box > a:hover{
   opacity: .4;
@@ -1458,6 +1608,16 @@ input:focus, textarea:focus, select:focus{
   }
   100% {
     height: 40px;
+  }
+}
+
+@keyframes slideDownComlplete
+{
+  0% {
+    height: 0px;
+  }
+  100% {
+    height: 100%;
   }
 }
 

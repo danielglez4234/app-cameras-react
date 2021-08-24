@@ -7,7 +7,7 @@ const regex = {
   group:/^[A-Za-z0-9]{3,20}$/, //letters and numbers, 3 to 20 characters and no special characters allowed
   url:/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/, // In short, it only allows a valid format starting with https:// or http:// and the follow characters (except for invalid characters in a url like ''"" or !¡?¿)
   user:/^[A-Za-z0-9\s]{3,50}$/, //letters and numbers, 3 to 50 characters and no special characters allowed and no accents
-  pwd:/^(?=.*[a-zA-Z\d].*)[a-zA-Z\d!@#$%&*]{3,}$/, //letters, numbers and special characterç, no spaces, at least 3 character
+  pwd:/^(?=.*[a-zA-ZÀ-ú0-9\d].*)[a-zA-Z\d!@#$%&*]{3,}$/, //letters, numbers and special characterç, no spaces, at least 3 character
   description:/.{3,400}$/ // matches any character except lines breaks and 3 to 400 characters
 }
 console.log(regex);
@@ -33,16 +33,16 @@ var $errorGroup = $('<div class="contein_error_message margin-top-10px"><div cla
 $('#groupCamera').after($errorGroup);
 $($errorGroup).hide();
 
-var $errorUrl = $('<div class="contein_error_message margin-top-10px"><div class="error_message">Please provide a valid URL. example: http://... or https://...</div></div>');
+var $errorUrl = $('<div class="contein_error_message margin-top-15px"><div class="error_message">Please provide a valid URL. example: http://... or https://...</div></div>');
 $($errorUrl).hide();
 
-var $errorUser = $('<div class="contein_error_message margin-top-10px"><div class="error_message">You have to check at least one activity</div></div>');
-$('#userCamera').after($errorUser);
+var $errorUser = $('<div class="contein_error_message margin-top-15px"><div class="error_message">This field cannot be empty or contain special characters</div></div>');
 $($errorUser).hide();
 
-var $errorPwd = $('<div class="contein_error_message margin-top-10px"><div class="error_message">You have to check at least one activity</div></div>');
-$('#pwdCamera').after($errorPwd);
+var $errorPwd = $('<div class="contein_error_message"><div class="error_message">The password cannot have spaces and must have at least a minimum length of 3</div></div>');
+var $errorConfirmPwd = $('<div class="contein_error_message"><div class="error_message">The passwords don\'t match</div></div>');
 $($errorPwd).hide();
+$($errorConfirmPwd).hide();
 
 var $errorDescription = $('<div class="contein_error_message margin-top-15px"><div class="error_message">The Description field cannot be Empty! provide at least a short description.</div></div>');
 $($errorDescription).hide();
@@ -70,10 +70,44 @@ function generalValidate(validateText, regexType, inputId_Name){
  //is returned for use when the 'register' button is pressed
 }
 
+$('#pwdCamera').on('keyup', function(event) {
+  const confirmPwd = event.target.value;
+  var pwd = $('#pwdCamera').val();
+  var actualValueconfirmPwd = $('#confirmPwdCamera').val();
+if (pwd === "" && confirmPwd === "") {
+  $('#pwdCamera').removeClass('confirmed-green confirmed-red');
+  $('#confirmPwdCamera').removeClass('confirmed-green confirmed-red');
+}
+else if (actualValueconfirmPwd && pwd != actualValueconfirmPwd) {
+  $('#pwdCamera').addClass('confirmed-red').removeClass('confirmed-green');
+  $('#confirmPwdCamera').addClass('confirmed-red').removeClass('confirmed-green');
+}
+else if (actualValueconfirmPwd === pwd) {
+   $('#pwdCamera').addClass('confirmed-green').removeClass('confirmed-red');
+   $('#confirmPwdCamera').addClass('confirmed-green').removeClass('confirmed-red');
+}
+});
 
+$('#confirmPwdCamera').on('keyup', function(event) { //choose a color and the select appears with the colors of that design
+const confirmPwd = event.target.value;
+var pwd = $('#pwdCamera').val();
 
-
-
+    if (pwd === "" && confirmPwd === "") {
+      $('#pwdCamera').removeClass('confirmed-green confirmed-red');
+      $('#confirmPwdCamera').removeClass('confirmed-green confirmed-red');
+    }
+    else if (pwd === "" && confirmPwd) {
+      $('#pwdCamera').addClass('confirmed-red').removeClass('confirmed-green');
+      $('#confirmPwdCamera').addClass('confirmed-red').removeClass('confirmed-green');
+    }
+   else if (confirmPwd === pwd || pwd === confirmPwd) {
+      $('#pwdCamera').addClass('confirmed-green').removeClass('confirmed-red');
+      $('#confirmPwdCamera').addClass('confirmed-green').removeClass('confirmed-red');
+    }else {
+      $('#pwdCamera').addClass('confirmed-red').removeClass('confirmed-green');
+      $('#confirmPwdCamera').addClass('confirmed-red').removeClass('confirmed-green');
+    }
+});
 
 
 
@@ -86,24 +120,44 @@ $('.formCameras').on('submit', function(event){
   var validIdCamera = generalValidate($('#idCamera').val(), regex.id, $('#idCamera'));
   var validName = generalValidate($('#nameCamera').val(), regex.name, $('#nameCamera'));
   var validUrl = generalValidate($('#urlCamera').val(), regex.url, $('#urlCamera'));
-  // const validUser = generalValidate($('#userCamera').val(), regex.user, $errorUser, $('#userCamera'));
-  // const validPwd = generalValidate($('#pwdCamera').val(), regex.pwd, $errorPwd, $('#pwdCamera'));
   var validDescription = generalValidate($('#descriptionCamera').val(), regex.description, $('#descriptionCamera'));
 
-  // const validEmail = validateEmail($('#mail').val());
-  // const validCheckbox = validateCheckbox();
-  // const validCardNumber = validateNameCardZipCvv($('#cc-num').val(), regex.cardNumber, $errorCardNumber, $('#cc-num'));
-  // const validZip = validateNameCardZipCvv($('#zip').val(), regex.zipCode, $errorZip, $('#zip'));
-  // const validCVV = validateNameCardZipCvv($('#cvv').val(), regex.cvv, $errorCVV, $('#cvv'));
+  var validUser = true;
+  var validPwd = true;
+  var credentialsCheck = $('#checkCreandentials:checkbox:checked');
+  if (credentialsCheck.length > 0) {
+    validUser = generalValidate($('#userCamera').val(), regex.user, $('#userCamera'));
+    validPwd = generalValidate($('#pwdCamera').val(), regex.pwd, $('#pwdCamera'));
+  }
+
 
   //if at least one returns 'false' the form is not sent
-  if (!validIdCamera || !validName || !validUrl || !validDescription){
+  if (!validIdCamera || !validName || !validUrl || !validDescription || !validUser || !validPwd){
     event.preventDefault();
+
     $('#title_container').after($submitError);
     $submitError.fadeIn(300);
 
+    if (credentialsCheck.length > 0) { // if credentials is check validate user an password
+      if (!validUser) {
+        $('#userCamera').after($errorUser);
+        $errorUser.fadeIn(200)
+      }else{ $errorUser.hide() }
+
+      if (!validPwd) {
+        $('#pwdCamera').after($errorPwd);
+        $errorPwd.fadeIn(200)
+      }else{ $errorPwd.hide() }
+
+      const macthPwd = $('#pwdCamera').val();
+      const macthConfirmPwd = $('#confirmPwdCamera').val();
+        if (macthPwd != macthConfirmPwd) {
+          $('#confirmPwdCamera').after($errorConfirmPwd);
+          $errorConfirmPwd.fadeIn(200)
+        }else{ $errorConfirmPwd.hide() }
+    }
+
     if (!validIdCamera) {
-      console.log($errorIdCamera);
       $('#idCamera').after($errorIdCamera);
       $errorIdCamera.fadeIn(200);
     }else{ $errorIdCamera.hide() }
@@ -112,6 +166,11 @@ $('.formCameras').on('submit', function(event){
       $('#nameCamera').after($errorName);
       $errorName.fadeIn(200)
     }else{ $errorName.hide() }
+
+    // if (!validGroup) {
+    //   $('#urlCamera').after($errorGroup);
+    //   $errorGroup.fadeIn(200)
+    // }else{ $errorGroup.hide() }
 
     if (!validUrl) {
       $('#urlCamera').after($errorUrl);
@@ -124,15 +183,7 @@ $('.formCameras').on('submit', function(event){
     }else{ $errorDescription.hide() }
 
   }
-  // // the payment section is only validated if it is displayed
-  // if ($('#payment').val() === 'Credit Card') {
-  //   if (!validCardNumber || !validZip || !validCVV) {
-  //     event.preventDefault();
-  //     $(submitError).fadeIn(200);
-  //   }
-  // }
-  // event.preventDefault();
-  // console.log('por aquí no pasas');
+
 });
 
 
@@ -140,11 +191,49 @@ $('.formCameras').on('submit', function(event){
 
 
 
+//------------------------------------------------------------------------------------------------------------------
 
 
 
+/*
+	Dropdown with Multiple checkbox select with jQuery - May 27, 2013
+	(c) 2013 @ElmahdiMahmoud
+	license: https://www.opensource.org/licenses/mit-license.php
+*/
 
+$(".dropdown dt a").on('click', function() {
+  $(".dropdown dd ul").slideToggle('fast');
+});
 
+$(".dropdown dd ul li a").on('click', function() {
+  $(".dropdown dd ul").hide();
+});
+
+function getSelectedValue(id) {
+  return $("#" + id).find("dt a span.value").html();
+}
+
+$(document).bind('click', function(e) {
+  var $clicked = $(e.target);
+  if (!$clicked.parents().hasClass("dropdown")) $(".dropdown dd ul").hide();
+});
+
+$('.mutliSelect input[type="checkbox"]').on('click', function() {
+
+  var title = $(this).closest('.mutliSelect').find('input[type="checkbox"]').val(),
+    title = $(this).val() + ",";
+
+  if ($(this).is(':checked')) {
+    var html = '<span title="' + title + '">' + title + '</span>';
+    $('.multiSel').append(html);
+    $(".hida").hide();
+  } else {
+    $('span[title="' + title + '"]').remove();
+    var ret = $(".hida");
+    $('.dropdown dt a').append(ret);
+
+  }
+});
 
 
 

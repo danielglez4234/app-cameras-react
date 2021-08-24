@@ -9,6 +9,7 @@ import groupIcon from '../img/group.png';
 import urlIcon from '../img/url.png';
 import userIcon from '../img/user.png';
 import pwdIcon from '../img/pwd.png';
+import arrowDown from '../img/arrowDown.png';
 
 
 const options = {
@@ -48,170 +49,39 @@ class CreateCamera extends Component {
     };
   }
 
-  // getTriggerNotificationIds = () => {
-  //   var data = Notification.data
-  //   console.log(data  + ' la data??? ;-;');
-  // };
-
   componentDidMount() {
-    $('#userForcamera').hide();
-    $('#pwdForCamera').hide();
-    // console.log($('#userForcamera'))
-    //
-    // // $(".update_container").hide().slideDown();
-    // console.log(this.state.subscriptionId + 'actual');
-    //
     // window.removeEventListener('beforeunload', this.deleteSubscription);
     // window.addEventListener('beforeunload', this.deleteSubscription);
     // this.createSubscription();
-    this.deleteSubscription(this.state.subscriptionId);
-
-
-    // const options = {
-    //     'Accept': 'application/json',
-    //     'Content-Type': 'application/json'
-    // };
-    // const createBodyEntities = {
-    //   "id":"gtc",
-    //   "type": "Camera",
-    //   "name": {
-    //     "type": "String",
-    //     "value": "ho"
-    //   },
-    //   "url": {
-    //     "type": "String",
-    //     "value": [
-    //       {
-    //         "id": "procesado",
-    //         "status": "active",
-    //         "roi": {}
-    //       },
-    //       {
-    //         "id": "procesado",
-    //         "status": "active",
-    //         "roi": {}
-    //       },
-    //       {
-    //         "id": "algomas",
-    //         "status": "disable",
-    //         "roi": {}
-    //       }
-    //     ]
-    //   },
-    //   "description": {
-    //     "type": "String",
-    //     "value": "descriptionCamera"
-    //   }
-    // };
-    // axios.post("http://161.72.123.211:1026/v2/entities", createBodyEntities, { headers: options	})
-    //   .then(response => {
-    //     const _this = this;
-    //     setTimeout(function(){
-    //     _this.setState({ //save the current state of the data
-    //       loadingCreate: false
-    //     });
-    //     }, 1000);
-    //   })
-    //   .catch(error => {
-    //
-    //     this.setState({ //save the current state of the data
-    //       connectionError: true
-    //     });
-    //     console.log('Error fetching and parsing data on the ORION context brocker', error);
-    //   });
-
-
-
-                          // const pressureValue = 777;
-                          // const temperatureValue = 666;
-                          // const idEntities = "Room6";
-                          // const updateBodyEntities = {
-                          //   "pressure": {
-                          //     "type":"Integer",
-                          //     "value":pressureValue,
-                          //     "metadata":{}
-                          //   },
-                          //   "temperature": {
-                          //     "type":"Float",
-                          //     "value": temperatureValue,
-                          //     "metadata":{}
-                          //   }
-                          // };
-                          // axios.put("http://161.72.123.211:1026/v2/entities/"+ idEntities +"/attrs?options=append", updateBodyEntities, { headers: options	})
-                          //   .then(response => {
-                          //     console.log('GET SUBSCRIPTION BY URL = ' + response.data.description);
-                          //     console.log('GET NOTIFICATION BY CHANGE = ' + response.data.id + ' ' + response.data.id);
-                          //   })
-                          //   .catch(error => {
-                          //     console.log('Error fetching and parsing data on the ORION context brocker', error);
-                          //     console.log('ghhjhhj', error);
-                          //   });
-
-                          //
-                          // const deleteEntityId = "gtcInt3";
-                          // const deleteEntityType = "Camera";
-                          // axios.delete("http://161.72.123.211:1026/v2/entities/"+ deleteEntityId +"?type="+ deleteEntityType +"", { headers: options	})
-                          //   .then(response => {
-                          //     console.log('GET SUBSCRIPTION BY URL = ' + response.data.description);
-                          //     console.log('GET NOTIFICATION BY CHANGE = ' + response.data.id + ' ' + response.data.id);
-                          //   })
-                          //   .catch(error => {
-                          //     console.log('Error fetching and parsing data on the ORION context brocker', error);
-                          //     console.log('ghhjhhj', error);
-                          //   });
-
-
-
+    // this.deleteSubscription(this.state.subscriptionId);
   }
 
+  deleteSubscription = () => {
+    console.log(this.state.subscriptionId + " dentro delete");
+    axios.delete("http://161.72.123.211:1026/v2/subscriptions/" + this.state.subscriptionId, body, { headers: options	})
+      .then(response => {
+        console.log("subscription was reset successfully");
+      })
+      .catch(error => {
+        console.log('Error fetching and parsing data on the ORION context brocker', error);
+        console.log('ghhjhhj', error);
+      });
+  }
 
-
-
-        deleteSubscription = () => {
-          console.log(this.state.subscriptionId + " dentro delete");
-          axios.delete("http://161.72.123.211:1026/v2/subscriptions/" + this.state.subscriptionId, body, { headers: options	})
-            .then(response => {
-              console.log("subscription was reset successfully");
-            })
-            .catch(error => {
-              console.log('Error fetching and parsing data on the ORION context brocker', error);
-              console.log('ghhjhhj', error);
-            });
-        }
-        //
-        createSubscription = () => {
-          axios.post("http://161.72.123.211:1026/v2/subscriptions", body, { headers: options	})
-            .then(response => {
-                this.setState({ //save the current state of the data
-                  subscriptionId: response.headers['location'].split('/')[3]
-                });
-                // console.log(response.headers['location'].split('/')[3]);
-                // console.log(this.state.subscriptionId + " dentro creación");
-            })
-            .catch(error => {
-              console.log('Error fetching and parsing data on the ORION context brocker', error);
-              console.log('ghhjhhj', error);
-            });
-        }
-
-
-
-
-
-
-
-
-        // componentWillUnmount(){
-        //     axios.delete("http://161.72.123.211:1026/v2/subscriptions/" + this.state.subscriptionId, body, { headers: options	})
-        //       .then(response => {
-        //         console.log(response.data.notification.attrs);
-        //       })
-        //       .catch(error => {
-        //         console.log('Error fetching and parsing data on the ORION context brocker', error);
-        //         console.log('ghhjhhj', error);
-        //       });
-        // }
-
+  createSubscription = () => {
+    axios.post("http://161.72.123.211:1026/v2/subscriptions", body, { headers: options	})
+      .then(response => {
+          this.setState({ //save the current state of the data
+            subscriptionId: response.headers['location'].split('/')[3]
+          });
+          // console.log(response.headers['location'].split('/')[3]);
+          // console.log(this.state.subscriptionId + " dentro creación");
+      })
+      .catch(error => {
+        console.log('Error fetching and parsing data on the ORION context brocker', error);
+        console.log('ghhjhhj', error);
+      });
+  }
 
 
 
@@ -226,8 +96,8 @@ class CreateCamera extends Component {
         <form className="formCameras formCamerasCreate" action="/add" method="get">
 
 <div className="formInputsfields">
-          <div className="cont-input displayInlineBlock">
-            <label for="idCamera" className="label-input">
+          <div className="cont-input cont-input-idCam displayInlineBlock">
+            <label htmlFor="idCamera" className="label-input">
               <img src={ idIcon } alt="id-camera" className="iconInput iconInput-idcam" />
               <span className="input-label-span input-label-idCam">Id-Camera</span>
             </label>
@@ -235,26 +105,63 @@ class CreateCamera extends Component {
           </div>
 
           <div className="cont-input cont-input-name displayInlineBlock">
-            <label for="nameCamera" className="label-input" >
+            <label htmlFor="nameCamera" className="label-input" >
               <img src={ nameIcon } alt="name" className="iconInput iconInput-name" />
               <span className="input-label-span input-label-name">Name</span>
             </label>
              <input id="nameCamera" name="nameCamera" className="input-form input-form-name" placeholder="Name..." />
           </div>
 
-
           <div className="cont-input cont-input-group">
             <label for="groupCamera" className="label-input" >
               <img src={ groupIcon } alt="group" className="iconInput iconInput-group" />
               <span className="input-label-span input-label-group">Group</span>
             </label>
-             <input id="groupCamera" name="groupCamera" className="input-form input-form-group" placeholder="Group..." />
+            <dl className="dropdown">
+                <dt>
+                <a href="#">
+                  <span className="hida">Select</span>
+                  <p className="multiSel"></p>
+                  <img src={ arrowDown } alt="arrow down" className="iconInput iconInput-arrowDown" />
+                </a>
+                </dt>
+                <dd>
+                    <div className="mutliSelect">
+                        <ul>
+                            <li>
+                                <label htmlFor="interiorGTC" className="label-input-select" >Intetrior GTC</label>
+                                <input id="interiorGTC" type="checkbox" value="Intetrior GTC" />
+                            </li>
+                            <li>
+                                <label htmlFor="exteriorGTC" className="label-input-select" >Exterior GTC</label>
+                                <input id="exteriorGTC" type="checkbox" value="Exterior GTC" />
+                            </li>
+                            <li>
+                                <label htmlFor="offices" className="label-input-select" >Offices</label>
+                                <input id="offices" type="checkbox" value="Offices" />
+                            </li>
+                            <li>
+                                <label htmlFor="dome" className="label-input-select" >Dome</label>
+                                <input id="dome" type="checkbox" value="Dome" />
+                            </li>
+                            <li>
+                                <label htmlFor="corridor" className="label-input-select" >Corridor</label>
+                                <input id="corridor" type="checkbox" value="Corridor" />
+                            </li>
+                            <li>
+                                <label htmlFor="others" className="label-input-select" >Others</label>
+                                <input id="others" type="checkbox" value="Others" />
+                            </li>
+                        </ul>
+                    </div>
+                </dd>
+            </dl>
           </div>
 
           <br/>
 
           <div className="cont-input cont-input-url displayInlineBlock">
-            <label for="urlCamera" className="label-input" >
+            <label htmlFor="urlCamera" className="label-input" >
               <img src={ urlIcon } alt="url" className="iconInput iconInput-url" />
               <span className="input-label-span input-label-url">URL</span>
             </label>
@@ -263,15 +170,16 @@ class CreateCamera extends Component {
 
 
           <div className="cont-input checkboxUrlCredentials displayInlineBlock">
-            <label for="checkCred" className="omrs-input-underlined">
-              <input id="checkCred" onClick={this.checkCredentials} id="checkCreandentials" type="checkbox" name="credentialsCheck" className="width-input-1 credentials-input" />
+            <label htmlFor="checkCreandentials" className="omrs-input-underlined">
+              <input onClick={this.checkCredentials} id="checkCreandentials" type="checkbox" name="credentialsCheck" className="width-input-1 credentials-input" />
               <span className="input-label-checkCredentials"> Credentials </span>
             </label>
           </div>
           <br/>
 
-          <div id="userForcamera" className="cont-input-user-pwd cont-input-user">
-            <label for="userCamera" className="label-input">
+        <div className="credentials-section">
+          <div id="userForcamera" className="cont-input-user">
+            <label htmlFor="userCamera" className="label-input">
               <img src={ userIcon } alt="user" className="iconInput iconInput-user" />
               <span className="input-label-span input-label-user">User</span>
             </label>
@@ -279,18 +187,26 @@ class CreateCamera extends Component {
           </div>
 
 
-          <div id="pwdForCamera" className="cont-input-user-pwd cont-input-pwd">
-            <label for="pwdCamera" className="label-input">
+          <div id="pwdForCamera" className="cont-input-pwd">
+            <label htmlFor="pwdCamera" className="label-input">
               <img src={ pwdIcon } alt="pwd" className="iconInput iconInput-pwd" />
               <span className="input-label-span input-label-pwd">Password</span>
             </label>
-            <input id="pwdCamera" type="password" pattern=".{6,}" name="pwdCamera" className="input-form" placeholder="Password..."/>
+            <input id="pwdCamera" type="password" name="pwdCamera" className="input-form" placeholder="Password..."/>
           </div>
 
+          <div id="confirmPwdForcamera" className=" cont-input-confirm-pwd">
+            <label htmlFor="confirmPwdCamera" className="label-input">
+              <img src={ pwdIcon } alt="confirm-pwd" className="iconInput iconInput-confirm-pwd" />
+              <span className="input-label-span input-label-confirm-pwd">Confirm Password</span>
+            </label>
+            <input id="confirmPwdCamera" type="password" className="input-form" placeholder="Confirm Password..."/>
+          </div>
+        </div>
 
           <div className="cont-input displayBlock">
             <span className="input-label-span input-label-description">Description</span>
-            <label className="label-input label-input-description">
+            <label htmlFor="descriptionCamera" className="label-input label-input-description">
               <textarea id="descriptionCamera" name="descriptionCamera" className="description-input-textarea"></textarea>
             </label>
           </div>
@@ -298,15 +214,15 @@ class CreateCamera extends Component {
           <br />
 
           <div className="cont-input displayInlineBlock">
-            <label className="omrs-input-underlined">
-              <input type="checkbox" name="recordImages" className="width-input-1 credentials-input" />
+            <label htmlFor="recordImages" className="omrs-input-underlined">
+              <input id="recordImages" type="checkbox" name="recordImages" className="width-input-1 credentials-input" />
               <span className="input-label-checkCredentials"> Record images </span>
             </label>
           </div>
           <br />
           <div className="cont-input displayInlineBlock">
-            <label className="omrs-input-underlined">
-              <input type="checkbox" name="processImages" className="width-input-1 credentials-input" />
+            <label htmlFor="processImages" className="omrs-input-underlined">
+              <input id="processImages" type="checkbox" name="processImages" className="width-input-1 credentials-input" />
               <span className="input-label-checkCredentials"> Process images </span>
             </label>
           </div>
@@ -342,11 +258,9 @@ class CreateCamera extends Component {
 
   checkCredentials = () => {
        if ($('#checkCreandentials:checkbox:checked').length > 0) {
-         $('#userForcamera').addClass('show-cont-input-user-pwd');
-         $('#pwdForCamera').addClass('show-cont-input-user-pwd');
+         $('.credentials-section').addClass('show-credential-section');
        }else {
-         $('#userForcamera').removeClass('show-cont-input-user-pwd');
-         $('#pwdForCamera').removeClass('show-cont-input-user-pwd');
+         $('.credentials-section').removeClass('show-credential-section');
        }
   }
 
