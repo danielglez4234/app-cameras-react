@@ -1,6 +1,7 @@
 import React, { Component }  from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
+import md5 from 'md5';
 
 import loadingSrc from '../img/loading.svg';
 
@@ -39,13 +40,17 @@ class HandleAddCamera extends Component {
         processStatus  = false;
       }
 
+
     var urlpath;
     const regexhttps = /^https:\/\/+/;
     const regexhttp = /^http:\/\/+/;
+
     var url = queryParams.get('urlCamera');
     const credentialsCheck = queryParams.get('credentialsCheck');
+
       const user = queryParams.get('userCamera');
       const pwd = queryParams.get('pwdCamera');
+          const encryptPwd = md5(pwd);
 
     var credentials;
     if (credentialsCheck === 'on') {
@@ -64,8 +69,6 @@ class HandleAddCamera extends Component {
       credentials = false;
       urlpath = url;
     }
-
-
 
 
 
@@ -89,6 +92,8 @@ class HandleAddCamera extends Component {
         "type": "String",
         "value":{
           "credentials": credentials,
+          "user": user,
+          "pwd": encryptPwd,
           "path": urlpath
          }
       },
