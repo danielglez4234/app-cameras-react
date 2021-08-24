@@ -10,10 +10,10 @@ import editIcon from '../img/edit.png';
 import closeIcon from '../img/close.png';
 import warningIcon from '../img/warning.png';
 import deleteIcon from '../img/delete.png';
-// import vidon from '../img/1.mp4';
+import vidon from '../img/vid.mp4';
 
 
-const Videos = ({ name, warningDelete, closeWaringDelete, showMenuItems, coverCamera }) => {
+const Videos = ({ name, warningDelete, closeWaringDelete, showMenuItems, coverCamera, showMoreInfo }) => {
   return(
     <div className={`rep_prub rep_prub${name.id}`}>
 
@@ -32,7 +32,8 @@ const Videos = ({ name, warningDelete, closeWaringDelete, showMenuItems, coverCa
     </div>
 
       {/*Delete and update Buttons*/}
-      <div className="cameraButtons">
+      <div className={`cameraButtons cameraButtons${name.id}`}>
+      <div className="div-to-expand">
         <button className="menuCameraItem updateDeleteCameraButtons" onClick={() => {warningDelete(name.id)}}>
           <div className="cameraIconButtons deleteCameraButton">
               <img src={ deleteIcon } alt="expand" className="cameraImgIcons deleteCameraButtonIcon" />
@@ -45,7 +46,7 @@ const Videos = ({ name, warningDelete, closeWaringDelete, showMenuItems, coverCa
           </div>
         </a>
 
-        <button className={`menuCameraItem menuCameraItem${name.id} display-none`}>
+        <button className={`menuCameraItem menuCameraItem${name.id} display-none`} onClick={() => {showMoreInfo(name.id)}}>
           <div className="cameraIconButtons moreInfoCameraButton">
               <img src={ moreInfoIcon } alt="expand" className="cameraImgIcons moreInfoCameraButtonIcon" />
           </div>
@@ -74,7 +75,7 @@ const Videos = ({ name, warningDelete, closeWaringDelete, showMenuItems, coverCa
             <img src={ menuVideoIcon } alt="expand" className="cameraImgIcons menuVideoCameraButtonIcon" />
         </div>
       </button>
-
+      </div>
       </div>
 
 
@@ -91,13 +92,13 @@ const Videos = ({ name, warningDelete, closeWaringDelete, showMenuItems, coverCa
       <video id={ name.id } autoPlay muted className="video_stream"></video>
       {/*<video src={vidon} autoPlay muted className="video_stream" />*/}
 
-      <div className="rep_prub-info">
+      <div className={`rep_prub-info rep_prub-info${name.id}`}>
         <hr className="info_separator" />
-        <span> <b>Location:</b> { name.name } </span>
+        <span className="rep_prub-info-title"> <p className="rep_prub-info-span">Camera Name:</p> { name.name } </span>
         <br />
-        <span> <b>Id-Camera:</b> { name.id } Group: {name.group}</span>
+        <span className="rep_prub-info-title"> <p className="rep_prub-info-span">Id-Camera:</p> { name.id } <p className="rep_prub-info-span">Group: </p>{name.group}</span>
         <br />
-        <span> <b>More info:</b> { name.description } </span>
+        <span className="rep_prub-info-title"> <p className="rep_prub-info-span">More info:</p> { name.description } </span>
       </div>
 
 

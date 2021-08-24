@@ -16,7 +16,7 @@ class ContainerVideo extends Component {
     super();
     this.state = {
       countVideos: 0,
-      mapTestId: [{id:'1'},{id:'2'},{id:'3'},{id:'4'}]
+      // mapTestId: [{id:'1'},{id:'2'},{id:'3'},{id:'4'}]
     };
   }
 
@@ -39,12 +39,17 @@ class ContainerVideo extends Component {
     showMenuItems = (id) =>{
       $('.menuCameraItem' + id).toggle();
       $('.menuVideoCameraButton' + id).toggleClass('border-bottom-left-radius-0');
+      $('.cameraButtons' + id).toggleClass('opacity-on');
     }
 
     coverCamera = (id) =>{
       $('.rep_prub').toggle();
       $('.coverCameraButtonIcon').toggleClass('cover-rotate-when-clicked');
       $('.rep_prub' + id).toggleClass('displayBlock width-height-1');
+    }
+
+    showMoreInfo = (id) =>{
+      $('.rep_prub-info' + id).toggleClass('show-rep_prub-info');
     }
 
     adjustVideoContainer = (countvideos) => {
@@ -84,6 +89,7 @@ class ContainerVideo extends Component {
         let videos;
         let warningDeleteBox;
         const result = context.idCam; //we save the data in the result variable
+        // const result = this.state.mapTestId;
         // console.log(result.length + 'totalPages');
 
         if (result === undefined){
@@ -101,6 +107,7 @@ class ContainerVideo extends Component {
                 closeWaringDelete={this.closeWarningDelete}
                 showMenuItems={this.showMenuItems}
                 coverCamera={this.coverCamera}
+                showMoreInfo={this.showMoreInfo}
                 />
             );
 

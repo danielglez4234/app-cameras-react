@@ -404,7 +404,7 @@ height: 100%;
 
 .video_stream{
   /* width: 100%; */
-  height: 461px;
+  height: 100%;
 }
 
 .rep_prub_cont{
@@ -425,6 +425,8 @@ height: 100%;
   width: 100%;
   position: absolute;
   padding-left: 100px;
+  padding-right: 8px;
+  padding-top: 15px;
   text-align: center;
   text-align-last: center;
   z-index: -5;
@@ -443,23 +445,32 @@ height: 100%;
 }
 
 .rep_prub-info{
+  background-color: rgb(73 80 87 / 30%);
   color: #f3f0f0;
   position: absolute;
   text-shadow: 1px 1px black;
   width: 100%;
-  bottom: 5px;
-  opacity: 1;
-  transition: all .6s ease-out;
+  bottom: -25px;
+  opacity: 0;
+  transition: all .2s ease-out;
   padding-right: 40px;
   padding-left: 40px;
   font-size: 13px;
   font-family: "Comfortaa-Medium";
 }
-    /* .rep_prub:hover .rep_prub-info{
-      opacity: 0.9;
-      bottom: 3px;
-      transition: all .3s ease-out;
-    } */
+    .show-rep_prub-info{
+      opacity: 1 !important;
+      bottom: 0px;
+      transition: all .2s ease-out;
+    }
+
+.rep_prub-info-span{
+  display: inline-block;
+}
+.rep_prub-info-title{
+  color: #f7f7f7;
+  font-family: "Comfortaa-Bold";
+}
 
 
 .info_separator{
@@ -473,10 +484,10 @@ height: 100%;
       transition: all .6s ease-out;
     }
 
-    /* .rep_prub:hover > .cameraButtons{
-      width: 100%;
-      transition: all .6s ease-out;
-    } */
+    .rep_prub:hover .cameraButtons{
+      opacity:1;
+      transition: all .3s ease-out;
+    }
 
 
 .expand_cont{
@@ -517,13 +528,15 @@ height: 100%;
   background-color: #667175;
   border-bottom-left-radius: 10px;
   right: 0px;
+  opacity: 0;
   z-index: 5;
+  transition: all .1s linear;
 }
   .cameraIconButtons{
       display: inline-block;
       padding: 3px;
       padding-bottom: 4px;
-      transition: all .1s ease-out;
+      transition: all .1s linear;
   }
         .cameraIconButtons:hover{
           background-color: #728992;
@@ -541,6 +554,11 @@ height: 100%;
       margin-right:5px;
       margin-left:5px;
     }
+
+.div-to-expand{
+
+}
+
 
 
 .updateDeleteCameraButtons{
@@ -623,8 +641,8 @@ height: 100%;
   display: none;
   background-color: #495057;
   position: absolute;
-  width: 95%;
-  height: 93%;
+  width: 94%;
+  height: 94%;
   z-index: 6;
   opacity: .1;
 }

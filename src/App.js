@@ -35,7 +35,7 @@ class App extends Component {
     this.state = {
       connection: connection,
       idCam: [],
-      idCamTest: ['test','test','test'],
+      idCamTest: ['test', 'test'],
       loading: true,
       connectionError: false,
       apiRestConnectioError: false,
