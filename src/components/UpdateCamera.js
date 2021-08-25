@@ -10,6 +10,7 @@ import urlIcon from '../img/url.png';
 import userIcon from '../img/user.png';
 import pwdIcon from '../img/pwd.png';
 import arrowDown from '../img/arrowDown.png';
+import closeGroupIcon from '../img/closeGroup.png';
 
 import updateMark from '../img/updateMark.png';
 
@@ -33,6 +34,51 @@ class UpdateCamera extends Component {
     this.getCameraById(idCamera);
   }
 
+  dropDownMenuGroup = () => {
+    $(".dropdown dt a").on('click', function() {
+      $(".dropdown dd ul").slideToggle('fast');
+    });
+
+    $(".dropdown dd ul li a").on('click', function() {
+      $(".dropdown dd ul").hide();
+    });
+
+    function getSelectedValue(id) {
+      return $("#" + id).find("dt a span.value").html();
+    }
+
+    $(document).bind('click', function(e) {
+      var $clicked = $(e.target);
+      if (!$clicked.parents().hasClass("dropdown")) $(".dropdown dd ul").hide();
+    });
+
+    $('.mutliSelect input[type="checkbox"]').on('click', function() {
+
+      var title = $(this).closest('.mutliSelect').find('input[type="checkbox"]').val(),
+        title = $(this).val();
+
+      if ($(this).is(':checked')) {
+        var html = '<span class="span-checkd" title="' + title + '">' + title + `<button onClick=${() => {this.unCheckGroup(title)}}><img src=${ closeGroupIcon } alt="close group" class="iconSpan-select select${title}" /></button></span>`;
+        $('.multiSel').after(html);
+        // $(".hida").hide();
+      } else {
+        $('span[title="' + title + '"]').remove();
+        // var ret = $(".hida");
+        // $('.dropdown dt a').append(ret);
+      }
+    });
+
+  }
+
+  unCheckGroup = (groupName) => {
+    $('.iconSpan-select').on('click', function() {
+      var title = $(this).closest('.span-checkd').find('span[type="title"]').val(),
+        title = $(this);
+      console.log(groupName);
+        $("." + groupName).prop("checked", false);
+    });
+  }
+
   getCameraById = (id) =>{
     const options = {
         'Accept': 'application/json',
@@ -45,6 +91,7 @@ class UpdateCamera extends Component {
           loadingUpdate: false
         });
 
+    this.dropDownMenuGroup();
         // var inputURLcredentials;
         // console.log(response.data.url.value);
         // if (response.data.url.value) {
@@ -95,7 +142,7 @@ class UpdateCamera extends Component {
       <div>
 
         <div className="cont-input cont-input-idCam displayInlineBlock">
-          <label for="idCamera" className="label-input">
+          <label htmlFor="idCamera" className="label-input">
             <img src={ idIcon } alt="id-camera" className="iconInput iconInput-idcam" />
             <span className="input-label-span input-label-idCam">Id-Camera</span>
           </label>
@@ -103,7 +150,7 @@ class UpdateCamera extends Component {
         </div>
 
         <div className="cont-input cont-input-name displayInlineBlock">
-          <label for="nameCamera" className="label-input" >
+          <label htmlFor="nameCamera" className="label-input" >
             <img src={ nameIcon } alt="name" className="iconInput iconInput-name" />
             <span className="input-label-span input-label-name">Name</span>
           </label>
@@ -111,15 +158,14 @@ class UpdateCamera extends Component {
         </div>
 
         <div className="cont-input cont-input-group">
-          <label for="groupCamera" className="label-input" >
+          <label htmlFor="groupCamera" className="label-input" >
             <img src={ groupIcon } alt="group" className="iconInput iconInput-group" />
             <span className="input-label-span input-label-group">Group</span>
           </label>
           <dl className="dropdown">
               <dt>
               <a href="#">
-                <span className="hida">Select</span>
-                <p className="multiSel"></p>
+                <span className="hida select-dropdowm">Select</span>
                 <img src={ arrowDown } alt="arrow down" className="iconInput iconInput-arrowDown" />
               </a>
               </dt>
@@ -127,38 +173,39 @@ class UpdateCamera extends Component {
                   <div className="mutliSelect">
                       <ul>
                           <li>
-                              <label htmlFor="interiorGTC" className="label-input-select" >Intetrior GTC</label>
-                              <input id="interiorGTC" type="checkbox" value="Intetrior GTC" />
+                              <label htmlFor="interiorGTC" className="label-input-select" >Interior-GTC</label>
+                              <input id="interiorGTC" name="interiorGTC" type="checkbox" value="Interior-GTC" />
                           </li>
                           <li>
-                              <label htmlFor="exteriorGTC" className="label-input-select" >Exterior GTC</label>
-                              <input id="exteriorGTC" type="checkbox" value="Exterior GTC" />
+                              <label htmlFor="exteriorGTC" className="label-input-select" >Exterior-GTC</label>
+                              <input id="exteriorGTC" name="exteriorGTC" type="checkbox" value="Exterior-GTC" />
                           </li>
                           <li>
                               <label htmlFor="offices" className="label-input-select" >Offices</label>
-                              <input id="offices" type="checkbox" value="Offices" />
+                              <input id="offices" name="offices" type="checkbox" value="Offices" />
                           </li>
                           <li>
                               <label htmlFor="dome" className="label-input-select" >Dome</label>
-                              <input id="dome" type="checkbox" value="Dome" />
+                              <input id="dome" name="dome" type="checkbox" value="Dome" />
                           </li>
                           <li>
                               <label htmlFor="corridor" className="label-input-select" >Corridor</label>
-                              <input id="corridor" type="checkbox" value="Corridor" />
+                              <input id="corridor" name="corridor" type="checkbox" value="Corridor" />
                           </li>
                           <li>
                               <label htmlFor="others" className="label-input-select" >Others</label>
-                              <input id="others" type="checkbox" value="Others" />
+                              <input id="others" name="others" type="checkbox" value="Others" />
                           </li>
                       </ul>
                   </div>
               </dd>
           </dl>
+          <div className="multiSel-Box"><p className="multiSel"></p></div>
         </div>
         <br/>
 
         <div className="cont-input cont-input-url displayInlineBlock">
-          <label for="urlCamera" className="label-input" >
+          <label htmlFor="urlCamera" className="label-input" >
             <img src={ urlIcon } alt="url" className="iconInput iconInput-url" />
             <span className="input-label-span input-label-url">URL</span>
           </label>
@@ -166,7 +213,7 @@ class UpdateCamera extends Component {
         </div>
 
         <div className="cont-input checkboxUrlCredentials displayInlineBlock">
-          <label for="checkCreandentials" className="omrs-input-underlined">
+          <label htmlFor="checkCreandentials" className="omrs-input-underlined">
             <input onClick={this.checkCredentials} id="checkCreandentials" type="checkbox" name="credentialsCheck" className="width-input-1 credentials-input" />
             <span className="input-label-checkCredentials"> Change Credentials </span>
           </label>
@@ -174,7 +221,7 @@ class UpdateCamera extends Component {
         <br/>
         <div className="credentials-section">
           <div id="userForcamera" className="cont-input-user displayInlineBlock">
-            <label for="userCamera" className="label-input">
+            <label htmlFor="userCamera" className="label-input">
               <img src={ userIcon } alt="user" className="iconInput iconInput-user" />
               <span className="input-label-span input-label-user">User</span>
             </label>
@@ -182,7 +229,7 @@ class UpdateCamera extends Component {
           </div>
 
           <div className="cont-input checkboxUrlCredentials displayInlineBlock">
-            <label for="checkChangePassword" className="omrs-input-underlined">
+            <label htmlFor="checkChangePassword" className="omrs-input-underlined">
               <input onClick={this.checkCangePassword} id="checkChangePassword" type="checkbox" name="credentialsCheck" className="width-input-1 credentials-input" />
               <span className="input-label-checkCredentials"> Change Password </span>
             </label>
@@ -191,7 +238,7 @@ class UpdateCamera extends Component {
 
           <div className="change-password-section">
             <div id="pwdForCamera" className="cont-input-pwd displayInlineBlock">
-              <label for="pwdCamera" className="label-input">
+              <label htmlFor="pwdCamera" className="label-input">
                 <img src={ pwdIcon } alt="pwd" className="iconInput iconInput-pwd" />
                 <span className="input-label-span input-label-pwd">Password</span>
               </label>
@@ -199,7 +246,7 @@ class UpdateCamera extends Component {
             </div>
 
             <div id="confirmPwdForcamera" className="cont-input-confirm-pwd">
-              <label for="confirmPwdCamera" className="label-input">
+              <label htmlFor="confirmPwdCamera" className="label-input">
                 <img src={ pwdIcon } alt="confirm-pwd" className="iconInput iconInput-confirm-pwd" />
                 <span className="input-label-span input-label-confirm-pwd">Confirm Password</span>
               </label>

@@ -1,7 +1,6 @@
 import React, { Component }  from 'react';
-import { Redirect } from 'react-router-dom';
 import axios from 'axios';
-import * as $ from 'jquery';
+// import * as $ from 'jquery';
 
 import loadingSrc from '../img/loading.svg';
 

@@ -6,6 +6,7 @@ const regex = {
   name:/^[A-Za-zÀ-ú0-9\s]{3,40}$/, //letters and numbers with spaces, 3 to 40 characters and no special characters allowed
   group:/^[A-Za-z0-9]{3,20}$/, //letters and numbers, 3 to 20 characters and no special characters allowed
   url:/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/, // In short, it only allows a valid format starting with https:// or http:// and the follow characters (except for invalid characters in a url like ''"" or !¡?¿)
+  detecCrendentials:/[@]/, // if the url have an "@" it means that have credentials set on the url itself
   user:/^[A-Za-z0-9\s]{3,50}$/, //letters and numbers, 3 to 50 characters and no special characters allowed and no accents
   pwd:/^(?=.*[a-zA-ZÀ-ú0-9\d].*)[a-zA-Z\d!@#$%&*]{3,}$/, //letters, numbers and special characterç, no spaces, at least 3 character
   description:/.{3,400}$/ // matches any character except lines breaks and 3 to 400 characters
@@ -35,6 +36,8 @@ $($errorGroup).hide();
 
 var $errorUrl = $('<div class="contein_error_message margin-top-15px"><div class="error_message">Please provide a valid URL. example: http://... or https://...</div></div>');
 $($errorUrl).hide();
+var $errorChecCredentialsInUrl = $('<div class="contein_error_message margin-top-15px"><div class="error_message">An \"@\" has been detected this may mean that you have placed a username and password in the url and activated the credentials button at the same time. Please choose only one of the two options.</div></div>');
+$($errorChecCredentialsInUrl).hide();
 
 var $errorUser = $('<div class="contein_error_message margin-top-15px"><div class="error_message">This field cannot be empty or contain special characters</div></div>');
 $($errorUser).hide();
@@ -69,6 +72,25 @@ function generalValidate(validateText, regexType, inputId_Name){
   }
  //is returned for use when the 'register' button is pressed
 }
+
+// function validateURL(validateText, regexURL, regexCredentials, inputId_Name){
+//   var testingFieldURL = regexURL.test(validateText);
+//   var testingFieldCredentials = regexURL.test(validateText);
+//   if (!testingFieldCredentials) {
+//     testingFieldCredentials = true;
+//     $(inputId_Name).after($errorConfirmPwd);
+//     return testingFieldCredentials;
+//   }
+//   else if (inputId_Name.val() === '') {
+//     var empty;
+//     return empty
+//   }else {
+//     return testingFieldURL;
+//   }
+//  //is returned for use when the 'register' button is pressed
+// }
+
+
 
 $('#pwdCamera').on('keyup', function(event) {
   const confirmPwd = event.target.value;
@@ -119,9 +141,10 @@ $('.formCameras').on('submit', function(event){
   console.log($errorName);
   var validIdCamera = generalValidate($('#idCamera').val(), regex.id, $('#idCamera'));
   var validName = generalValidate($('#nameCamera').val(), regex.name, $('#nameCamera'));
-  var validUrl = generalValidate($('#urlCamera').val(), regex.url, $('#urlCamera'));
-  var validDescription = generalValidate($('#descriptionCamera').val(), regex.description, $('#descriptionCamera'));
 
+  var validUrl = generalValidate($('#urlCamera').val(), regex.url, $('#urlCamera'));
+
+  var validDescription = generalValidate($('#descriptionCamera').val(), regex.description, $('#descriptionCamera'));
   var validUser = true;
   var validPwd = true;
   var credentialsCheck = $('#checkCreandentials:checkbox:checked');
@@ -194,46 +217,39 @@ $('.formCameras').on('submit', function(event){
 //------------------------------------------------------------------------------------------------------------------
 
 
-
-/*
-	Dropdown with Multiple checkbox select with jQuery - May 27, 2013
-	(c) 2013 @ElmahdiMahmoud
-	license: https://www.opensource.org/licenses/mit-license.php
-*/
-
-$(".dropdown dt a").on('click', function() {
-  $(".dropdown dd ul").slideToggle('fast');
-});
-
-$(".dropdown dd ul li a").on('click', function() {
-  $(".dropdown dd ul").hide();
-});
-
-function getSelectedValue(id) {
-  return $("#" + id).find("dt a span.value").html();
-}
-
-$(document).bind('click', function(e) {
-  var $clicked = $(e.target);
-  if (!$clicked.parents().hasClass("dropdown")) $(".dropdown dd ul").hide();
-});
-
-$('.mutliSelect input[type="checkbox"]').on('click', function() {
-
-  var title = $(this).closest('.mutliSelect').find('input[type="checkbox"]').val(),
-    title = $(this).val() + ",";
-
-  if ($(this).is(':checked')) {
-    var html = '<span title="' + title + '">' + title + '</span>';
-    $('.multiSel').append(html);
-    $(".hida").hide();
-  } else {
-    $('span[title="' + title + '"]').remove();
-    var ret = $(".hida");
-    $('.dropdown dt a').append(ret);
-
-  }
-});
+// $(".dropdown dt a").on('click', function() {
+//   $(".dropdown dd ul").slideToggle('fast');
+// });
+//
+// $(".dropdown dd ul li a").on('click', function() {
+//   $(".dropdown dd ul").hide();
+// });
+//
+// function getSelectedValue(id) {
+//   return $("#" + id).find("dt a span.value").html();
+// }
+//
+// $(document).bind('click', function(e) {
+//   var $clicked = $(e.target);
+//   if (!$clicked.parents().hasClass("dropdown")) $(".dropdown dd ul").hide();
+// });
+//
+// $('.mutliSelect input[type="checkbox"]').on('click', function() {
+//
+//   var title = $(this).closest('.mutliSelect').find('input[type="checkbox"]').val(),
+//     title = $(this).val();
+//
+//   if ($(this).is(':checked')) {
+//     var html = '<span title="' + title + '">' + title + '</span>';
+//     $('.multiSel').append(html);
+//     // $(".hida").hide();
+//   } else {
+//     $('span[title="' + title + '"]').remove();
+//     // var ret = $(".hida");
+//     // $('.dropdown dt a').append(ret);
+//
+//   }
+// });
 
 
 

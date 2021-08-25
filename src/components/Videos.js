@@ -10,7 +10,7 @@ import editIcon from '../img/edit.png';
 import closeIcon from '../img/close.png';
 import warningIcon from '../img/warning.png';
 import deleteIcon from '../img/delete.png';
-import vidon from '../img/vid.mp4';
+// import vidon from '../img/vid.mp4';
 
 
 const Videos = ({ name, warningDelete, closeWaringDelete, showMenuItems, coverCamera, showMoreInfo }) => {
@@ -25,7 +25,7 @@ const Videos = ({ name, warningDelete, closeWaringDelete, showMenuItems, coverCa
         <img src={ warningIcon } alt="expand" className="warning-delete-warning-icon" />
         <p className="warning-delete-text">Are you sure you want to Delete <b>{name.id}</b>?</p>
         <p className="warning-delete-text warning-delete-text-secundary">Onces deleted you cant turn back.</p>
-        <a className="warning-delete-button" href={`/delete?idCamForDelete=${name.id}`}>
+        <a className="warning-delete-button" href={`/delete?id=${name.id}`}>
           <img src={ deleteIcon } alt="expand" className="deleteCameraButtonIcon" />
         </a>
       </div>
@@ -79,9 +79,7 @@ const Videos = ({ name, warningDelete, closeWaringDelete, showMenuItems, coverCa
       </div>
 
 
-      {
-
-        /*
+      {/*
       <div>
         <a className="fancybox expand_linkToGalley" href="" data-fancybox="gallery1">
           <img src={moreInfo} alt="expand" className="expandirIcon prev_grallery_hidden"/>

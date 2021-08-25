@@ -141,11 +141,11 @@ class App extends Component {
 
             var idCameras = _this.state.idCam;
 
-              var i;
-              for (i = 0; i < idCameras.length; i++) {
+
+              for (var x = 0; x < idCameras.length; x++) {
 
                 // console.log(idCameras[i]);
-                const camera = idCameras[i];
+                const camera = idCameras[x];
 
                 const options = {
                   remoteVideo: document.getElementById(camera.id),

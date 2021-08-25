@@ -1,5 +1,4 @@
 import React, { Component }  from 'react';
-import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import md5 from 'md5';
 
@@ -23,6 +22,29 @@ class HandleAddCamera extends Component {
     const group = queryParams.get('groupCamera');
     const description = queryParams.get('descriptionCamera');
 
+
+
+    //--------------------------Group Sectiond------------------------
+    const interiorGTC = queryParams.get('interiorGTC');
+    const exteriorGTC = queryParams.get('exteriorGTC');
+    const offices = queryParams.get('offices');
+    const dome = queryParams.get('dome');
+    const corridor = queryParams.get('corridor');
+    const others = queryParams.get('others');
+
+    var setgroup = [];
+    if (interiorGTC) {setgroup.push(interiorGTC);}
+    if (exteriorGTC) {setgroup.push(exteriorGTC);}
+    if (offices) {setgroup.push(offices);}
+    if (dome) {setgroup.push(dome);}
+    if (corridor) {setgroup.push(corridor);}
+    if (others) {setgroup.push(others);}
+
+    console.log(setgroup);
+
+
+
+    //----------------------------------------------------------------
 
     const recordImagesStatus = queryParams.get('recordImages');
     var recordStatus;
@@ -87,6 +109,10 @@ class HandleAddCamera extends Component {
       "name": {
         "type": "String",
         "value": name
+      },
+      "group":{
+        "type": "String",
+        "value": setgroup
       },
       "url": {
         "type": "String",

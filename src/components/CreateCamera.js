@@ -10,7 +10,7 @@ import urlIcon from '../img/url.png';
 import userIcon from '../img/user.png';
 import pwdIcon from '../img/pwd.png';
 import arrowDown from '../img/arrowDown.png';
-
+import closeGroupIcon from '../img/closeGroup.png';
 
 const options = {
     'Accept': 'application/json',
@@ -45,7 +45,6 @@ class CreateCamera extends Component {
     this.state = {
       subscriptionId: "",
       notificactionData: []
-
     };
   }
 
@@ -53,8 +52,69 @@ class CreateCamera extends Component {
     // window.removeEventListener('beforeunload', this.deleteSubscription);
     // window.addEventListener('beforeunload', this.deleteSubscription);
     // this.createSubscription();
-    // this.deleteSubscription(this.state.subscriptionId);
+    this.deleteSubscription(this.state.subscriptionId);
+    this.dropDownMenuGroup();
   }
+
+  dropDownMenuGroup = () => {
+    const _this = this;
+
+    $(".dropdown dt a").on('click', function() {
+      $(".dropdown dd ul").slideToggle('fast');
+    });
+
+    $(".dropdown dd ul li a").on('click', function() {
+      $(".dropdown dd ul").hide();
+    });
+
+    function getSelectedValue(id) {
+      return $("#" + id).find("dt a span.value").html();
+    }
+
+    $(document).bind('click', function(e) {
+      var $clicked = $(e.target);
+      if (!$clicked.parents().hasClass("dropdown")) $(".dropdown dd ul").hide();
+    });
+
+    // const interiorCheck ="<span class='span-checked checkedInteriorGTC' title='Interior-GTC'> Interior-GTC <img src=" + closeGroupIcon + " alt='close group' onClick='"+unCheckGroup('Interior-GTC')+"' class='iconSpan-select' /></div></span>";
+    // const exteriorCheck ="<span class='span-checked checkedExteriorGTC' title='Exterior-GTC'> Exterior-GTC <img src=" + closeGroupIcon + " alt='close group' onClick='"+ unCheckGroup('Exterior-GTC') +"' class='iconSpan-select' /></div></span>";
+    // const officesCheck ="<span class='span-checked checkedOffices' title='Offices'> Offices <img src=" + closeGroupIcon + " alt='close group' onClick='"+ unCheckGroup('Offices') +"' class='iconSpan-select' /></div></span>";
+    // const domeCheck ="<span class='span-checked checkedDome' title='Dome'> Dome <img src=" + closeGroupIcon + " alt='close group' onClick='"+ unCheckGroup('Dome') +"' class='iconSpan-select' /></div></span>";
+    // const corridor ="<span class='span-checked checkedCorridor' title='Corridor'> Corridor <img src=" + closeGroupIcon + " alt='close group' onClick='"+ unCheckGroup('Corridor') +"' class='iconSpan-select' /></div></span>";
+    // const otherCheck ="<span class='span-checked checkedOther' title='Other'> Other <img src=" + closeGroupIcon + " alt='close group' onClick='"+ unCheckGroup('Other') +"' class='iconSpan-select' /></div></span>";
+
+    $('.mutliSelect input[type="checkbox"]').on('click', function() {
+
+      var title = $(this).closest('.mutliSelect').find('input[type="checkbox"]').val(),
+        title = $(this).val();
+
+      if ($(this).is(':checked')) {
+        var html = "<span class=\"span-checked checked"+ title + "\" title=" + title + ">" + title + "<img src=" + closeGroupIcon + " alt=\"close group\" onClick=" + _this.unCheckGroup(title) + " class=\"iconSpan-select\" /></div></span>";
+        $('.multiSel').append(html);
+
+      } else {
+        $('span[title="' + title + '"]').remove();
+        // var ret = $(".hida");
+        // $('.dropdown dt a').append(ret);
+      }
+    });
+
+
+  }
+
+  unCheckGroup = (groupName) => {
+    console.log('porque');
+    $('.iconSpan-select').on('click', function() {
+      var title = $(this).closest('span').val();
+      console.log(title);
+        $("#" + groupName).prop("checked", false);
+        $('.checked' + groupName).remove();
+    });
+  }
+
+
+
+
 
   deleteSubscription = () => {
     console.log(this.state.subscriptionId + " dentro delete");
@@ -113,15 +173,14 @@ class CreateCamera extends Component {
           </div>
 
           <div className="cont-input cont-input-group">
-            <label for="groupCamera" className="label-input" >
+            <label htmlFor="groupCamera" className="label-input" >
               <img src={ groupIcon } alt="group" className="iconInput iconInput-group" />
               <span className="input-label-span input-label-group">Group</span>
             </label>
             <dl className="dropdown">
                 <dt>
                 <a href="#">
-                  <span className="hida">Select</span>
-                  <p className="multiSel"></p>
+                  <span className="hida select-dropdowm">Select</span>
                   <img src={ arrowDown } alt="arrow down" className="iconInput iconInput-arrowDown" />
                 </a>
                 </dt>
@@ -129,33 +188,34 @@ class CreateCamera extends Component {
                     <div className="mutliSelect">
                         <ul>
                             <li>
-                                <label htmlFor="interiorGTC" className="label-input-select" >Intetrior GTC</label>
-                                <input id="interiorGTC" type="checkbox" value="Intetrior GTC" />
+                                <label htmlFor="Interior-GTC" className="label-input-select" >Interior-GTC</label>
+                                <input id="Interior-GTC" name="interiorGTC" type="checkbox" value="Interior-GTC" />
                             </li>
                             <li>
-                                <label htmlFor="exteriorGTC" className="label-input-select" >Exterior GTC</label>
-                                <input id="exteriorGTC" type="checkbox" value="Exterior GTC" />
+                                <label htmlFor="Exterior-GTC" className="label-input-select" >Exterior-GTC</label>
+                                <input id="Exterior-GTC" name="exteriorGTC" type="checkbox" value="Exterior-GTC" />
                             </li>
                             <li>
-                                <label htmlFor="offices" className="label-input-select" >Offices</label>
-                                <input id="offices" type="checkbox" value="Offices" />
+                                <label htmlFor="Offices" className="label-input-select" >Offices</label>
+                                <input id="Offices" name="offices" type="checkbox" value="Offices" />
                             </li>
                             <li>
-                                <label htmlFor="dome" className="label-input-select" >Dome</label>
-                                <input id="dome" type="checkbox" value="Dome" />
+                                <label htmlFor="Dome" className="label-input-select" >Dome</label>
+                                <input id="Dome" name="dome" type="checkbox" value="Dome" />
                             </li>
                             <li>
-                                <label htmlFor="corridor" className="label-input-select" >Corridor</label>
-                                <input id="corridor" type="checkbox" value="Corridor" />
+                                <label htmlFor="Corridor" className="label-input-select" >Corridor</label>
+                                <input id="Corridor" name="corridor" type="checkbox" value="Corridor" />
                             </li>
                             <li>
-                                <label htmlFor="others" className="label-input-select" >Others</label>
-                                <input id="others" type="checkbox" value="Others" />
+                                <label htmlFor="Others" className="label-input-select" >Others</label>
+                                <input id="Others" name="others" type="checkbox" value="Others" />
                             </li>
                         </ul>
                     </div>
                 </dd>
             </dl>
+            <div className="multiSel-Box"><p className="multiSel"></p></div>
           </div>
 
           <br/>

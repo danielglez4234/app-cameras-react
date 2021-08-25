@@ -1,5 +1,4 @@
 import React, { Component }  from 'react';
-import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 
 import loadingSrc from '../img/loading.svg';
@@ -20,7 +19,7 @@ class HandleDeleteCamera extends Component {
     const _this = this;
     const queryParams = new URLSearchParams(window.location.search);
 
-    const idCamera = queryParams.get('idCamForDelete');
+    const idCamera = queryParams.get('id');
     const typeCam = "Camera";
 
     console.log(idCamera);

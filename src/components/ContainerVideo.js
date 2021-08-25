@@ -5,7 +5,7 @@ import * as $ from 'jquery';
 import noCameaSrc from '../img/noCamera.png';
 import loadingSrc from '../img/loading.svg';
 import apiNotResponding from '../img/apiNotResponding.png';
-import deleteIcon from '../img/delete.png';
+// import deleteIcon from '../img/delete.png';
 
 import Videos from './Videos';
 import ConnectionError from './ConnectionError';

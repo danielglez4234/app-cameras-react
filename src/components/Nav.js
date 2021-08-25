@@ -1,5 +1,5 @@
 import React, { Component }  from 'react';
-import { NavLink } from 'react-router-dom';
+// import { NavLink } from 'react-router-dom';
 import * as $ from 'jquery';
 
 import logoSrc from '../img/logo.png';
@@ -101,7 +101,7 @@ class Nav extends Component {
         $(".fa-angle-double-right").removeClass("rotate-arrow");
 
     $(".rep_prub_cont").toggleClass("marginLeft-0-Cont");
-    $(".rep_prub_cont_inside").toggleClass("paddinfLeft-0");
+    $(".rep_prub_cont_inside").toggleClass("paddingLeft-0 paddingRight-0 paddingTop-0");
     $(".connection_error").toggleClass("marginleft_alignErrorMessageIcon");
     $(".message_connection_error").toggleClass("marginleft_alignErrorMessageText");
 
@@ -114,7 +114,7 @@ class Nav extends Component {
         $(".fa-angle-left").removeClass("rotate-arrow");
 
     $(".rep_prub_cont").removeClass("marginLeft-0-Cont");
-    $(".rep_prub_cont_inside").removeClass("paddinfLeft-0");
+    $(".rep_prub_cont_inside").removeClass("paddingLeft-0 paddingRight-0 paddingTop-0");
   }
   unExpandNavArea = () => {
     $(".unExpandNavArea").hide();
