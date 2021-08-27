@@ -1,6 +1,6 @@
-import React from 'react';
+import React             from 'react';
 
-import connectErrorSrc from '../img/connection_error.png';
+import connectErrorSrc   from '../img/connection_error.png';
 
 const ConnectionError = () => {
   return(

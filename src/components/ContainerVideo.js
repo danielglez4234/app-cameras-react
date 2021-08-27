@@ -1,14 +1,14 @@
-import React, { Component }  from 'react';
-import { Consumer } from './context';
-import * as $ from 'jquery';
+import React, { Component }   from 'react';
+import { Consumer }           from './context';
+import * as $                 from 'jquery';
 
-import noCameaSrc from '../img/noCamera.png';
-import loadingSrc from '../img/loading.svg';
-import apiNotResponding from '../img/apiNotResponding.png';
-// import deleteIcon from '../img/delete.png';
+import noCameaSrc             from '../img/noCamera.png';
+import loadingSrc             from '../img/loading.svg';
+import apiNotResponding       from '../img/apiNotResponding.png';
+// import deleteIcon          from '../img/delete.png';
 
-import Videos from './Videos';
-import ConnectionError from './ConnectionError';
+import Videos                 from './Videos';
+import ConnectionError        from './ConnectionError';
 
 class ContainerVideo extends Component {
 
@@ -39,7 +39,7 @@ class ContainerVideo extends Component {
     showMenuItems = (id) =>{
       $('.menuCameraItem' + id).toggle();
       $('.menuVideoCameraButton' + id).toggleClass('border-bottom-left-radius-0');
-      $('.cameraButtons' + id).toggleClass('opacity-on');
+      $('.cameraButtons' + id).toggleClass('opacity-on-Move-right');
     }
 
     coverCamera = (id) =>{
@@ -55,29 +55,34 @@ class ContainerVideo extends Component {
     adjustVideoContainer = (countvideos) => {
       if (countvideos === 1) {
         $('.rep_prub').addClass('width-height-1')
-          .removeClass('width-height-2 width-height-3 width-height-5 width-height-7');
+                      .removeClass('width-height-2 width-height-3 width-height-5 width-height-7');
+
         $('.video_stream').addClass('adjustWidthVideo-x1')
-          .removeClass('adjustWidthVideo-x2 adjustWidthVideo-x3 adjustWidthVideo-x5 adjustWidthVideo-x7');
+                          .removeClass('adjustWidthVideo-x2 adjustWidthVideo-x3 adjustWidthVideo-x5 adjustWidthVideo-x7');
       }else if (countvideos === 2) {
         $('.rep_prub').addClass('width-height-2')
-          .removeClass('width-height-1 width-height-3 width-height-5 width-height-7');
+                      .removeClass('width-height-1 width-height-3 width-height-5 width-height-7');
+
         $('.video_stream').addClass('adjustWidthVideo-x2')
-          .removeClass('adjustWidthVideo-x1 adjustWidthVideo-x3 adjustWidthVideo-x5 adjustWidthVideo-x7');
+                          .removeClass('adjustWidthVideo-x1 adjustWidthVideo-x3 adjustWidthVideo-x5 adjustWidthVideo-x7');
       }else if (countvideos === 3 || countvideos === 4) {
         $('.rep_prub').addClass('width-height-3')
-          .removeClass('width-height-1 width-height-2 width-height-5 width-height-7');
+                      .removeClass('width-height-1 width-height-2 width-height-5 width-height-7');
+
         $('.video_stream').addClass('adjustWidthVideo-x3')
-          .removeClass('adjustWidthVideo-x1 adjustWidthVideo-x2 adjustWidthVideo-x5 adjustWidthVideo-x7');
+                          .removeClass('adjustWidthVideo-x1 adjustWidthVideo-x2 adjustWidthVideo-x5 adjustWidthVideo-x7');
       }else if (countvideos === 5 || countvideos === 6) {
         $('.rep_prub').addClass('width-height-5')
-          .removeClass('width-height-1 width-height-2 width-height-3 width-height-7');
+                      .removeClass('width-height-1 width-height-2 width-height-3 width-height-7');
+
         $('.video_stream').addClass('adjustWidthVideo-x5')
-          .removeClass('adjustWidthVideo-x1 adjustWidthVideo-x2 adjustWidthVideo-x3 adjustWidthVideo-x7');
+                          .removeClass('adjustWidthVideo-x1 adjustWidthVideo-x2 adjustWidthVideo-x3 adjustWidthVideo-x7');
       }else if (countvideos === 7 || countvideos === 8 || countvideos === 9) {
         $('.rep_prub').addClass('width-height-7')
-          .removeClass('width-height-1 width-height-2 width-height-3 width-height-5');
+                      .removeClass('width-height-1 width-height-2 width-height-3 width-height-5');
+
         $('.video_stream').addClass('adjustWidthVideo-x7')
-          .removeClass('adjustWidthVideo-x1 adjustWidthVideo-x2 adjustWidthVideo-x3 adjustWidthVideo-x5');
+                          .removeClass('adjustWidthVideo-x1 adjustWidthVideo-x2 adjustWidthVideo-x3 adjustWidthVideo-x5');
       }
     }
 
@@ -87,7 +92,6 @@ class ContainerVideo extends Component {
       <Consumer>
       { context => {
         let videos;
-        let warningDeleteBox;
         const result = context.idCam; //we save the data in the result variable
         // const result = this.state.mapTestId;
         // console.log(result.length + 'totalPages');
@@ -101,19 +105,18 @@ class ContainerVideo extends Component {
           if (result.length > 0) { // if the results found are greater than 0 the images are displayed
             videos = result.map(video =>
                <Videos
-                key= {video.id}
-                name={ video }
-                warningDelete={this.warningDelete}
-                closeWaringDelete={this.closeWarningDelete}
-                showMenuItems={this.showMenuItems}
-                coverCamera={this.coverCamera}
-                showMoreInfo={this.showMoreInfo}
+                key                = { video.id }
+                name               = { video }
+                warningDelete      = { this.warningDelete }
+                closeWaringDelete  = { this.closeWarningDelete }
+                showMenuItems      = { this.showMenuItems }
+                coverCamera        = { this.coverCamera }
+                showMoreInfo       = { this.showMoreInfo }
                 />
             );
-
             this.state.countVideos = videos.length;
-            const countvideo = this.state.countVideos;
-            const _this = this;
+            const countvideo       = this.state.countVideos;
+            const _this            = this;
             setTimeout(function(){ _this.adjustVideoContainer(countvideo); }, 1);
 
 

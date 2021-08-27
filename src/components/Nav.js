@@ -1,8 +1,8 @@
-import React, { Component }  from 'react';
+import React, { Component }   from 'react';
 // import { NavLink } from 'react-router-dom';
-import * as $ from 'jquery';
+import * as $                 from 'jquery';
 
-import logoSrc from '../img/logo.png';
+import logoSrc                from '../img/logo.png';
 
 class Nav extends Component {
 
@@ -89,11 +89,13 @@ class Nav extends Component {
   }
 
   showEditDelteButtons = () =>{
+
     $(".updateDeleteCameraButtons").toggleClass('displayInlineBlock');
     $('.moreInfoCameraButton').toggleClass('border-bottom-left-radius-0');
   }
 
   hideNavBar = () => {
+
     $(".unExpandNavArea").hide();
     $("#navBar").toggle().removeClass("button-expandNavBar timetransition25s");
     $(".showOrHideButton-div").toggleClass("moveAlong").removeClass("moveAlongExpand timetransition25s").addClass("timetransition0s");
@@ -107,6 +109,7 @@ class Nav extends Component {
 
   }
   expandNavBar = () => {
+
     $(".unExpandNavArea").toggle();
     $("#navBar").show().addClass("timetransition25s").toggleClass("button-expandNavBar");
     $(".showOrHideButton-div").removeClass("moveAlong timetransition0s").addClass("timetransition25s").toggleClass("moveAlongExpand");
@@ -117,6 +120,7 @@ class Nav extends Component {
     $(".rep_prub_cont_inside").removeClass("paddingLeft-0 paddingRight-0 paddingTop-0");
   }
   unExpandNavArea = () => {
+
     $(".unExpandNavArea").hide();
     $("#navBar").removeClass("button-expandNavBar");
     $(".showOrHideButton-div").removeClass("moveAlongExpand");

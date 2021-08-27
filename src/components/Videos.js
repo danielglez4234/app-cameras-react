@@ -1,15 +1,15 @@
-import React from 'react';
+import React          from 'react';
 
-import expandIcon from '../img/expand.png';
-import moreInfoIcon from '../img/moreInfo.png';
-import zoomInIcon from '../img/zoomIn.png';
-import resizeIcon from '../img/resize2.png';
-import menuVideoIcon from '../img/menuVideo.png';
+import expandIcon     from '../img/expand.png';
+import moreInfoIcon   from '../img/moreInfo.png';
+import zoomInIcon     from '../img/zoomIn.png';
+import resizeIcon     from '../img/resize2.png';
+import menuVideoIcon  from '../img/menuVideo.png';
 
-import editIcon from '../img/edit.png';
-import closeIcon from '../img/close.png';
-import warningIcon from '../img/warning.png';
-import deleteIcon from '../img/delete.png';
+import editIcon       from '../img/edit.png';
+import closeIcon      from '../img/close.png';
+import warningIcon    from '../img/warning.png';
+import deleteIcon     from '../img/delete.png';
 // import vidon from '../img/vid.mp4';
 
 
@@ -19,9 +19,9 @@ const Videos = ({ name, warningDelete, closeWaringDelete, showMenuItems, coverCa
 
     <div className={`warning-delete warning-delete${name.id}`}>
       <div className="warningDeleteBox">
-      <a onClick={() => {closeWaringDelete(name.id)}}>
+      <button onClick={() => {closeWaringDelete(name.id)}}>
         <img src={ closeIcon } alt="expand" className="warning-delete-close-icon" />
-      </a>
+      </button>
         <img src={ warningIcon } alt="expand" className="warning-delete-warning-icon" />
         <p className="warning-delete-text">Are you sure you want to Delete <b>{name.id}</b>?</p>
         <p className="warning-delete-text warning-delete-text-secundary">Onces deleted you cant turn back.</p>

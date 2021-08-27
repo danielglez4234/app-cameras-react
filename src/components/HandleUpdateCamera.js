@@ -1,5 +1,6 @@
 import React, { Component }  from 'react';
 import axios from 'axios';
+// import md5 from 'md5';
 // import * as $ from 'jquery';
 
 import loadingSrc from '../img/loading.svg';
@@ -16,9 +17,25 @@ class HandleUpdateCamera extends Component {
 
   handleUpdate = () => {
     const queryParams = new URLSearchParams(window.location.search);
-    const id = queryParams.get('idCamera');
-    const name = queryParams.get('nameCamera');
-    const description = queryParams.get('description');
+    const id          = queryParams.get('idCamera');
+    const name        = queryParams.get('nameCamera');
+    const description = queryParams.get('descriptionCamera');
+
+
+    const interiorGTC = queryParams.get('Interior-GTC');
+    const exteriorGTC = queryParams.get('Exterior-GTC');
+    const offices     = queryParams.get('Offices');
+    const dome        = queryParams.get('Dome');
+    const corridor    = queryParams.get('Corridor');
+    const others      = queryParams.get('Others');
+
+    var setgroup      = [];
+    if (interiorGTC)  {setgroup.push(interiorGTC);}
+    if (exteriorGTC)  {setgroup.push(exteriorGTC);}
+    if (offices)      {setgroup.push(offices);}
+    if (dome)         {setgroup.push(dome);}
+    if (corridor)     {setgroup.push(corridor);}
+    if (others)       {setgroup.push(others);}
 
 
     const recordImagesStatus = queryParams.get('recordImages');
@@ -38,31 +55,41 @@ class HandleUpdateCamera extends Component {
       }
 
 
-    var urlpath;
-    const regexhttps = /^https:\/\/+/;
-    const regexhttp = /^http:\/\/+/;
-    var url = queryParams.get('urlCamera');
-    const credentialsCheck = queryParams.get('credentialsCheck');
-      const user = queryParams.get('userCamera');
-      const pwd = queryParams.get('pwdCamera');
+    // var urlpath;
+    // const regexhttps        = /^https:\/\/+/;
+    // const regexhttp         = /^http:\/\/+/;
 
-    var credentials;
-    if (credentialsCheck === 'on') {
-      credentials = true;
-      if (regexhttps.test(url)) {
-        url = url.slice(8);
-        urlpath = 'https://' + user + ':' + pwd + '@' + url;
+    var url                 = queryParams.get('urlCamera');
+    // const credentialsCheck  = queryParams.get('credentialsCheck');
+    const user              = queryParams.get('userCamera');
+    const pwd               = queryParams.get('pwdCamera');
 
-      }else{
-        url.replace(regexhttp, ' ');
-        url = url.slice(7);
-        var ela = urlpath = 'http://' + user + ':' + pwd + '@' + url;
-        console.log(ela);
+      var password;
+      if (pwd) {
+        password = {
+                    "type": "String",
+                    "value" : pwd
+                   };
       }
-    }else {
-      credentials = false;
-      urlpath = url;
-    }
+        // const encryptPwd = md5(pwd);
+
+    // var credentials;
+    // if (credentialsCheck === 'on') {
+    //   credentials = true;
+    //   if (regexhttps.test(url)) {
+    //     url = url.slice(8);
+    //     urlpath = 'https://' + user + ':' + pwd + '@' + url;
+    //
+    //   }else{
+    //     url.replace(regexhttp, ' ');
+    //     url = url.slice(7);
+    //     var ela = urlpath = 'http://' + user + ':' + pwd + '@' + url;
+    //     console.log(ela);
+    //   }
+    // }else {
+    //   credentials = false;
+    //   urlpath = url;
+    // }
 
 
     const options = {
@@ -74,20 +101,24 @@ class HandleUpdateCamera extends Component {
         "type": "String",
         "value": name
       },
+      "group":{
+        "type": "String",
+        "value": setgroup
+      },
       "url": {
         "type": "String",
-        "value":{
-          "credentials": credentials,
-          "path": urlpath
-         }
+        "value": url
       },
+      "user": {
+        "type": "String",
+        "value" :user,
+      },
+      password,
       "kurentoConfig": {
         "type": "Boolean",
         "value": {
-          "record": recordStatus,
-          "process": processStatus,
-          "addressLocality": false,
-          "postalCode": false
+          "recorder":     recordStatus,
+          "carDetection": processStatus
         },
       },
       "description": {

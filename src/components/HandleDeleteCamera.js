@@ -1,7 +1,7 @@
 import React, { Component }  from 'react';
-import axios from 'axios';
+import axios                 from 'axios';
 
-import loadingSrc from '../img/loading.svg';
+import loadingSrc            from '../img/loading.svg';
 
 class HandleDeleteCamera extends Component {
 
@@ -16,11 +16,12 @@ class HandleDeleteCamera extends Component {
   }
 
   handleDelete= () => {
-    const _this = this;
-    const queryParams = new URLSearchParams(window.location.search);
+    
+    const _this         = this;
+    const queryParams   = new URLSearchParams(window.location.search);
 
-    const idCamera = queryParams.get('id');
-    const typeCam = "Camera";
+    const idCamera      = queryParams.get('id');
+    const typeCam       = "Camera";
 
     console.log(idCamera);
 

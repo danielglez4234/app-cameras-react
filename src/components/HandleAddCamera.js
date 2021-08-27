@@ -1,8 +1,8 @@
 import React, { Component }  from 'react';
-import axios from 'axios';
-import md5 from 'md5';
+import axios                 from 'axios';
+// import md5                   from 'md5';
 
-import loadingSrc from '../img/loading.svg';
+import loadingSrc            from '../img/loading.svg';
 
 class HandleAddCamera extends Component {
 
@@ -17,31 +17,25 @@ class HandleAddCamera extends Component {
 
   addCamera = () => {
     const queryParams = new URLSearchParams(window.location.search);
-    const id = queryParams.get('idCamera');
-    const name = queryParams.get('nameCamera');
-    const group = queryParams.get('groupCamera');
+    const id          = queryParams.get('idCamera');
+    const name        = queryParams.get('nameCamera');
     const description = queryParams.get('descriptionCamera');
 
 
-
-    //--------------------------Group Sectiond------------------------
     const interiorGTC = queryParams.get('interiorGTC');
     const exteriorGTC = queryParams.get('exteriorGTC');
-    const offices = queryParams.get('offices');
-    const dome = queryParams.get('dome');
-    const corridor = queryParams.get('corridor');
-    const others = queryParams.get('others');
+    const offices     = queryParams.get('offices');
+    const dome        = queryParams.get('dome');
+    const corridor    = queryParams.get('corridor');
+    const others      = queryParams.get('others');
 
-    var setgroup = [];
-    if (interiorGTC) {setgroup.push(interiorGTC);}
-    if (exteriorGTC) {setgroup.push(exteriorGTC);}
-    if (offices) {setgroup.push(offices);}
-    if (dome) {setgroup.push(dome);}
-    if (corridor) {setgroup.push(corridor);}
-    if (others) {setgroup.push(others);}
-
-    console.log(setgroup);
-
+    var setgroup      = [];
+    if (interiorGTC)  {setgroup.push(interiorGTC);}
+    if (exteriorGTC)  {setgroup.push(exteriorGTC);}
+    if (offices)      {setgroup.push(offices);}
+    if (dome)         {setgroup.push(dome);}
+    if (corridor)     {setgroup.push(corridor);}
+    if (others)       {setgroup.push(others);}
 
 
     //----------------------------------------------------------------
@@ -49,48 +43,48 @@ class HandleAddCamera extends Component {
     const recordImagesStatus = queryParams.get('recordImages');
     var recordStatus;
       if (recordImagesStatus === 'on') {
-        recordStatus = true;
+        recordStatus         = true;
       }else {
-        recordStatus = false;
+        recordStatus         = false;
       }
 
     const processImageStatus = queryParams.get('processImages');
     var processStatus;
       if (processImageStatus === 'on') {
-        processStatus  = true;
+        processStatus        = true;
       }else {
-        processStatus  = false;
+        processStatus        = false;
       }
 
 
-    var urlpath;
-    const regexhttps = /^https:\/\/+/;
-    const regexhttp = /^http:\/\/+/;
+    // var urlpath;
+    // const regexhttps         = /^https:\/\/+/;
+    // const regexhttp          = /^http:\/\/+/;
 
-    var url = queryParams.get('urlCamera');
-    const credentialsCheck = queryParams.get('credentialsCheck');
+    var url                  = queryParams.get('urlCamera');
+    // const credentialsCheck   = queryParams.get('credentialsCheck');
 
-      const user = queryParams.get('userCamera');
-      const pwd = queryParams.get('pwdCamera');
-          const encryptPwd = md5(pwd);
+      const user             = queryParams.get('userCamera');
+      const pwd              = queryParams.get('pwdCamera');
+          // const encryptPwd = md5(pwd);
 
-    var credentials;
-    if (credentialsCheck === 'on') {
-      credentials = true;
-      if (regexhttps.test(url)) {
-        url = url.slice(8);
-        urlpath = 'https://' + user + ':' + pwd + '@' + url;
-
-      }else{
-        url.replace(regexhttp, ' ');
-        url = url.slice(7);
-        var ela = urlpath = 'http://' + user + ':' + pwd + '@' + url;
-        console.log(ela);
-      }
-    }else {
-      credentials = false;
-      urlpath = url;
-    }
+    // var credentials;
+    // if (credentialsCheck === 'on') {
+    //   credentials = true;
+    //   if (regexhttps.test(url)) {
+    //     url = url.slice(8);
+    //     urlpath = 'https://' + user + ':' + pwd + '@' + url;
+    //
+    //   }else{
+    //     url.replace(regexhttp, ' ');
+    //     url = url.slice(7);
+    //     var ela = urlpath = 'http://' + user + ':' + pwd + '@' + url;
+    //     console.log(ela);
+    //   }
+    // }else {
+    //   credentials = false;
+    //   urlpath = url;
+    // }
 
 
 
@@ -100,41 +94,38 @@ class HandleAddCamera extends Component {
         'Content-Type': 'application/json'
     };
     const createBodyEntities = {
-      "id": "gtc" + id,
-      "type": "Camera",
-      "group": {
-        "type": "String",
-        "value": group
-      },
+      "id":       "gtc" + id,
+      "type":     "Camera",
       "name": {
-        "type": "String",
-        "value": name
+        "type":    "String",
+        "value":   name
       },
       "group":{
-        "type": "String",
-        "value": setgroup
+        "type":    "ArrayList",
+        "value":   setgroup
       },
       "url": {
-        "type": "String",
-        "value":{
-          "credentials": credentials,
-          "user": user,
-          "pwd": encryptPwd,
-          "path": urlpath
-         }
+        "type":    "String",
+        "value":   url
+      },
+      "user": {
+        "type":    "String",
+        "value":   user,
+      },
+      "password": {
+      "type":     "String",
+      "value" :    pwd,
       },
       "kurentoConfig": {
-        "type": "Boolean",
+        "type": "Map",
         "value": {
-          "record": recordStatus,
-          "process": processStatus,
-          "addressLocality": false,
-          "postalCode": false
+          "recorder":     recordStatus,
+          "carDetection": processStatus
         },
       },
       "description": {
-        "type": "String",
-        "value": description
+        "type":   "String",
+        "value":  description
       }
     };
     axios.post("http://161.72.123.211:1026/v2/entities", createBodyEntities, { headers: options	})
@@ -150,7 +141,6 @@ class HandleAddCamera extends Component {
         });
         console.log('Error fetching and parsing data on the ORION context brocker', error);
       });
-
   }
 
 

@@ -1,6 +1,9 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-// import './cors.js';
+import React            from 'react';
+import ReactDOM         from 'react-dom';
+
+import App              from './App';
+import reportWebVitals  from './reportWebVitals';
+
 import './setProxy.js';
 
 import './css/style.css';
@@ -10,9 +13,6 @@ import './css/foundation.min.css';
 import './js/scripts.js';
 
 import './includes/bootstrap.js';
-
-import App from './App';
-import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>

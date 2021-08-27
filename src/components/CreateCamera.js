@@ -1,16 +1,19 @@
-import React, { Component }  from 'react';
-import * as $ from 'jquery';
-import axios from 'axios';
+import React, { Component }   from 'react';
+import * as $                 from 'jquery';
+import axios                  from 'axios';
+
 import '../setProxy.js';
 
-import idIcon from '../img/id.png';
-import nameIcon from '../img/name.png';
-import groupIcon from '../img/group.png';
-import urlIcon from '../img/url.png';
-import userIcon from '../img/user.png';
-import pwdIcon from '../img/pwd.png';
-import arrowDown from '../img/arrowDown.png';
-import closeGroupIcon from '../img/closeGroup.png';
+import idIcon                 from '../img/id.png';
+import nameIcon               from '../img/name.png';
+import groupIcon              from '../img/group.png';
+import urlIcon                from '../img/url.png';
+import userIcon               from '../img/user.png';
+import pwdIcon                from '../img/pwd.png';
+import arrowDown              from '../img/arrowDown.png';
+import closeGroupIcon         from '../img/closeGroup.png';
+
+
 
 const options = {
     'Accept': 'application/json',
@@ -49,15 +52,21 @@ class CreateCamera extends Component {
   }
 
   componentDidMount() {
+    const _this = this;
     // window.removeEventListener('beforeunload', this.deleteSubscription);
     // window.addEventListener('beforeunload', this.deleteSubscription);
     // this.createSubscription();
     this.deleteSubscription(this.state.subscriptionId);
-    this.dropDownMenuGroup();
+    setTimeout(function(){
+      _this.dropDownMenuGroup();
+    }, 1000);
   }
 
   dropDownMenuGroup = () => {
-    const _this = this;
+
+    $('.toRotateTheArrow').on('click', function() {
+      $('.iconInput-arrowDown').toggleClass('rotate-arrow-groups');
+    });
 
     $(".dropdown dt a").on('click', function() {
       $(".dropdown dd ul").slideToggle('fast');
@@ -67,53 +76,36 @@ class CreateCamera extends Component {
       $(".dropdown dd ul").hide();
     });
 
-    function getSelectedValue(id) {
-      return $("#" + id).find("dt a span.value").html();
-    }
-
     $(document).bind('click', function(e) {
-      var $clicked = $(e.target);
-      if (!$clicked.parents().hasClass("dropdown")) $(".dropdown dd ul").hide();
-    });
-
-    // const interiorCheck ="<span class='span-checked checkedInteriorGTC' title='Interior-GTC'> Interior-GTC <img src=" + closeGroupIcon + " alt='close group' onClick='"+unCheckGroup('Interior-GTC')+"' class='iconSpan-select' /></div></span>";
-    // const exteriorCheck ="<span class='span-checked checkedExteriorGTC' title='Exterior-GTC'> Exterior-GTC <img src=" + closeGroupIcon + " alt='close group' onClick='"+ unCheckGroup('Exterior-GTC') +"' class='iconSpan-select' /></div></span>";
-    // const officesCheck ="<span class='span-checked checkedOffices' title='Offices'> Offices <img src=" + closeGroupIcon + " alt='close group' onClick='"+ unCheckGroup('Offices') +"' class='iconSpan-select' /></div></span>";
-    // const domeCheck ="<span class='span-checked checkedDome' title='Dome'> Dome <img src=" + closeGroupIcon + " alt='close group' onClick='"+ unCheckGroup('Dome') +"' class='iconSpan-select' /></div></span>";
-    // const corridor ="<span class='span-checked checkedCorridor' title='Corridor'> Corridor <img src=" + closeGroupIcon + " alt='close group' onClick='"+ unCheckGroup('Corridor') +"' class='iconSpan-select' /></div></span>";
-    // const otherCheck ="<span class='span-checked checkedOther' title='Other'> Other <img src=" + closeGroupIcon + " alt='close group' onClick='"+ unCheckGroup('Other') +"' class='iconSpan-select' /></div></span>";
-
-    $('.mutliSelect input[type="checkbox"]').on('click', function() {
-
-      var title = $(this).closest('.mutliSelect').find('input[type="checkbox"]').val(),
-        title = $(this).val();
-
-      if ($(this).is(':checked')) {
-        var html = "<span class=\"span-checked checked"+ title + "\" title=" + title + ">" + title + "<img src=" + closeGroupIcon + " alt=\"close group\" onClick=" + _this.unCheckGroup(title) + " class=\"iconSpan-select\" /></div></span>";
-        $('.multiSel').append(html);
-
-      } else {
-        $('span[title="' + title + '"]').remove();
-        // var ret = $(".hida");
-        // $('.dropdown dt a').append(ret);
+      var $clicked   = $(e.target);
+      if (!$clicked.parents().hasClass("dropdown")){
+        $(".dropdown dd ul").hide();
+        $('.iconInput-arrowDown').removeClass('rotate-arrow-groups');
       }
     });
 
+    $('.mutliSelect input[type="checkbox"]').on('click', function() {
 
-  }
+      var title      = $(this).closest('.mutliSelect').find('input[type="checkbox"]').val(),
+        title        = $(this).val();
 
-  unCheckGroup = (groupName) => {
-    console.log('porque');
-    $('.iconSpan-select').on('click', function() {
-      var title = $(this).closest('span').val();
-      console.log(title);
-        $("#" + groupName).prop("checked", false);
-        $('.checked' + groupName).remove();
+      if ($(this).is(':checked')) {
+        var html     = "<div class='group-options-box group-options-box" + title + "'><span class='span-checked' title=" + title + ">" + title + "</span><img src=" + closeGroupIcon + " alt='close group' class='iconSpan-select iconSpan-select"+ title + "' /></div>";
+        $('.multiSel').append(html);
+
+      } else {
+        $('.group-options-box'+ title).remove();
+        // var ret = $(".hida");
+        // $('.dropdown dt a').append(ret);
+      }
+
+      $('.iconSpan-select' + title).on('click', function() {
+        var title   = $(this).closest('div').find('.span-checked').html();
+          $("#" + title).prop("checked", false);
+          $('.group-options-box'+ title).remove();
+      });
     });
   }
-
-
-
 
 
   deleteSubscription = () => {
@@ -124,7 +116,6 @@ class CreateCamera extends Component {
       })
       .catch(error => {
         console.log('Error fetching and parsing data on the ORION context brocker', error);
-        console.log('ghhjhhj', error);
       });
   }
 
@@ -134,12 +125,9 @@ class CreateCamera extends Component {
           this.setState({ //save the current state of the data
             subscriptionId: response.headers['location'].split('/')[3]
           });
-          // console.log(response.headers['location'].split('/')[3]);
-          // console.log(this.state.subscriptionId + " dentro creación");
       })
       .catch(error => {
         console.log('Error fetching and parsing data on the ORION context brocker', error);
-        console.log('ghhjhhj', error);
       });
   }
 
@@ -178,8 +166,8 @@ class CreateCamera extends Component {
               <span className="input-label-span input-label-group">Group</span>
             </label>
             <dl className="dropdown">
-                <dt>
-                <a href="#">
+                <dt id="groupCamera">
+                <a className="toRotateTheArrow" href="#">
                   <span className="hida select-dropdowm">Select</span>
                   <img src={ arrowDown } alt="arrow down" className="iconInput iconInput-arrowDown" />
                 </a>

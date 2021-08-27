@@ -12,6 +12,7 @@ body
 
 
 .opacity-on{opacity: 1 !important}
+.opacity-on-Move-right{opacity: 1 !important; right: 0px !important;}
 
 .displayBlock{ display: block !important; }
 .displayFlex{display:flex !important;}
@@ -394,6 +395,10 @@ height: 100%;
   transform: rotate(-180deg);
   transition: all 0s ease-out;
 }
+.rotate-arrow-groups{
+  transform: rotate(-180deg);
+  transition: all 0s ease-out;
+}
 .button-expandNavBar {
   width:250px;
   overflow:hidden;
@@ -490,6 +495,7 @@ height: 100%;
     .rep_prub:hover .cameraButtons{
       opacity:1;
       transition: all .3s ease-out;
+      right: 0px;
     }
 
 
@@ -530,7 +536,7 @@ height: 100%;
   display: inline-block;
   background-color: #667175;
   border-bottom-left-radius: 10px;
-  right: 0px;
+  right: -46px;
   opacity: 0;
   z-index: 5;
   transition: all .1s linear;
@@ -674,6 +680,7 @@ height: 100%;
 
 .warning-delete-close-icon{
   position: absolute;
+  top: 2px;
   right: 2px;
   width: 30px;
 }
@@ -688,7 +695,7 @@ height: 100%;
   position: relative;
   padding: 0px 37px;
   color:#333;
-  top:47px;
+  top:23px;
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
@@ -966,9 +973,12 @@ height: 100%;
     height: 48px;
     position: absolute;
     z-index: 3;
-    margin-left: 149px;
+    margin-left: 96px;
     margin-top: -10px;
+    top:10px;
+    transition: all 0s ease-out;
   }
+
   .iconInput-url{
     width: 24px;
   }
@@ -1052,11 +1062,9 @@ input:focus, textarea:focus, select:focus{
 }
   .input-form-id-camera{
     width:300px;
-    text-transform: capitalize;
   }
   .input-form-name{
     width:500px;
-    text-transform: capitalize;
   }
   .input-form-group{
     width:400px;
@@ -1185,7 +1193,7 @@ input:focus, textarea:focus, select:focus{
   border-bottom-right-radius: 4px;
   background-color: #d4d7dc;
   box-shadow: none;
-  width: 400px;
+  width: 300px;
   height:50px;
   padding-left: 10px;
   padding-right: 40px;
@@ -1209,9 +1217,8 @@ input:focus, textarea:focus, select:focus{
 }
 .dropdown dt a span,
 .multiSel span {
-  cursor: pointer;
   display: inline-block;
-  padding: 2px 23px 2px 4px;
+  padding: 5px 10px 5px 4px;
   color: #f1f2f3;
   font-family: "Comfortaa-SemiBold";
   font-size: 13px;
@@ -1231,7 +1238,7 @@ input:focus, textarea:focus, select:focus{
   padding: 2px 15px 2px 5px;
   position: absolute;
   top: 2px;
-  width: 400px;
+  width: 300px;
   list-style: none;
   height: 150px;
   overflow: auto;
@@ -1257,12 +1264,17 @@ input:focus, textarea:focus, select:focus{
   color: #9799a1;
 }
 
+.group-options-box{
+  display:inline-block;
+  margin-top:1px;
+}
+
 .iconSpan-select{
-  background-color: #d4d7dc;
+  background-color: #495057;
   position: relative;
-  right: -23px;
   margin-top: -2px;
   margin-bottom: -2px;
+  cursor:pointer;
 }
 /*--------------------------------------------------------------------------------------------------------------------------*/
 
