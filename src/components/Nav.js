@@ -21,9 +21,10 @@ class Nav extends Component {
         <div onClick={ this.unExpandNavArea } className="unExpandNavArea"></div>
       <nav id="navBar" className="main-menu">
 
-        <div>
-          <a href="/">
-            <img className="logo" src={ logoSrc } alt="Gran Telescopio de Canarias" />
+        <div className="box-logo">
+          <a href="/" className="box-logo-content">
+            <img className="box-logo-icon" src={ logoSrc } alt="Gran Telescopio de Canarias" />
+            <span className="box-logo-text"> GRANTECAN </span>
           </a>
        </div>
 
@@ -33,52 +34,64 @@ class Nav extends Component {
 
             <li>
               <a href="/">
-                <i className="fa fa-home fa-lg"></i>
+                {/*<i class="bx bxs-home menuNav-icon bx-menu-icons"></i>*/}
+                <i className="fa fa-home fa-lg menuNav-icon"></i>
                 <span className="nav-text"> Home </span>
               </a>
             </li>
 
             <li>
               <a href="#">
-                <i className="fa fa-user fa-lg"></i>
+                <i class="bx bxs-user menuNav-icon bx-menu-icons"></i>
+                {/*<i className="fa fa-user fa-lg menuNav-icon"></i>*/}
                 <span className="nav-text"> Log in </span>
               </a>
             </li>
 
             <li>
               <a href="/list">
-                <i className="fa fa-list fa-lg"></i>
+                {/*<i class="bx bx-list-ul menuNav-icon bx-menu-icons"></i>*/}
+                <i className="fa fa-list-ul fa-lg menuNav-icon"></i>
                 <span className="nav-text"> Show All </span>
               </a>
             </li>
 
             <li className="darkerli darkerlishadow">
               <a href="/create">
-                <i className="fa fa-plus-square fa-lg"></i>
+                <i class="bx bxs-add-to-queue menuNav-icon bx-menu-icons"></i>
+                {/*<i className="fa fa-plus-square fa-lg menuNav-icon"></i>*/}
                 <span className="nav-text"> Add New Camera </span>
               </a>
             </li>
 
             <li className="darkerli darkerlishadowdown">
               <button className="menu-nav-button" onClick={() => {this.showEditDelteButtons()}}>
-                <i className="fa fa-edit fa-lg"></i>
+                <i class="bx bxs-edit menuNav-icon bx-menu-icons"></i>
+                {/*<i className="fa fa-edit fa-lg menuNav-icon"></i>*/}
                 <span className="nav-text menu-nav-button-text"> Edit </span>
               </button>
             </li>
 
             <li>
               <a href="#">
-                <i className="fa fa-filter fa-lg"></i>
+                {/*<i class="bx bx-filter-alt menuNav-icon bx-menu-icons"></i>*/}
+                <i className="fa fa-filter fa-lg menuNav-icon"></i>
                 <span className="nav-text"> Filter </span>
               </a>
             </li>
 
           </ul>
-          <ul className="logout">
-            <li>
+          <ul className="ulBottom">
+            <li className="menu-pagination">
               <a href="#">
-                <i className="fa fa-crop fa-lg"></i>
-                <span className="nav-text"> Opción 9 </span>
+                <i class="bx bxs-copy-alt menuNav-icon bx-menu-icons" ></i>
+                <span className="nav-text"> Pagination </span>
+              </a>
+            </li>
+            <li className="logout">
+              <a href="#">
+                <i class="bx bx-log-out menuNav-icon bx-menu-icons"></i>
+                <span className="nav-text"> Log Out </span>
               </a>
             </li>
           </ul>
@@ -90,8 +103,8 @@ class Nav extends Component {
 
   showEditDelteButtons = () =>{
 
-    $(".updateDeleteCameraButtons").toggleClass('displayInlineBlock');
-    $('.moreInfoCameraButton').toggleClass('border-bottom-left-radius-0');
+    $(".deleteUpdate-cameraButtons-box").toggleClass('show-deleteUpdate-camerabuttons');
+    $('.moreInfoCameraButton').toggleClass('border-bottom-left-radius-0 border-top-left-radius-0');
   }
 
   hideNavBar = () => {

@@ -143,7 +143,7 @@ class UpdateCamera extends Component {
     }
 
   return(
-<div className="rep_prub_cont">
+<div className="rep_prub_form">
 { (this.state.idNotFound) ? error :
     <div className="update_container">
       <div id="title_container" className="mark_title_update mark_title_create">

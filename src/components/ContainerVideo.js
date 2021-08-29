@@ -16,7 +16,7 @@ class ContainerVideo extends Component {
     super();
     this.state = {
       countVideos: 0,
-      // mapTestId: [{id:'1'},{id:'2'},{id:'3'},{id:'4'}]
+      mapTestId: [{id:'1'},{id:'2'},{id:'3'},{id:'4'},{id:'5'},{id:'6'},{id:'7'},{id:'8'},{id:'9'}]
     };
   }
 
@@ -38,7 +38,7 @@ class ContainerVideo extends Component {
 
     showMenuItems = (id) =>{
       $('.menuCameraItem' + id).toggle();
-      $('.menuVideoCameraButton' + id).toggleClass('border-bottom-left-radius-0');
+      $('.menuVideoCameraButton' + id).toggleClass('border-bottom-left-radius-0 border-top-left-radius-0');
       $('.cameraButtons' + id).toggleClass('opacity-on-Move-right');
     }
 
@@ -77,7 +77,7 @@ class ContainerVideo extends Component {
 
         $('.video_stream').addClass('adjustWidthVideo-x5')
                           .removeClass('adjustWidthVideo-x1 adjustWidthVideo-x2 adjustWidthVideo-x3 adjustWidthVideo-x7');
-      }else if (countvideos === 7 || countvideos === 8 || countvideos === 9) {
+      }else{
         $('.rep_prub').addClass('width-height-7')
                       .removeClass('width-height-1 width-height-2 width-height-3 width-height-5');
 
@@ -92,8 +92,8 @@ class ContainerVideo extends Component {
       <Consumer>
       { context => {
         let videos;
-        const result = context.idCam; //we save the data in the result variable
-        // const result = this.state.mapTestId;
+        // const result = context.idCam; //we save the data in the result variable
+        const result = this.state.mapTestId;
         // console.log(result.length + 'totalPages');
 
         if (result === undefined){
@@ -129,13 +129,15 @@ class ContainerVideo extends Component {
         }
 
         return(
-          <div className="rep_prub_cont_inside">
-          <div onClick={() => {this.closeWarningDelete()}} className="block-area-for-warning-delete"></div>
+          <div className="container-cameras-box">
+            <div className="rep_prub_cont">
+            <div onClick={() => {this.closeWarningDelete()}} className="block-area-for-warning-delete"></div>
 
-          { (context.connectionError) ? <ConnectionError /> :
-            (context.apiRestConnectioError) ? <p><img className="loading connection_error" src={ apiNotResponding } alt="loading"/><span class="message_connection_error api_error">APi REST server is not responding...</span></p> :
-            (context.loading) ? <div className="rep_prub_cont"><img className="loading connection_error" src={ loadingSrc } alt="loading"/></div> : videos }
+            { (context.connectionError) ? <ConnectionError /> :
+              (context.apiRestConnectioError) ? <p><img className="loading connection_error" src={ apiNotResponding } alt="loading"/><span class="message_connection_error api_error">APi REST server is not responding...</span></p> :
+              (context.loading) ? <img className="loading connection_error" src={ loadingSrc } alt="loading"/> : videos }
 
+            </div>
           </div>
         );
       }}

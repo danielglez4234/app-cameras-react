@@ -107,6 +107,10 @@ class CreateCamera extends Component {
     });
   }
 
+  resetDropDownMenuGroup = () =>{
+    $('.group-options-box').remove();
+  }
+
 
   deleteSubscription = () => {
     console.log(this.state.subscriptionId + " dentro delete");
@@ -135,7 +139,7 @@ class CreateCamera extends Component {
 
   render(){
   return(
-<div className="rep_prub_cont">
+<div className="rep_prub_form">
 
       <div className="update_container">
         <div id="title_container" className="mark_title_update mark_title_create">
@@ -288,7 +292,7 @@ class CreateCamera extends Component {
                 <span className="cancel"> Cancel </span>
             </a>
 
-            <button type="reset" className="btn-6 btn-6-reset">
+            <button onClick={() =>{this.resetDropDownMenuGroup()}} type="reset" className="btn-6 btn-6-reset">
               <i className="fa fa-reply fa-lg icon-FormButton-reset"></i>
               <span className="reset"> Reset </span>
             </button>

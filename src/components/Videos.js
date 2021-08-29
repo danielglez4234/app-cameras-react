@@ -32,20 +32,23 @@ const Videos = ({ name, warningDelete, closeWaringDelete, showMenuItems, coverCa
     </div>
 
       {/*Delete and update Buttons*/}
+      <div className="deleteUpdate-cameraButtons-box">
+          <button className="menuCameraItem" onClick={() => {warningDelete(name.id)}}>
+            <div className="cameraIconButtons deleteCameraButton">
+                <img src={ deleteIcon } alt="expand" className="cameraImgIcons deleteCameraButtonIcon" />
+            </div>
+          </button>
+
+          <a className="menuCameraItem" href={`/update?idCam=${name.id}`}>
+            <div className="cameraIconButtons updateCameraButton">
+                <img src={ editIcon } alt="expand" className="cameraImgIcons updateCameraButtonIcon" />
+            </div>
+          </a>
+      </div>
+
       <div className={`cameraButtons cameraButtons${name.id}`}>
+
       <div className="div-to-expand">
-        <button className="menuCameraItem updateDeleteCameraButtons" onClick={() => {warningDelete(name.id)}}>
-          <div className="cameraIconButtons deleteCameraButton">
-              <img src={ deleteIcon } alt="expand" className="cameraImgIcons deleteCameraButtonIcon" />
-          </div>
-        </button>
-
-        <a className="menuCameraItem updateDeleteCameraButtons" href={`/update?idCam=${name.id}`}>
-          <div className="cameraIconButtons updateCameraButton">
-              <img src={ editIcon } alt="expand" className="cameraImgIcons updateCameraButtonIcon" />
-          </div>
-        </a>
-
         <button className={`menuCameraItem menuCameraItem${name.id} display-none`} onClick={() => {showMoreInfo(name.id)}}>
           <div className="cameraIconButtons moreInfoCameraButton">
               <img src={ moreInfoIcon } alt="expand" className="cameraImgIcons moreInfoCameraButtonIcon" />

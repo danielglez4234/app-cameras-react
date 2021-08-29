@@ -36,7 +36,7 @@ class App extends Component {
       connection: connection,
       idCam: [],
       idCamTest: ['test', 'test'],
-      loading: true,
+      loading: false,
       connectionError: false,
       apiRestConnectioError: false,
       data: {
@@ -94,7 +94,7 @@ class App extends Component {
     }
     this.state.connection.onerror = function(event) {
       _this.setState({ //save the current state of the data
-        connectionError: true
+        connectionError: false
       });
       console.log("Failed to connect to the websocket server...");
     }
@@ -183,7 +183,7 @@ class App extends Component {
     .catch(error => {
       console.log('Error fetching and parsing data', error);
       this.setState({ //save the current state of the data
-        apiRestConnectioError: true
+        apiRestConnectioError: false
       });
     });
 
@@ -238,8 +238,19 @@ class App extends Component {
 
             <Route exact path="/"  render={() => // if loading is true h3 is displayed, else the gallery is shown
               (this.state.connectionError) ? <ConnectionError /> :
-              (this.state.apiRestConnectioError) ? <div className="rep_prub_cont"><img className="loading connection_error" src={ apiNotResponding } alt="loading"/><span class="message_connection_error api_error">APi REST server is not responding...</span></div> :
-              (this.state.loading) ? <div className="rep_prub_cont"><img className="loading connection_error" src={ loadingSrc } alt="loading"/></div> : <ContainerVideo />
+              (this.state.apiRestConnectioError) ?
+              <div className="container-cameras-box">
+                <div className="rep_prub_cont"><img className="loading connection_error" src={ apiNotResponding } alt="loading"/>
+                  <span class="message_connection_error api_error">APi REST server is not responding...</span>
+                </div>
+              </div> :
+              (this.state.loading) ?
+              <div className="container-cameras-box">
+                <div className="rep_prub_cont">
+                  <img className="loading connection_error" src={ loadingSrc } alt="loading"/>
+                </div>
+              </div> :
+              <ContainerVideo />
             } />
             <Route path="/list"           render={() => <ContainerVideo /> } />
             <Route path="/create"         render={() => <CreateCamera /> } />

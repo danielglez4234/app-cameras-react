@@ -16,7 +16,7 @@ class HandleDeleteCamera extends Component {
   }
 
   handleDelete= () => {
-    
+
     const _this         = this;
     const queryParams   = new URLSearchParams(window.location.search);
 
@@ -87,7 +87,7 @@ class HandleDeleteCamera extends Component {
                         </a>
                       </div>;
     return (
-      <div className="rep_prub_cont">
+      <div className="rep_prub_form">
 
       { (this.state.connectionError) ? error :
         (this.state.connectionErrorServer) ? error :
