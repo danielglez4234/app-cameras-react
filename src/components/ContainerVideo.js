@@ -16,7 +16,7 @@ class ContainerVideo extends Component {
     super();
     this.state = {
       countVideos: 0,
-      mapTestId: [{id:'1'},{id:'2'},{id:'3'},{id:'4'},{id:'5'},{id:'6'},{id:'7'},{id:'8'},{id:'9'}]
+      // mapTestId: [{id:'1'},{id:'2'},{id:'3'},{id:'4'},{id:'5'},{id:'6'},{id:'7'},{id:'8'},{id:'9'}]
     };
   }
 
@@ -86,14 +86,147 @@ class ContainerVideo extends Component {
       }
     }
 
+    pagination = (activatepagination) =>{
+      // var connection = new NGSI.Connection("http://161.72.123.211:1026");
+      let actualPage; // CHANGE!!!!!
+      let active;
+      // calculating the first and last book to show when moving between pages
+      let perPage = 1;
+      let offset = ( perPage * actualPage ) - perPage;
+      // with this we can move between the pages by clicking on the arrows
+      let nextPage = actualPage + 1;
+      let prevPage = actualPage - 1;
+
+      var rooms = [];
+
+      // connection.v2.listEntities({ order: [[ "type", "DESC"  ]], offset: offset, limit: perPage}).then(async(response) => {
+      //       if (response.results[0]) {
+      //
+      //         response.results.forEach((entity) => {
+      //             rooms.push(entity);
+      //         });
+      //
+      //         let countCamera = await connection.v2.listEntities().then((response) => {
+      //             let count = response.results.length;
+      //             return count;
+      //           });
+      //
+      //         const totalPages =  Math.ceil( countCamera / perPage );
+      //
+      //         {/*pagination HTML*/}
+      //
+      //       }else if(actualPage > totalPages || actualPage <= 0 || isNaN(actualPage)){
+      //
+      //         {/*error*/}
+      //       }
+      //
+      //     });
+
+          const paginationBox =  <div className="bar-bottom">
+                                  <div className="pagination">
+                                    {/*$buttonPREV*/}
+                                      <ul>
+                                        {/*firstPage*/}{/*pages*/}{/*lastPage*/}
+                                      </ul>
+                                    {/*$buttonNEXT*/}
+                                  </div>
+                                </div>;
+        }
+
+        generatePagination = (activatepagination, totalPages, actualPage, prevPage, nextPage) => {
+          var disabledPrevPage;
+          var disabledNextPage;
+          var active;
+          var pages = [];
+
+          if (activatepagination) {
+
+            if (prevPage >= 1){
+               disabledPrevPage = ".";
+            }else{
+               disabledPrevPage = "disable_next_or_prev";
+            }
+
+            var $buttonPREV = $("<a className='btn_pagination btn_pagination-left "+ disabledPrevPage +"' href='/camera/"+ prevPage +"'> ◄ </a>");
+
+
+              if (totalPages <= 4){
+
+              }else if (actualPage > 2){
+                var firstPage = $("<li><a className='first numb' href='/camera/1' > 1 </a></li>");
+
+                if (actualPage > 3){
+                 var dotsLeft = $("<li><a className='dots'>...</a></li>");
+                }
+              }
+
+
+              if (actualPage == totalPages){
+                prevPage = prevPage - 2;
+
+              }else if (actualPage == totalPages - 1){
+                prevPage = prevPage - 1;
+              }
+
+
+              if (actualPage == 1){
+                nextPage= nextPage + 2;
+
+              }else if (actualPage == 2){
+                nextPage= nextPage + 1;
+              }
+
+
+              for (var i = prevPage; i <= nextPage; ++i) {
+
+                if (i > totalPages){
+                  continue
+                }
+                if (i == 0){
+                   i= i + 1
+                }
+                if (actualPage == i){
+                  active = "active";
+                }else{
+                  active = "";
+                }
+                if (i >= 1){
+                  pages = pages.push($("<li><a className='numb volar "+ active +"' href='camera/"+ i +"''>"+ i +"</a></li>"));
+                }
+              }
+
+
+
+              if (totalPages <= 4){
+
+              }else if (actualPage < totalPages - 1){
+                if (actualPage < totalPages - 2){
+                  var dotsRight = $("<li><a className='dots'> ...</a></li>");
+                }
+                var lastPage = $("<li><a className='last numb' href='/camera/" + totalPages +"'> totalPages </a></li>");
+              }
+
+
+              if (actualPage + 1 <= totalPages){
+                 disabledNextPage = ".";
+              }else{
+                 disabledNextPage = "disable_next_or_prev";
+              }
+
+
+            var $buttonNEXT = $("<a className='btn_pagination btn_pagination-right"+ disabledNextPage +"' href='/camera/"+ (actualPage + 1) +"'> ►</a>");
+
+          }
+        }
+
 
   render(){
     return (
       <Consumer>
       { context => {
         let videos;
-        // const result = context.idCam; //we save the data in the result variable
-        const result = this.state.mapTestId;
+        const result = context.idCam; //we save the data in the result variable
+        // const result = this.state.mapTestId;
         // console.log(result.length + 'totalPages');
 
         if (result === undefined){
@@ -134,7 +267,7 @@ class ContainerVideo extends Component {
             <div onClick={() => {this.closeWarningDelete()}} className="block-area-for-warning-delete"></div>
 
             { (context.connectionError) ? <ConnectionError /> :
-              (context.apiRestConnectioError) ? <p><img className="loading connection_error" src={ apiNotResponding } alt="loading"/><span class="message_connection_error api_error">APi REST server is not responding...</span></p> :
+              (context.apiRestConnectioError) ? <p><img className="loading connection_error" src={ apiNotResponding } alt="loading"/><span className="message_connection_error api_error">APi REST server is not responding...</span></p> :
               (context.loading) ? <img className="loading connection_error" src={ loadingSrc } alt="loading"/> : videos }
 
             </div>

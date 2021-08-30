@@ -34,7 +34,7 @@ class Nav extends Component {
 
             <li>
               <a href="/">
-                {/*<i class="bx bxs-home menuNav-icon bx-menu-icons"></i>*/}
+                {/*<i className="bx bxs-home menuNav-icon bx-menu-icons"></i>*/}
                 <i className="fa fa-home fa-lg menuNav-icon"></i>
                 <span className="nav-text"> Home </span>
               </a>
@@ -42,7 +42,7 @@ class Nav extends Component {
 
             <li>
               <a href="#">
-                <i class="bx bxs-user menuNav-icon bx-menu-icons"></i>
+                <i className="bx bxs-user menuNav-icon bx-menu-icons"></i>
                 {/*<i className="fa fa-user fa-lg menuNav-icon"></i>*/}
                 <span className="nav-text"> Log in </span>
               </a>
@@ -50,7 +50,7 @@ class Nav extends Component {
 
             <li>
               <a href="/list">
-                {/*<i class="bx bx-list-ul menuNav-icon bx-menu-icons"></i>*/}
+                {/*<i className="bx bx-list-ul menuNav-icon bx-menu-icons"></i>*/}
                 <i className="fa fa-list-ul fa-lg menuNav-icon"></i>
                 <span className="nav-text"> Show All </span>
               </a>
@@ -58,7 +58,7 @@ class Nav extends Component {
 
             <li className="darkerli darkerlishadow">
               <a href="/create">
-                <i class="bx bxs-add-to-queue menuNav-icon bx-menu-icons"></i>
+                <i className="bx bxs-add-to-queue menuNav-icon bx-menu-icons"></i>
                 {/*<i className="fa fa-plus-square fa-lg menuNav-icon"></i>*/}
                 <span className="nav-text"> Add New Camera </span>
               </a>
@@ -66,31 +66,32 @@ class Nav extends Component {
 
             <li className="darkerli darkerlishadowdown">
               <button className="menu-nav-button" onClick={() => {this.showEditDelteButtons()}}>
-                <i class="bx bxs-edit menuNav-icon bx-menu-icons"></i>
+                <i className="bx bxs-edit menuNav-icon bx-menu-icons"></i>
                 {/*<i className="fa fa-edit fa-lg menuNav-icon"></i>*/}
                 <span className="nav-text menu-nav-button-text"> Edit </span>
               </button>
             </li>
 
             <li>
-              <a href="#">
-                {/*<i class="bx bx-filter-alt menuNav-icon bx-menu-icons"></i>*/}
-                <i className="fa fa-filter fa-lg menuNav-icon"></i>
-                <span className="nav-text"> Filter </span>
-              </a>
+              <button className="menu-nav-button">
+                {/*<i className="bx bxs-edit menuNav-icon bx-menu-icons"></i>*/}
+                <i className="fa fa-filter fa-lg menuNav-icon bx-menu-icons adjust-filter-icon"></i>
+                {/*<i className="fa fa-edit fa-lg menuNav-icon"></i>*/}
+                <span className="nav-text menu-nav-button-text transform-uppercase adjust-filter-text"> Filter </span>
+              </button>
             </li>
 
           </ul>
           <ul className="ulBottom">
             <li className="menu-pagination">
               <a href="#">
-                <i class="bx bxs-copy-alt menuNav-icon bx-menu-icons" ></i>
+                <i className="bx bxs-copy-alt menuNav-icon bx-menu-icons" ></i>
                 <span className="nav-text"> Pagination </span>
               </a>
             </li>
             <li className="logout">
               <a href="#">
-                <i class="bx bx-log-out menuNav-icon bx-menu-icons"></i>
+                <i className="bx bx-log-out menuNav-icon bx-menu-icons"></i>
                 <span className="nav-text"> Log Out </span>
               </a>
             </li>
