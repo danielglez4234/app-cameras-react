@@ -1,9 +1,6 @@
-// Dockerfile
-
-
-FROM node:16.8-alpine
+FROM alpine:3.11
 WORKDIR /app-cameras-react
-ENV PATH="./node-modules/.bin:$PATH"
+ENV PATH="./node_modules/.bin:$PATH"
 COPY . .
-RUN npm run build
+RUN sudo npm run build
 CMD ["npm", "start"]
