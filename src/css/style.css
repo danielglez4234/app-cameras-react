@@ -30,7 +30,7 @@ body
 }
 .marginLeft-0-Cont{
   width: 98% !important;
-  margin-left: 30px !important;
+  margin-left: 19px !important;
   padding-left: 0px !important;
 }
 
@@ -246,9 +246,12 @@ margin-top: 100px;
 .menu-icon-edit{ font-size: 23px !important; }
 .menu-icon-filter{ font-size: 23px !important; }
 .menu-icon-op{ font-size: 23px !important; } */
-
 .adjust-filter-icon{ left: 0px !important; top: 10px !important;}
 .adjust-filter-text{padding-left:9px !important;}
+
+.menuNav-hover-text-box{
+  position: fixed;
+}
 
 
 .main-menu .nav-icon {
@@ -392,6 +395,7 @@ color:white;
   position: absolute;
   opacity: 0.2;
   cursor: initial;
+  z-index: 1
 }
 
 /* Darker element side menu Start*/
@@ -520,7 +524,7 @@ height: 100%;
 .rep_prub_cont{
   height: 100%;
   width: 100%;
-  padding: 5px 5px 0px 5px;
+  padding: 10px 0px 0px 10px;
   text-align: center;
   text-align-last: center;
   z-index: -5;
@@ -896,11 +900,12 @@ height: 100%;
 
 .bar-bottom{
   width: 100%;
-  height: 30px;
-  background-color: #42444a;
+  margin-left: -100px;
+  height: 40px;
+  background-color: red;
   position: absolute;
   bottom: 0;
-  z-index: -4;
+  z-index: 1;
   overflow-y: hidden;
 }
 
