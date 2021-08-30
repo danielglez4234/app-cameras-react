@@ -4,6 +4,8 @@ import axios                 from 'axios';
 
 import loadingSrc            from '../img/loading.svg';
 
+const {REACT_APP_SERVICES_IP} = process.env;
+
 class HandleAddCamera extends Component {
 
   constructor() {
@@ -68,26 +70,6 @@ class HandleAddCamera extends Component {
       const pwd              = queryParams.get('pwdCamera');
           // const encryptPwd = md5(pwd);
 
-    // var credentials;
-    // if (credentialsCheck === 'on') {
-    //   credentials = true;
-    //   if (regexhttps.test(url)) {
-    //     url = url.slice(8);
-    //     urlpath = 'https://' + user + ':' + pwd + '@' + url;
-    //
-    //   }else{
-    //     url.replace(regexhttp, ' ');
-    //     url = url.slice(7);
-    //     var ela = urlpath = 'http://' + user + ':' + pwd + '@' + url;
-    //     console.log(ela);
-    //   }
-    // }else {
-    //   credentials = false;
-    //   urlpath = url;
-    // }
-
-
-
 
     const options = {
         'Accept': 'application/json',
@@ -128,7 +110,7 @@ class HandleAddCamera extends Component {
         "value":  description
       }
     };
-    axios.post("http://161.72.123.211:1026/v2/entities", createBodyEntities, { headers: options	})
+    axios.post(`http://${REACT_APP_SERVICES_IP}:1026/v2/entities`, createBodyEntities, { headers: options	})
       .then(response => {
         this.setState({ //save the current state of the data
           loadingCreate: false
@@ -165,7 +147,7 @@ class HandleAddCamera extends Component {
                       </div>;
     // const success = <p>The camera <b>{this.state.showId}</b> was created successfully.. go to <a href="/">Home</a></p>
     return (
-      <div className="rep_prub_cont">
+      <div className="rep_prub_form">
 
       { (this.state.connectionError) ? error :
         (this.state.loadingCreate) ? <img className="loading connection_error" src={ loadingSrc } alt="loading"/> : success }

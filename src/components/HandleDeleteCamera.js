@@ -3,6 +3,8 @@ import axios                 from 'axios';
 
 import loadingSrc            from '../img/loading.svg';
 
+const {REACT_APP_SERVICES_IP} = process.env;
+
 class HandleDeleteCamera extends Component {
 
   constructor() {
@@ -30,7 +32,7 @@ class HandleDeleteCamera extends Component {
         'Content-Type': 'application/json'
     };
 
-      axios.delete("http://161.72.123.211:1026/v2/entities/"+ idCamera +"?type="+ typeCam +"", { headers: options	})
+      axios.delete(`http://${REACT_APP_SERVICES_IP}:1026/v2/entities/${idCamera}?type=${typeCam}`, { headers: options	})
         .then(response => {
           this.setState({ //save the current state of the data
             loadingDelete: false
@@ -45,7 +47,7 @@ class HandleDeleteCamera extends Component {
         });
 
       async function deletePost() {
-        await axios.delete("https://161.72.123.211:8443/camera/"+ idCamera, { headers: options	})
+        await axios.delete(`https://${REACT_APP_SERVICES_IP}:8443/camera/${idCamera}`, { headers: options	})
           .then(response => {
             setTimeout(function(){
             _this.setState({ //save the current state of the data

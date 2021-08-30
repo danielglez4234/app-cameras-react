@@ -1,6 +1,6 @@
-FROM alpine:3.11
+FROM node:15.13-alpine
 WORKDIR /app-cameras-react
 ENV PATH="./node_modules/.bin:$PATH"
 COPY . .
-RUN sudo npm run build
+RUN npm run build
 CMD ["npm", "start"]

@@ -5,6 +5,8 @@ import axios from 'axios';
 
 import loadingSrc from '../img/loading.svg';
 
+const {REACT_APP_SERVICES_IP} = process.env;
+
 class HandleUpdateCamera extends Component {
 
   constructor() {
@@ -73,24 +75,6 @@ class HandleUpdateCamera extends Component {
       }
         // const encryptPwd = md5(pwd);
 
-    // var credentials;
-    // if (credentialsCheck === 'on') {
-    //   credentials = true;
-    //   if (regexhttps.test(url)) {
-    //     url = url.slice(8);
-    //     urlpath = 'https://' + user + ':' + pwd + '@' + url;
-    //
-    //   }else{
-    //     url.replace(regexhttp, ' ');
-    //     url = url.slice(7);
-    //     var ela = urlpath = 'http://' + user + ':' + pwd + '@' + url;
-    //     console.log(ela);
-    //   }
-    // }else {
-    //   credentials = false;
-    //   urlpath = url;
-    // }
-
 
     const options = {
         'Accept': 'application/json',
@@ -126,7 +110,7 @@ class HandleUpdateCamera extends Component {
         "value": description
       }
     };
-    axios.patch("http://161.72.123.211:1026/v2/entities/"+ id +"/attrs?options=append", updateBody, { headers: options	})
+    axios.patch(`http://${REACT_APP_SERVICES_IP}:1026/v2/entities/${id}/attrs?options=append`, updateBody, { headers: options	})
       .then(response => {
         this.setState({ //save the current state of the data
           loadingUpdate: false
@@ -163,7 +147,7 @@ class HandleUpdateCamera extends Component {
                         </a>
                       </div>;
     return (
-      <div className="rep_prub_cont">
+      <div className="rep_prub_form">
 
       { (this.state.connectionError) ? error :
         (this.state.loadingUpdate) ? <img className="loading connection_error" src={ loadingSrc } alt="loading"/> : success }

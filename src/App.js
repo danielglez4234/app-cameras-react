@@ -24,8 +24,9 @@ import HandleUpdateCamera  from './components/HandleUpdateCamera';
 import HandleDeleteCamera  from './components/HandleDeleteCamera';
 // import AccumulateNotifications from './components/AccumulateNotifications';
 
+const {REACT_APP_SERVICES_IP} = process.env;
 
-var connection  = new WebSocket('wss://161.72.123.165:8443/kurento');
+var connection  = new WebSocket(`wss://${REACT_APP_SERVICES_IP}:8443/kurento`);
 const mapKms    = new Map();
 
 class App extends Component {
@@ -36,17 +37,17 @@ class App extends Component {
       connection: connection,
       idCam: [],
       idCamTest: ['test', 'test'],
-      loading: false,
+      loading: true,
       connectionError: false,
       apiRestConnectioError: false,
       data: {
           count: 0,
           kms : [],
           stun : {
-            "urls" : "stun:161.72.123.165:3478"
+            "urls" : `stun:${REACT_APP_SERVICES_IP}:3478`
           },
           turn : {
-            "urls" : "turn:161.72.123.165:3478",
+            "urls" : `turn:${REACT_APP_SERVICES_IP}:3478`,
             "username" : "guest",
             "credential" : "12345"
           }
@@ -94,7 +95,7 @@ class App extends Component {
     }
     this.state.connection.onerror = function(event) {
       _this.setState({ //save the current state of the data
-        connectionError: false
+        connectionError: true
       });
       console.log("Failed to connect to the websocket server...");
     }
@@ -118,7 +119,7 @@ class App extends Component {
   connect = () => {
     var _this = this;
 
-    axios.get(`https://161.72.123.165:8443/cameras`)
+    axios.get(`https://${REACT_APP_SERVICES_IP}:8443/cameras`)
     .then(response => {
 
       this.setState({ //save the current state of the data
@@ -183,7 +184,7 @@ class App extends Component {
     .catch(error => {
       console.log('Error fetching and parsing data', error);
       this.setState({ //save the current state of the data
-        apiRestConnectioError: false
+        apiRestConnectioError: true
       });
     });
 
@@ -241,7 +242,7 @@ class App extends Component {
               (this.state.apiRestConnectioError) ?
               <div className="container-cameras-box">
                 <div className="rep_prub_cont"><img className="loading connection_error" src={ apiNotResponding } alt="loading"/>
-                  <span class="message_connection_error api_error">APi REST server is not responding...</span>
+                  <span className="message_connection_error api_error">APi REST server is not responding...</span>
                 </div>
               </div> :
               (this.state.loading) ?
