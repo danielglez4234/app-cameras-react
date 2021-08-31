@@ -117,9 +117,10 @@ class Nav extends Component {
         $(".fa-angle-double-right").removeClass("rotate-arrow");
 
     $(".rep_prub_cont").toggleClass("marginLeft-0-Cont");
+    $(".container-cameras-box").toggleClass("paddingLeft-0");
     $(".rep_prub_cont_inside").toggleClass("paddingLeft-0 paddingRight-0 paddingTop-0");
-    $(".connection_error").toggleClass("marginleft_alignErrorMessageIcon");
-    $(".message_connection_error").toggleClass("marginleft_alignErrorMessageText");
+    // $(".connection_error").toggleClass("marginleft_alignErrorMessageIcon");
+    // $(".message_connection_error").toggleClass("marginleft_alignErrorMessageText");
 
   }
   expandNavBar = () => {
@@ -131,6 +132,7 @@ class Nav extends Component {
         $(".fa-angle-left").removeClass("rotate-arrow");
 
     $(".rep_prub_cont").removeClass("marginLeft-0-Cont");
+    $(".container-cameras-box").removeClass("paddingLeft-0");
     $(".rep_prub_cont_inside").removeClass("paddingLeft-0 paddingRight-0 paddingTop-0");
   }
   unExpandNavArea = () => {

@@ -15,8 +15,8 @@ class ContainerVideo extends Component {
   constructor() {
     super();
     this.state = {
-      countVideos: 0,
-      // mapTestId: [{id:'1'},{id:'2'},{id:'3'},{id:'4'},{id:'5'},{id:'6'},{id:'7'},{id:'8'},{id:'9'}]
+      countVideos: 0
+      // mapTestId: [{id:'1'},{id:'2'},{id:'3'},{id:'4'}]
     };
   }
 
@@ -98,126 +98,126 @@ class ContainerVideo extends Component {
     //   let prevPage = actualPage - 1;
     //
     //   var rooms = [];
-
-      // connection.v2.listEntities({ order: [[ "type", "DESC"  ]], offset: offset, limit: perPage}).then(async(response) => {
-      //       if (response.results[0]) {
-      //
-      //         response.results.forEach((entity) => {
-      //             rooms.push(entity);
-      //         });
-      //
-      //         let countCamera = await connection.v2.listEntities().then((response) => {
-      //             let count = response.results.length;
-      //             return count;
-      //           });
-      //
-      //         const totalPages =  Math.ceil( countCamera / perPage );
-      //
-      //         {/*pagination HTML*/}
-      //
-      //       }else if(actualPage > totalPages || actualPage <= 0 || isNaN(actualPage)){
-      //
-      //         {/*error*/}
-      //       }
-      //
-      //     });
-        //
-        //   const paginationBox =  <div className="bar-bottom">
-        //                           <div className="pagination">
-        //                             {/*$buttonPREV*/}
-        //                               <ul>
-        //                                 {/*firstPage*/}{/*pages*/}{/*lastPage*/}
-        //                               </ul>
-        //                             {/*$buttonNEXT*/}
-        //                           </div>
-        //                         </div>;
-        // }
-        //
-        // generatePagination = (activatepagination, totalPages, actualPage, prevPage, nextPage) => {
-        //   var disabledPrevPage;
-        //   var disabledNextPage;
-        //   var active;
-        //   var pages = [];
-        //
-        //   if (activatepagination) {
-        //
-        //     if (prevPage >= 1){
-        //        disabledPrevPage = ".";
-        //     }else{
-        //        disabledPrevPage = "disable_next_or_prev";
-        //     }
-        //
-        //     var $buttonPREV = $("<a className='btn_pagination btn_pagination-left "+ disabledPrevPage +"' href='/camera/"+ prevPage +"'> ◄ </a>");
-        //
-        //
-        //       if (totalPages <= 4){
-        //
-        //       }else if (actualPage > 2){
-        //         var firstPage = $("<li><a className='first numb' href='/camera/1' > 1 </a></li>");
-        //
-        //         if (actualPage > 3){
-        //          var dotsLeft = $("<li><a className='dots'>...</a></li>");
-        //         }
-        //       }
-        //
-        //
-        //       if (actualPage == totalPages){
-        //         prevPage = prevPage - 2;
-        //
-        //       }else if (actualPage == totalPages - 1){
-        //         prevPage = prevPage - 1;
-        //       }
-        //
-        //
-        //       if (actualPage == 1){
-        //         nextPage= nextPage + 2;
-        //
-        //       }else if (actualPage == 2){
-        //         nextPage= nextPage + 1;
-        //       }
-        //
-        //
-        //       for (var i = prevPage; i <= nextPage; ++i) {
-        //
-        //         if (i > totalPages){
-        //           continue
-        //         }
-        //         if (i == 0){
-        //            i= i + 1
-        //         }
-        //         if (actualPage == i){
-        //           active = "active";
-        //         }else{
-        //           active = "";
-        //         }
-        //         if (i >= 1){
-        //           pages = pages.push($("<li><a className='numb volar "+ active +"' href='camera/"+ i +"''>"+ i +"</a></li>"));
-        //         }
-        //       }
-        //
-        //
-        //
-        //       if (totalPages <= 4){
-        //
-        //       }else if (actualPage < totalPages - 1){
-        //         if (actualPage < totalPages - 2){
-        //           var dotsRight = $("<li><a className='dots'> ...</a></li>");
-        //         }
-        //         var lastPage = $("<li><a className='last numb' href='/camera/" + totalPages +"'> totalPages </a></li>");
-        //       }
-        //
-        //
-        //       if (actualPage + 1 <= totalPages){
-        //          disabledNextPage = ".";
-        //       }else{
-        //          disabledNextPage = "disable_next_or_prev";
-        //       }
-        //
-        //
-        //     var $buttonNEXT = $("<a className='btn_pagination btn_pagination-right"+ disabledNextPage +"' href='/camera/"+ (actualPage + 1) +"'> ►</a>");
-        //
-        //   }
-        // }
+    //
+    //   // connection.v2.listEntities({ order: [[ "type", "DESC"  ]], offset: offset, limit: perPage}).then(async(response) => {
+    //   //       if (response.results[0]) {
+    //   //
+    //   //         response.results.forEach((entity) => {
+    //   //             rooms.push(entity);
+    //   //         });
+    //   //
+    //   //         let countCamera = await connection.v2.listEntities().then((response) => {
+    //   //             let count = response.results.length;
+    //   //             return count;
+    //   //           });
+    //   //
+    //   //         const totalPages =  Math.ceil( countCamera / perPage );
+    //   //
+    //   //         {/*pagination HTML*/}
+    //   //
+    //   //       }else if(actualPage > totalPages || actualPage <= 0 || isNaN(actualPage)){
+    //   //
+    //   //         {/*error*/}
+    //   //       }
+    //   //
+    //   //     });
+    //
+    //       const paginationBox =  <div className="bar-bottom">
+    //                               <div className="pagination">
+    //                                 {/*$buttonPREV*/}
+    //                                   <ul>
+    //                                     {/*firstPage*/}{/*pages*/}{/*lastPage*/}
+    //                                   </ul>
+    //                                 {/*$buttonNEXT*/}
+    //                               </div>
+    //                             </div>;
+    //     }
+    //
+    //     generatePagination = (activatepagination, totalPages, actualPage, prevPage, nextPage) => {
+    //       var disabledPrevPage;
+    //       var disabledNextPage;
+    //       var active;
+    //       var pages = [];
+    //
+    //       if (activatepagination) {
+    //
+    //         if (prevPage >= 1){
+    //            disabledPrevPage = ".";
+    //         }else{
+    //            disabledPrevPage = "disable_next_or_prev";
+    //         }
+    //
+    //         var $buttonPREV = $("<a className='btn_pagination btn_pagination-left "+ disabledPrevPage +"' href='/camera/"+ prevPage +"'> ◄ </a>");
+    //
+    //
+    //           if (totalPages <= 4){
+    //
+    //           }else if (actualPage > 2){
+    //             var firstPage = $("<li><a className='first numb' href='/camera/1' > 1 </a></li>");
+    //
+    //             if (actualPage > 3){
+    //              var dotsLeft = $("<li><a className='dots'>...</a></li>");
+    //             }
+    //           }
+    //
+    //
+    //           if (actualPage == totalPages){
+    //             prevPage = prevPage - 2;
+    //
+    //           }else if (actualPage == totalPages - 1){
+    //             prevPage = prevPage - 1;
+    //           }
+    //
+    //
+    //           if (actualPage == 1){
+    //             nextPage= nextPage + 2;
+    //
+    //           }else if (actualPage == 2){
+    //             nextPage= nextPage + 1;
+    //           }
+    //
+    //
+    //           for (var i = prevPage; i <= nextPage; ++i) {
+    //
+    //             if (i > totalPages){
+    //               continue
+    //             }
+    //             if (i == 0){
+    //                i= i + 1
+    //             }
+    //             if (actualPage == i){
+    //               active = "active";
+    //             }else{
+    //               active = "";
+    //             }
+    //             if (i >= 1){
+    //               pages = pages.push($("<li><a className='numb volar "+ active +"' href='camera/"+ i +"''>"+ i +"</a></li>"));
+    //             }
+    //           }
+    //
+    //
+    //
+    //           if (totalPages <= 4){
+    //
+    //           }else if (actualPage < totalPages - 1){
+    //             if (actualPage < totalPages - 2){
+    //               var dotsRight = $("<li><a className='dots'> ...</a></li>");
+    //             }
+    //             var lastPage = $("<li><a className='last numb' href='/camera/" + totalPages +"'> totalPages </a></li>");
+    //           }
+    //
+    //
+    //           if (actualPage + 1 <= totalPages){
+    //              disabledNextPage = ".";
+    //           }else{
+    //              disabledNextPage = "disable_next_or_prev";
+    //           }
+    //
+    //
+    //         var $buttonNEXT = $("<a className='btn_pagination btn_pagination-right"+ disabledNextPage +"' href='/camera/"+ (actualPage + 1) +"'> ►</a>");
+    //
+    //       }
+    //     }
 
 
   render(){
