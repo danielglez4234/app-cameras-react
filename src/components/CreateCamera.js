@@ -169,12 +169,12 @@ class CreateCamera extends Component {
               <img src={ groupIcon } alt="group" className="iconInput iconInput-group" />
               <span className="input-label-span input-label-group">Group</span>
             </label>
-            <dl className="dropdown">
-                <dt id="groupCamera">
-                <a className="toRotateTheArrow" href="#">
-                  <span className="hida select-dropdowm">Select</span>
-                  <img src={ arrowDown } alt="arrow down" className="iconInput iconInput-arrowDown" />
-                </a>
+            <dl id="groupCamera" className="dropdown">
+                <dt>
+                  <a className="toRotateTheArrow" href="#">
+                    <span className="hida select-dropdowm">Select</span>
+                    <img src={ arrowDown } alt="arrow down" className="iconInput iconInput-arrowDown" />
+                  </a>
                 </dt>
                 <dd>
                     <div className="mutliSelect">
@@ -229,7 +229,7 @@ class CreateCamera extends Component {
           </div>
           <br/>
 
-        <div className="credentials-section">
+        <div id="cred" className="credentials-section">
           <div id="userForcamera" className="cont-input-user">
             <label htmlFor="userCamera" className="label-input">
               <img src={ userIcon } alt="user" className="iconInput iconInput-user" />
@@ -256,7 +256,7 @@ class CreateCamera extends Component {
           </div>
         </div>
 
-          <div className="cont-input displayBlock">
+          <div id="descriptionCamera" className="cont-input displayBlock">
             <span className="input-label-span input-label-description">Description</span>
             <label htmlFor="descriptionCamera" className="label-input label-input-description">
               <textarea id="descriptionCamera" name="descriptionCamera" className="description-input-textarea"></textarea>
@@ -311,7 +311,14 @@ class CreateCamera extends Component {
   checkCredentials = () => {
        if ($('#checkCreandentials:checkbox:checked').length > 0) {
          $('.credentials-section').addClass('show-credential-section');
-       }else {
+       }else if($('.credentials-section').hasClass('expand-credentials-section-for-errors')){
+         $('.credentials-section').removeClass('expand-credentials-section-for-errors');
+         $('.credentials-section').removeClass('show-credential-section');
+             $('.error-user').hide();
+             $('.error-password').hide();
+             $('.error-confirm-password').hide();
+       }
+       else {
          $('.credentials-section').removeClass('show-credential-section');
        }
   }

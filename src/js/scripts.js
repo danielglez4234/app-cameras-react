@@ -19,42 +19,68 @@ setTimeout(function(){
 
 // --------------------------------------------- ERROR HTML Messages -------------------------------------------------------------------------------------
 
-var $errorIdCamera              = $('<div class="contein_error_message margin-top-15px"><div class="error_message">The Id-Camera cannot contain less than 3 to 10 characters and any special character \'$%&\'.</div></div>');
+var $errorIdCamera              = $('<div class="contein_error_message contein_error_message-id margin-top-15px"><div class="error_message">Length range from 3 to 10, no spaces and scpecial characters.</div></div>');
+var $errorIdCameraEmpty         = $('<div class="contein_error_message contein_error_message-id margin-top-15px"><div class="error_message">The ID field cannot be empty!.</div></div>');
+
   $('.idCamera2').after($errorIdCamera);
+  $('#idCamera').after($errorIdCameraEmpty)
+  
+                .after($errorIdCamera);
   $($errorIdCamera).hide();
+  $($errorIdCameraEmpty).hide();
+
 
 // const $error = $('<div class="contein_error_message"><div class="error_message">The Email field cannot be Empty</div></div>');
-var $errorName                  = $('<div class="contein_error_message margin-top-15px"><div class="error_message">The Name cannot contain less than 3 to 40 characters and any special character \'$%&\'.</div></div>');
-  $($errorName).hide();
-// .after($errorEmail_2);
-// $($errorEmail_2).hide();
+var $errorName                  = $('<div class="contein_error_message margin-top-15px"><div class="error_message">Length range from 3 to 40, no special character allowed.</div></div>');
+var $errorNameEmpty             = $('<div class="contein_error_message margin-top-15px"><div class="error_message">The Name field cannot be empty!.</div></div>');
+$('#nameCamera').after($errorName)
+                .after($errorNameEmpty);;
+$($errorName).hide();
+$($errorNameEmpty).hide();
 
-var $errorGroup                 = $('<div class="contein_error_message margin-top-15px"><div class="error_message">You have to check at least one Group.</div></div>');
-  $('#groupCamera').after($errorGroup);
-  $($errorGroup).hide();
 
-var $errorUrl = $('<div class="contein_error_message margin-top-15px"><div class="error_message">Please provide a valid URL. example: http://... or https://...</div></div>');
-  $($errorUrl).hide();
+var $errorGroup                 = $('<div class="contein_error_message"><div class="error_message-group">You have to check at least one Group.</div></div>');
+$('#groupCamera').after($errorGroup);
+$($errorGroup).hide();
+
+var $errorUrl                   = $('<div class="contein_error_message margin-top-15px"><div class="error_message">Please provide a valid URL. example: http://... or https://...</div></div>');
+var $errorUrlEmpty              = $('<div class="contein_error_message margin-top-15px"><div class="error_message">The URL field cannot be empty!.</div></div>');
 var $errorCheckCredentialsInUrl = $('<div class="contein_error_message margin-top-15px"><div class="error_message">A "@" has been detected, this may mean that you have put a username and password in the URL, if the url requires credentials please activate the credentials field.</div></div>');
-  $($errorCheckCredentialsInUrl).hide();
+$('#urlCamera').after($errorCheckCredentialsInUrl)
+               .after($errorUrl)
+               .after($errorUrlEmpty);
+$($errorUrl).hide();
+$($errorUrlEmpty).hide();
+$($errorCheckCredentialsInUrl).hide();
 
-var $errorUser                  = $('<div class="contein_error_message margin-top-15px"><div class="error_message">This field cannot be empty or contain special characters.</div></div>');
-  $($errorUser).hide();
 
-var $errorPwd                   = $('<div class="contein_error_message"><div class="error_message">The password cannot have spaces and must have at least a minimum length of 3.</div></div>');
-var $errorConfirmPwd            = $('<div class="contein_error_message"><div class="error_message">The passwords don\'t match</div></div>');
-  $($errorPwd).hide();
-  $($errorConfirmPwd).hide();
+var $errorUserEmpty             = $('<div class="contein_error_message margin-top-15px"><div class="error_message">The User field cannot be empty!.</div></div>');
+var $errorUser                  = $('<div class="contein_error_message contein_error_message-user error-user margin-top-15px"><div class="error_message">The User cannot contain less than 3 to 50 characters and any special character</div></div>');
+$('#userCamera').after($errorUser)
+                .after($errorUserEmpty);
+$($errorUser).hide();
+$($errorUserEmpty).hide();
 
-var $errorDescription           = $('<div class="contein_error_message margin-top-15px"><div class="error_message">The Description field cannot be Empty! provide at least a short description.</div></div>');
-  $($errorDescription).hide();
+
+var $errorPwd                   = $('<div class="contein_error_message error-password margin-top-15px"><div class="error_message">The password cannot have spaces and must have at least a minimum length of 3.</div></div>');
+var $errorConfirmPwd            = $('<div class="contein_error_message error-confirm-password margin-top-15px"><div class="error_message">The passwords don\'t match</div></div>');
+$('#pwdCamera').after($errorPwd);
+$('#confirmPwdCamera').after($errorConfirmPwd);
+$($errorPwd).hide();
+$($errorConfirmPwd).hide();
+
+var $errorDescription           = $('<div class="contein_error_message-description"><div class="error_message-group error_message-desc">The Description field cannot be Empty! provide at least a short description.</div></div>');
+var $errorDescriptionEmpty      = $('<div class="contein_error_message-description"><div class="error_message-group error_message-desc">The Description field cannot be Empty! provide at least a short description.</div></div>');
+$('#descriptionCamera').after($errorDescription)
+                       .after($errorDescriptionEmpty);
+$($errorDescription).hide();
+$($errorDescriptionEmpty).hide();
 
 
 var $submitError                = $('<div class="error_message_submit">An error has occurred, check that all fields are correctly filled.</div>');
-  $($submitError).hide();
+$($submitError).hide();
 
-var $errorCanNotBeEmpty         = $('<div class="contein_error_message"><div class="error_message">This field cannot be empty!.</div></div>');
-  $($errorCanNotBeEmpty).hide();
+
 
 
 // --------------------------------------------- END OF ERROR HTML Messages -------------------------------------------------------------------------------------
@@ -109,22 +135,69 @@ var pwd              = $('#pwdCamera').val();
       $('#confirmPwdCamera').addClass('confirmed-red').removeClass('confirmed-green');
     }
 });
+
+$('#idCamera').on('input', function(){
+  const nameText     = $('#idCamera').val();
+  const nameInput    = $('#idCamera');
+  const errorText    = $errorIdCamera;
+  const errorEmpty   = $errorIdCameraEmpty;
+
+  validate(nameText, regex.id, nameInput, errorText, errorEmpty);
+});
+
+$('#nameCamera').on('input', function(){
+  const nameText     = $('#nameCamera').val();
+  const nameInput    = $('#nameCamera');
+  const errorText    = $errorName;
+  const errorEmpty   = $errorNameEmpty;
+
+  validate(nameText, regex.name, nameInput, errorText, errorEmpty);
+});
+$('#descriptionCamera').on('input', function(){
+  const nameText     = $('#descriptionCamera').val();
+  const nameInput    = $('#descriptionCamera');
+  const errorText    = $errorDescription;
+  const errorEmpty   = $errorDescriptionEmpty;
+
+  validate(nameText, regex.description, nameInput, errorText, errorEmpty);
+});
 // ----------------------------------------------------------------------------------------------------------------------------------
 
 
 
-function generalValidate(validateText, regexType, inputId_Name){
+function generalValidate(validateText, regexType, inputId_Name, errortext){
   const testingField     = regexType.test(validateText);
 
   if (inputId_Name.val() === '') {
-
+    $(inputId_Name).after(errortext);
     var empty = 0;
     return empty
   }else {
-
+    $(inputId_Name).after(errortext);
     return testingField;
   }
  //is returned for use when the 'register' button is pressed
+}
+
+
+function validate(validateText, regexType, inputId_Name, errortext, errorEmpty){
+  const testingField = regexType.test(validateText);
+  let validated = false;
+  if (!testingField) { //if it doesn't match
+    $(errortext).fadeIn(1);
+    $(errorEmpty).fadeOut(1);
+    // $('#mail').attr('style', '');
+  }else {
+    $(errortext).fadeOut(1);
+    $(errorEmpty).fadeOut(1);
+    // $('#mail').attr('style', 'border-color:#e2e277');
+  }
+  if(validateText === ''){ // if the email input in empty
+    // $('#mail').attr('style', '');
+    $(errorEmpty).fadeIn(1);
+    $(errortext).fadeOut(1);
+  }
+  return testingField; //is returned for use when the 'register' button is pressed
 }
 
 
@@ -141,18 +214,18 @@ var testingField;
     }
 }
 
-function validateURL(validateText, regexURL, regexCredentials, inputId_Name){
+function validateURL(validateText, regexURL, regexCredentials, inputId_Name, errortext){
 
   var testingFieldURL          = regexURL.test(validateText);
   var testingFieldCredentials  = regexCredentials.test(validateText);
 
   if (!testingFieldCredentials) {
     if (inputId_Name.val() === '') {
-
+      $(errortext).fadeIn(100);
       var empty;
       return empty
     }else {
-
+      $(errortext).fadeIn(100);
       return testingFieldURL;
     }
   }else {
@@ -162,10 +235,6 @@ function validateURL(validateText, regexURL, regexCredentials, inputId_Name){
   }
  //is returned for use when the 'register' button is pressed
 }
-
-
-
-
 
 
 
@@ -186,6 +255,7 @@ $('.formCameras').on('submit', function(event){
   var validUser            = true;
   var validPwd             = true;
   var credentialsCheck     = $('#checkCreandentials:checkbox:checked');
+
   if (credentialsCheck.length > 0) {
     validUser              = generalValidate($('#userCamera').val(), regex.user, $('#userCamera'));
     validPwd               = generalValidate($('#pwdCamera').val(), regex.pwd, $('#pwdCamera'));
@@ -201,50 +271,90 @@ $('.formCameras').on('submit', function(event){
 
     if (credentialsCheck.length > 0) { // if credentials is check validate user an password
       if (!validUser) {
-        $('#userCamera').after($errorUser);
-        $errorUser.fadeIn(200)
-      }else{ $errorUser.hide() }
+        $errorUser.fadeIn(1);
 
-      if (!validPwd) {
-        $('#pwdCamera').after($errorPwd);
-        $errorPwd.fadeIn(200)
-      }else{ $errorPwd.hide() }
+          if ($('#cred').hasClass('credentials-update-section')) {
+            if($('#checkChangePassword:checkbox:checked').length === 1){
+              $('.credentials-update-section').addClass('expand-update-user-credentials-section-for-errors');
+            }
+          }else{
+            $('.credentials-section').addClass('expand-credentials-section-for-errors');
+          }
 
-      const macthPwd        = $('#pwdCamera').val();
-      const macthConfirmPwd = $('#confirmPwdCamera').val();
-        if (macthPwd !== macthConfirmPwd) {
-          $('#confirmPwdCamera').after($errorConfirmPwd);
-          $errorConfirmPwd.fadeIn(200)
-        }else{ $errorConfirmPwd.hide() }
+      }else{
+        $errorUser.hide();
+        $('.credentials-section').removeClass('expand-credentials-section-for-errors');
+      }
+
+      if ($('#checkChangePassword:checkbox:checked').length === 1) {
+
+        if (!validPwd) {
+          $errorPwd.fadeIn(1);
+
+        }else{
+          $errorPwd.hide();
+        }
+
+        const macthPwd        = $('#pwdCamera').val();
+        const macthConfirmPwd = $('#confirmPwdCamera').val();
+
+          if (macthPwd !== macthConfirmPwd) {
+            $errorConfirmPwd.fadeIn(1);
+
+          }else{
+            $errorConfirmPwd.hide()
+          }
+
+      }else if ($('#cred').hasClass('credentials-update-section')) {
+
+        if (!validPwd) {
+          $errorPwd.fadeIn(1);
+
+        }else{
+          $errorPwd.hide();
+        }
+
+        const macthPwd        = $('#pwdCamera').val();
+        const macthConfirmPwd = $('#confirmPwdCamera').val();
+
+          if (macthPwd !== macthConfirmPwd) {
+            $errorConfirmPwd.fadeIn(1);
+
+          }else{
+            $errorConfirmPwd.hide()
+          }
+      }
+
     }
 
     if (!validIdCamera) {
-      $('#idCamera').after($errorIdCamera);
-      $errorIdCamera.fadeIn(200);
+      $errorIdCamera.fadeIn(1);
+
     }else{ $errorIdCamera.hide() }
 
     if (!validName) {
-      $('#nameCamera').after($errorName);
-      $errorName.fadeIn(200)
+      $errorName.fadeIn(1)
+
     }else{ $errorName.hide() }
 
     if (!validGroup) {
-      $('#groupCamera').after($errorGroup);
-      $errorGroup.fadeIn(200)
+      $errorGroup.fadeIn(1)
     }else{ $errorGroup.hide() }
 
     if (validUrl === 1) {
-      $('#urlCamera').after($errorCheckCredentialsInUrl);
-      $errorCheckCredentialsInUrl.fadeIn(200);
+      $errorCheckCredentialsInUrl.fadeIn(1);
       $errorUrl.hide();
-    }else if (!validUrl) {
+
+    }else{ $errorCheckCredentialsInUrl.hide(); }
+    if (!validUrl) {
       $('#urlCamera').after($errorUrl);
-      $errorUrl.fadeIn(200)
-    }else{ $errorUrl.hide(); $errorCheckCredentialsInUrl.hide(); }
+      $errorUrl.fadeIn(1)
+
+    }else{ $errorUrl.hide(); }
 
     if (!validDescription) {
-      $('#descriptionCamera').after($errorDescription);
-      $errorDescription.fadeIn(200)
+      $errorDescription.fadeIn(1)
+
     }else{ $errorDescription.hide() }
 
   }

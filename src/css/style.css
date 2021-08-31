@@ -1115,13 +1115,14 @@ height: 100%;
   margin-bottom: 10px;
 }
   .cont-input-idCam{
-    margin-bottom: 20px;
+    margin-bottom: 30px;
   }
   .cont-input-name {
     margin-left:40px;
   }
   .cont-input-group {
     margin-top:20px;
+    margin-bottom: 15px;
   }
   .cont-input-url {
     margin-bottom:40px;
@@ -1138,8 +1139,12 @@ height: 100%;
     margin-bottom: 30px;
     margin-left:40px;
   }
+        .cont-update-input-pwd{
+          margin-top: 19px;
+        }
+        .cont-update-input-confirm-pwd{
 
-
+        }
 
 .iconInput {
   position: relative;
@@ -1310,7 +1315,6 @@ input:focus, textarea:focus, select:focus{
 
 .credentials-section{
   position: relative;
-  /* display:none; */
   background-color: #e3e7ea;
   height: 0px;
   margin: 0px -51px 40px -51px;
@@ -1319,8 +1323,18 @@ input:focus, textarea:focus, select:focus{
   overflow-y: hidden;
   box-shadow: inset 0px 4px 5px -4px rgba(50, 50, 50, 0.55), inset 0px -4px 5px -4px rgba(50, 50, 50, 0.55);
   transition: all .2s linear;
-  /* animation: slideDownComlplete 1s; */
-  /* transition: linear .3s; */
+}
+
+.credentials-update-section{
+  position: relative;
+  background-color: #e3e7ea;
+  height: 0px;
+  margin: 0px -51px 40px -51px;
+  padding-left: 51px;
+  padding-right: 51px;
+  overflow-y: hidden;
+  box-shadow: inset 0px 4px 5px -4px rgba(50, 50, 50, 0.55), inset 0px -4px 5px -4px rgba(50, 50, 50, 0.55);
+  transition: all .2s linear;
 }
 
 
@@ -1330,21 +1344,45 @@ input:focus, textarea:focus, select:focus{
     /* display: block !important; */
   }
 
+  .show-update-credential-section{
+    height: 147px;
+    transition: all .2s linear;
+  }
+
 .change-password-section{
-  display:none;
+  height: 0px;
   background-color: #f1f2f3;
   margin-left: -51px;
   margin-right: -51px;
   padding-left: 51px;
-  padding-top: 54px;
   box-shadow: inset 0px 4px 5px -4px rgba(50, 50, 50, 0.55), inset 0px -4px 5px -4px rgba(50, 50, 50, 0.55);
+  transition: all .2s linear;
+  opacity:0;
+}
+.expand-update-credential-section{
+  height: 304px;
+  transition: all .2s linear;
 }
     .show-password-section{
-      display: block !important;
+      height: 178px;
+      padding-top:35px;
+      transition: all .2s linear;
+      opacity:1;
     }
 
 .confirmed-green{ border:lightgreen 1px solid !important; }
 .confirmed-red{ border: red 1px solid !important; }
+
+
+      /* .expand-credentials-section-for-errors{
+        height: 338px !important;
+      } */
+          .expand-update-user-credentials-section-for-errors{
+            height: 355px !important;
+          }
+          /* .expand-update-pwd-credentials-section-for-errors{
+          height: 180px !important;
+          } */
 
 /*----------------------------------------------------------------------------------------------------------------------------------------*/
 .label-input-select{
@@ -1433,7 +1471,7 @@ input:focus, textarea:focus, select:focus{
   list-style: none;
   height: 150px;
   overflow: auto;
-  z-index: 2;
+  z-index: 6;
 }
 
 .dropdown span.value {
@@ -1772,8 +1810,21 @@ input:focus, textarea:focus, select:focus{
 
 .contein_error_message{
   position: relative;
-  height: 60px;
-}.error_message{
+}
+        .contein_error_message-id{
+          margin-bottom: 45px;
+        }
+        .contein_error_message-user{
+          height: 36px;
+        }
+        .contein_error_message-description{
+          margin-left: 595px;
+          margin-top: -94px;
+          position: absolute;
+          width: 262px;
+        }
+
+.error_message{
   color: white;
   background-color: #F65656;
   text-align: center;
@@ -1781,10 +1832,12 @@ input:focus, textarea:focus, select:focus{
   position: absolute;
   margin-top: -5px;
   font-family: "Comfortaa-Light";
-  font-size: 13px;
-}.error_message:after {
+  font-size: 12px;
+  z-index: 5;
+}
+    .error_message:after {
       bottom: 100%;
-      left: 7%;
+      left: 26px;
       border: solid transparent;
       content: " ";
       height: 0;
@@ -1794,7 +1847,40 @@ input:focus, textarea:focus, select:focus{
       border-bottom-color: #F65656;
       border-width: 10px;
       margin-left: -10px;
+        }
+
+
+    .error_message-group{
+      width: 273px;
+      margin-left: 10px;
+      color: white;
+      background-color: #F65656;
+      text-align: center;
+      padding: 10px 10px;
+      position: absolute;
+      margin-top: 5px;
+      font-family: "Comfortaa-Light";
+      font-size: 12px;
+      z-index: 1;
     }
+    .error_message-group:after {
+        bottom: 9px;
+        left: -10px;
+        border: solid transparent;
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+        border-right-color: #F65656;
+        border-width: 10px;
+        margin-left: -10px;
+        }
+
+.error_message-desc:after{
+  bottom: 19px;
+}
+
 .error_message_submit{
   color: white;
   background-color: #F65656;

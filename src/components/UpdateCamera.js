@@ -14,6 +14,8 @@ import closeGroupIcon        from '../img/closeGroup.png';
 
 import updateMark            from '../img/updateMark.png';
 
+const {REACT_APP_SERVICES_IP} = process.env;
+
 class UpdateCamera extends Component {
 
   constructor() {
@@ -103,7 +105,7 @@ class UpdateCamera extends Component {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
     };
-    axios.get("http://161.72.123.211:1026/v2/entities/"+ id,  { headers: options	})
+    axios.get(`http://${REACT_APP_SERVICES_IP}:1026/v2/entities/${id}`,  { headers: options	})
       .then(response => {
         this.setState({ //save the current state of the data
           camera: response.data,
@@ -127,6 +129,7 @@ class UpdateCamera extends Component {
                       <i className="fa fa-times fa-2x exit-button "></i>
                     </a>
                   </div>;
+
     if (!this.state.loadingUpdate) {
       var goups       = this.state.camera.group.value;
       var allGroups   = ["Interior-GTC", "Exterior-GTC","Offices","Dome","Corridor","Others"];
@@ -177,7 +180,7 @@ class UpdateCamera extends Component {
             <img src={ groupIcon } alt="group" className="iconInput iconInput-group" />
             <span className="input-label-span input-label-group">Group</span>
           </label>
-          <dl className="dropdown">
+          <dl id="groupCamera" className="dropdown">
               <dt>
               <a className="toRotateTheArrow" href="#">
                 <span className="hida select-dropdowm">Select</span>
@@ -213,7 +216,7 @@ class UpdateCamera extends Component {
           </label>
         </div>
         <br/>
-        <div className="credentials-section">
+        <div id="cred" className="credentials-update-section">
           <div id="userForcamera" className="cont-input-user displayInlineBlock">
             <label htmlFor="userCamera" className="label-input">
               <img src={ userIcon } alt="user" className="iconInput iconInput-user" />
@@ -231,7 +234,7 @@ class UpdateCamera extends Component {
           <br/>
 
           <div className="change-password-section">
-            <div id="pwdForCamera" className="cont-input-pwd displayInlineBlock">
+            <div id="pwdForCamera" className="cont-input-pwd cont-update-input-pwd displayInlineBlock">
               <label htmlFor="pwdCamera" className="label-input">
                 <img src={ pwdIcon } alt="pwd" className="iconInput iconInput-pwd" />
                 <span className="input-label-span input-label-pwd">Password</span>
@@ -239,7 +242,7 @@ class UpdateCamera extends Component {
               <input id="pwdCamera" type="password" name="pwdCamera" className="input-form" placeholder="Password..."/>
             </div>
 
-            <div id="confirmPwdForcamera" className="cont-input-confirm-pwd">
+            <div id="confirmPwdForcamera" className="cont-input-confirm-pwd cont-update-input-confirm-pwd">
               <label htmlFor="confirmPwdCamera" className="label-input">
                 <img src={ pwdIcon } alt="confirm-pwd" className="iconInput iconInput-confirm-pwd" />
                 <span className="input-label-span input-label-confirm-pwd">Confirm Password</span>
@@ -250,7 +253,7 @@ class UpdateCamera extends Component {
 
         </div>
 
-        <div className="cont-input displayBlock">
+        <div id="descriptionCamera" className="cont-input displayBlock">
           <span className="input-label-span input-label-description">Description</span>
           <label className="label-input label-input-description">
             <textarea defaultValue={this.state.camera.description.value} id="descriptionCamera" name="descriptionCamera" className="description-input-textarea"></textarea>
@@ -305,18 +308,34 @@ class UpdateCamera extends Component {
 
   checkCredentials = () => {
        if ($('#checkCreandentials:checkbox:checked').length > 0) {
-         $('.credentials-section').addClass('show-credential-section');
-       }else {
-         $('.credentials-section').removeClass('show-credential-section');
+         $('.credentials-update-section').addClass('show-update-credential-section');
+       }
+       else if($('.credentials-update-section').hasClass('expand-credentials-update-section-for-errors')){
+         $('.credentials-update-section').removeClass('expand-credentials-update-section-for-errors');
+         $('.credentials-update-section').removeClass('show-credential-section');
+             $('.error-user').hide();
+             $('.error-password').hide();
+             $('.error-confirm-password').hide();
+       }
+       else if ($('#checkCreandentials:checkbox:checked').length === 0 && $('#checkChangePassword:checkbox:checked').length > 0){
+         $('.change-password-section').removeClass('show-password-section');
+         $('.credentials-update-section').removeClass('expand-update-credential-section');
+
+         $('#checkChangePassword').prop("checked", false);
+         $('.credentials-update-section').removeClass('show-update-credential-section');
+       }
+       else {
+         $('.credentials-update-section').removeClass('show-update-credential-section');
        }
   }
   checkCangePassword = () =>{
     if ($('#checkChangePassword:checkbox:checked').length > 0) {
-      console.log('hrlo');
       $('.change-password-section').addClass('show-password-section');
-    }else {
-      console.log('hrlo');
+      $('.credentials-update-section').addClass('expand-update-credential-section');
+    }
+    else {
       $('.change-password-section').removeClass('show-password-section');
+      $('.credentials-update-section').removeClass('expand-update-credential-section');
     }
   }
 }

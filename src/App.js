@@ -24,7 +24,7 @@ import HandleUpdateCamera  from './components/HandleUpdateCamera';
 import HandleDeleteCamera  from './components/HandleDeleteCamera';
 // import AccumulateNotifications from './components/AccumulateNotifications';
 
-const {REACT_APP_SERVICES_IP} = process.env;
+const {REACT_APP_SERVICES_IP, REACT_APP_TURN_USERNAME, REACT_APP_TURN_PASSWORD} = process.env;
 
 var connection  = new WebSocket(`wss://${REACT_APP_SERVICES_IP}:8443/kurento`);
 const mapKms    = new Map();
@@ -48,8 +48,8 @@ class App extends Component {
           },
           turn : {
             "urls" : `turn:${REACT_APP_SERVICES_IP}:3478`,
-            "username" : "guest",
-            "credential" : "12345"
+            "username" : REACT_APP_TURN_USERNAME,
+            "credential" : REACT_APP_TURN_PASSWORD
           }
       }
     };
