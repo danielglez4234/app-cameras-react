@@ -134,6 +134,7 @@ margin-top: 100px;
 #style-1::-webkit-scrollbar{
   width: 5px;
   background-color: #F7F7F7;
+
 }
 
 #style-1::-webkit-scrollbar-thumb{
@@ -777,8 +778,8 @@ height: 100%;
   display: none;
   background-color: #495057;
   position: absolute;
-  height: 100%;
-  width: 100%;
+  height: 99%;
+  width: 99%;
   z-index: 6;
   opacity: .1;
   margin: -10px 0px 0px -98px;
@@ -1134,7 +1135,7 @@ height: 100%;
   }
   .cont-input-user{
     margin-bottom:30px;
-    margin-top: 43px
+    margin-top: 60px
   }
   .cont-input-pwd{
     display:inline-block;
@@ -1344,7 +1345,7 @@ input:focus, textarea:focus, select:focus{
 
 
   .show-credential-section{
-    height: 208px;
+    height: 248px;
     transition: all .2s linear;
     /* display: block !important; */
   }
@@ -1369,7 +1370,7 @@ input:focus, textarea:focus, select:focus{
   transition: all .2s linear;
 }
     .show-password-section{
-      height: 178px;
+      height: 162px;
       padding-top:35px;
       transition: all .2s linear;
       opacity:1;
@@ -1382,9 +1383,9 @@ input:focus, textarea:focus, select:focus{
       /* .expand-credentials-section-for-errors{
         height: 338px !important;
       } */
-          .expand-update-user-credentials-section-for-errors{
+          /* .expand-update-user-credentials-section-for-errors{
             height: 355px !important;
-          }
+          } */
           /* .expand-update-pwd-credentials-section-for-errors{
           height: 180px !important;
           } */
@@ -1416,7 +1417,7 @@ input:focus, textarea:focus, select:focus{
 
 
 
-.dropdown dt a {
+.dropdown dt div {
   display: block;
   color: #3a3e44;
   min-height: 25px;
@@ -1434,6 +1435,7 @@ input:focus, textarea:focus, select:focus{
   padding-top: 4px;
   font-size:14px;
   font-family: "Comfortaa-Bold";
+  cursor:pointer;
 }
 
 .select-dropdowm{
@@ -1449,7 +1451,7 @@ input:focus, textarea:focus, select:focus{
   width:488px;
   height: 58px;
 }
-.dropdown dt a span,
+.dropdown dt div span,
 .multiSel span {
   display: inline-block;
   padding: 5px 10px 5px 4px;
@@ -1820,7 +1822,9 @@ input:focus, textarea:focus, select:focus{
           margin-bottom: 45px;
         }
         .contein_error_message-user{
-          height: 36px;
+          position: absolute;
+          margin-left: 450px;
+          top: 56px;
         }
         .contein_error_message-description{
           margin-left: 595px;

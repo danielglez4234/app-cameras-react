@@ -23,7 +23,7 @@ class UpdateCamera extends Component {
     this.state = {
       loadingUpdate: true,
       idNotFound: false,
-      // cameradataForTest:{id: "q", name:{value:"hola"}, group:{value:"interno"}, url:{value:{path:"zaza", user:"paco"}}, description:{value:"desc"}},
+      // cameradataForTest:{id: "q", name:{value:"hola"}, group:{value:"interno"}, url:{value:{path:"zaza"}}, user:{value:"interno"}, description:{value:"desc"}, kurentoConfig:{value:{"recorder": "true", "carDetection": "true"}}},
       camera: [],
       credentials: ""
     };
@@ -42,7 +42,7 @@ class UpdateCamera extends Component {
       $('.iconInput-arrowDown').toggleClass('rotate-arrow-groups');
     });
 
-    $(".dropdown dt a").on('click', function() {
+    $(".dropdown dt div").on('click', function() {
       $(".dropdown dd ul").slideToggle('fast');
     });
 
@@ -98,6 +98,11 @@ class UpdateCamera extends Component {
 
       });
     });
+  }
+
+  resetDropDownMenuGroup = () =>{
+    $('.group-options-box').remove();
+    this.dropDownMenuGroup();
   }
 
   getCameraById = (id) =>{
@@ -182,10 +187,10 @@ class UpdateCamera extends Component {
           </label>
           <dl id="groupCamera" className="dropdown">
               <dt>
-              <a className="toRotateTheArrow" href="#">
-                <span className="hida select-dropdowm">Select</span>
-                <img src={ arrowDown } alt="arrow down" className="iconInput iconInput-arrowDown" />
-              </a>
+                <div className="toRotateTheArrow">
+                  <span className="hida select-dropdowm">Select</span>
+                  <img src={ arrowDown } alt="arrow down" className="iconInput iconInput-arrowDown" />
+                </div>
               </dt>
               <dd>
                   <div className="mutliSelect">
@@ -250,28 +255,27 @@ class UpdateCamera extends Component {
               <input id="confirmPwdCamera" type="password" className="input-form" placeholder="Confirm Password..."/>
             </div>
           </div>
-
         </div>
 
         <div id="descriptionCamera" className="cont-input displayBlock">
           <span className="input-label-span input-label-description">Description</span>
-          <label className="label-input label-input-description">
-            <textarea defaultValue={this.state.camera.description.value} id="descriptionCamera" name="descriptionCamera" className="description-input-textarea"></textarea>
+          <label htmlFor="descriptionCamera-textarea" className="label-input label-input-description">
+            <textarea id="descriptionCamera-textarea" defaultValue={this.state.camera.description.value} name="descriptionCamera" className="description-input-textarea"></textarea>
           </label>
         </div>
 
         <br />
 
         <div className="cont-input displayInlineBlock">
-          <label className="omrs-input-underlined">
-            <input defaultChecked={this.state.camera.kurentoConfig.value.recorder} type="checkbox" name="recordImages" className="width-input-1 credentials-input" />
+          <label htmlFor="recordImages" className="omrs-input-underlined">
+            <input id="recordImages" defaultChecked={this.state.camera.kurentoConfig.value.recorder} type="checkbox" name="recordImages" className="width-input-1 credentials-input" />
             <span className="input-label-checkCredentials"> Record images </span>
           </label>
         </div>
         <br />
         <div className="cont-input displayInlineBlock">
-          <label className="omrs-input-underlined">
-            <input defaultChecked={this.state.camera.kurentoConfig.value.carDetection} type="checkbox" name="processImages" className="width-input-1 credentials-input" />
+          <label htmlFor="processImages" className="omrs-input-underlined">
+            <input id="processImages" defaultChecked={this.state.camera.kurentoConfig.value.carDetection} type="checkbox" name="processImages" className="width-input-1 credentials-input" />
             <span className="input-label-checkCredentials"> Process images </span>
           </label>
         </div>
@@ -291,7 +295,7 @@ class UpdateCamera extends Component {
               <span className="cancel"> Cancel </span>
           </a>
 
-          <button type="reset" className="btn-6 btn-6-reset">
+          <button onClick={() =>{this.resetDropDownMenuGroup()}} type="reset" className="btn-6 btn-6-reset">
             <i className="fa fa-reply fa-lg icon-FormButton-reset"></i>
             <span className="reset"> Reset </span>
           </button>
@@ -310,13 +314,6 @@ class UpdateCamera extends Component {
        if ($('#checkCreandentials:checkbox:checked').length > 0) {
          $('.credentials-update-section').addClass('show-update-credential-section');
        }
-       else if($('.credentials-update-section').hasClass('expand-credentials-update-section-for-errors')){
-         $('.credentials-update-section').removeClass('expand-credentials-update-section-for-errors');
-         $('.credentials-update-section').removeClass('show-credential-section');
-             $('.error-user').hide();
-             $('.error-password').hide();
-             $('.error-confirm-password').hide();
-       }
        else if ($('#checkCreandentials:checkbox:checked').length === 0 && $('#checkChangePassword:checkbox:checked').length > 0){
          $('.change-password-section').removeClass('show-password-section');
          $('.credentials-update-section').removeClass('expand-update-credential-section');
@@ -325,6 +322,9 @@ class UpdateCamera extends Component {
          $('.credentials-update-section').removeClass('show-update-credential-section');
        }
        else {
+         $('.error-user').hide();
+         $('.error-password').hide();
+         $('.error-confirm-password').hide();
          $('.credentials-update-section').removeClass('show-update-credential-section');
        }
   }

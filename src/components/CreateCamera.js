@@ -68,7 +68,7 @@ class CreateCamera extends Component {
       $('.iconInput-arrowDown').toggleClass('rotate-arrow-groups');
     });
 
-    $(".dropdown dt a").on('click', function() {
+    $(".dropdown dt div").on('click', function() {
       $(".dropdown dd ul").slideToggle('fast');
     });
 
@@ -95,8 +95,6 @@ class CreateCamera extends Component {
 
       } else {
         $('.group-options-box'+ title).remove();
-        // var ret = $(".hida");
-        // $('.dropdown dt a').append(ret);
       }
 
       $('.iconSpan-select' + title).on('click', function() {
@@ -171,10 +169,10 @@ class CreateCamera extends Component {
             </label>
             <dl id="groupCamera" className="dropdown">
                 <dt>
-                  <a className="toRotateTheArrow" href="#">
+                  <div className="toRotateTheArrow">
                     <span className="hida select-dropdowm">Select</span>
                     <img src={ arrowDown } alt="arrow down" className="iconInput iconInput-arrowDown" />
-                  </a>
+                  </div>
                 </dt>
                 <dd>
                     <div className="mutliSelect">
@@ -258,8 +256,8 @@ class CreateCamera extends Component {
 
           <div id="descriptionCamera" className="cont-input displayBlock">
             <span className="input-label-span input-label-description">Description</span>
-            <label htmlFor="descriptionCamera" className="label-input label-input-description">
-              <textarea id="descriptionCamera" name="descriptionCamera" className="description-input-textarea"></textarea>
+            <label htmlFor="descriptionCamera-textarea" className="label-input label-input-description">
+              <textarea id="descriptionCamera-textarea" name="descriptionCamera" className="description-input-textarea"></textarea>
             </label>
           </div>
 
@@ -311,14 +309,10 @@ class CreateCamera extends Component {
   checkCredentials = () => {
        if ($('#checkCreandentials:checkbox:checked').length > 0) {
          $('.credentials-section').addClass('show-credential-section');
-       }else if($('.credentials-section').hasClass('expand-credentials-section-for-errors')){
-         $('.credentials-section').removeClass('expand-credentials-section-for-errors');
-         $('.credentials-section').removeClass('show-credential-section');
-             $('.error-user').hide();
-             $('.error-password').hide();
-             $('.error-confirm-password').hide();
-       }
-       else {
+       }else {
+         $('.error-user').hide();
+         $('.error-password').hide();
+         $('.error-confirm-password').hide();
          $('.credentials-section').removeClass('show-credential-section');
        }
   }
