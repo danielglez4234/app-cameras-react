@@ -253,7 +253,24 @@ class App extends Component {
               </div> :
               <ContainerVideo />
             } />
-            <Route path="/list"           render={() => <ContainerVideo /> } />
+
+            <Route path="/list"           render={() =>
+              (this.state.connectionError) ? <ConnectionError /> :
+              (this.state.apiRestConnectioError) ?
+              <div className="container-cameras-box">
+                <div className="rep_prub_cont"><img className="loading connection_error" src={ apiNotResponding } alt="loading"/>
+                  <span className="message_connection_error api_error">APi REST server is not responding...</span>
+                </div>
+              </div> :
+              (this.state.loading) ?
+              <div className="container-cameras-box">
+                <div className="rep_prub_cont">
+                  <img className="loading connection_error" src={ loadingSrc } alt="loading"/>
+                </div>
+              </div> :
+              <ContainerVideo />
+            } />
+            
             <Route path="/create"         render={() => <CreateCamera /> } />
             <Route path="/add"            render={() => <HandleAddCamera /> } />
             <Route path="/update"         render={() => <UpdateCamera /> } />
