@@ -193,18 +193,14 @@ $('#userCamera').on('input', function(){
 
 function validate(validateText, regexType, inputId_Name, errortext, errorEmpty){
   const testingField = regexType.test(validateText);
-  let validated = false;
   if (!testingField) { //if it doesn't match
     $(errortext).fadeIn(1);
     $(errorEmpty).fadeOut(1);
-    // $('#mail').attr('style', '');
   }else {
     $(errortext).fadeOut(1);
     $(errorEmpty).fadeOut(1);
-    // $('#mail').attr('style', 'border-color:#e2e277');
   }
   if(validateText === ''){ // if the email input in empty
-    // $('#mail').attr('style', '');
     $(errorEmpty).fadeIn(1);
     $(errortext).fadeOut(1);
   }
@@ -229,30 +225,6 @@ function validateURL(validateText, regexURL, regexCredentials, inputId_Name, err
 
   var testingFieldURL          = regexURL.test(validateText);
   var testingFieldCredentials  = regexCredentials.test(validateText);
-
-  // if (!testingFieldCredentials) {
-  //   if (inputId_Name.val() === '') {
-  //     errorEmpty.fadeIn(1);
-  //     errortext.hide();
-  //     errorTextForCredentials.hide();
-  //
-  //     var empty;
-  //     return empty
-  //   }else {
-  //     errortext.fadeIn(1);
-  //     errorEmpty.hide();
-  //     errorTextForCredentials.hide();
-  //
-  //     return testingFieldURL;
-  //   }
-  // }else {
-  //   errorTextForCredentials.fadeIn(1);
-  //   errortext.hide();
-  //   errorEmpty.hide();
-  //   const detected_at = 1;
-  //   return detected_at;
-  // }
-
 
   if (!testingFieldURL) { //if it doesn't match
     $(errortext).fadeIn(1);
@@ -282,7 +254,7 @@ function validateURL(validateText, regexURL, regexCredentials, inputId_Name, err
 }
 
 
-
+//------------------------------------------------------------------------------------------------------------------
 
 
 

@@ -2,7 +2,6 @@ import React, { Component }   from 'react';
 import * as $                 from 'jquery';
 import axios                  from 'axios';
 
-import '../setProxy.js';
 
 import idIcon                 from '../img/id.png';
 import nameIcon               from '../img/name.png';
