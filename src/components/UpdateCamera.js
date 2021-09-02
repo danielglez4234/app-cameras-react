@@ -164,7 +164,7 @@ class UpdateCamera extends Component {
       { (this.state.loadingUpdate) ? <img className="loadingUpdate" src={ loadingSrc } alt="loading"/> :
 
       <div>
-
+        <div className="id_disabled"></div>
         <div className="cont-input cont-input-idCam displayInlineBlock">
           <label htmlFor="idCamera" className="label-input">
             <img src={ idIcon } alt="id-camera" className="iconInput iconInput-idcam" />
