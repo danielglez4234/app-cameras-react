@@ -583,6 +583,8 @@ height: 100%;
 
 .rep_prub-info-span{
   display: inline-block;
+  margin-right: 8px;
+  color: #9fa1a2;
 }
 .rep_prub-info-title{
   color: #f7f7f7;

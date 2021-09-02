@@ -180,7 +180,6 @@ $('#descriptionCamera').on('input', function(){
 
 $('#userCamera').on('input', function(){
   const nameText     = $('#userCamera').val();
-  console.log(nameText);
   const nameInput    = $('#userCamera');
   const errorText    = $errorUser;
   const errorEmpty   = $errorUserEmpty;

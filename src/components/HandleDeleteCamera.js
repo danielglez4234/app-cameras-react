@@ -25,8 +25,6 @@ class HandleDeleteCamera extends Component {
     const idCamera      = queryParams.get('id');
     const typeCam       = "Camera";
 
-    console.log(idCamera);
-
     const options = {
         'Accept': 'application/json',
         'Content-Type': 'application/json'

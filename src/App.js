@@ -270,7 +270,7 @@ class App extends Component {
               </div> :
               <ContainerVideo />
             } />
-            
+
             <Route path="/create"         render={() => <CreateCamera /> } />
             <Route path="/add"            render={() => <HandleAddCamera /> } />
             <Route path="/update"         render={() => <UpdateCamera /> } />

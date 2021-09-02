@@ -232,7 +232,7 @@ class UpdateCamera extends Component {
 
           <div className="cont-input checkboxUrlCredentials displayInlineBlock">
             <label htmlFor="checkChangePassword" className="omrs-input-underlined">
-              <input onClick={this.checkCangePassword} id="checkChangePassword" type="checkbox" name="credentialsCheck" className="width-input-1 credentials-input" />
+              <input onClick={this.checkChangePassword} id="checkChangePassword" type="checkbox" name="credentialsCheck" className="width-input-1 credentials-input" />
               <span className="input-label-checkCredentials"> Change Password </span>
             </label>
           </div>
@@ -328,7 +328,7 @@ class UpdateCamera extends Component {
          $('.credentials-update-section').removeClass('show-update-credential-section');
        }
   }
-  checkCangePassword = () =>{
+  checkChangePassword = () =>{
     if ($('#checkChangePassword:checkbox:checked').length > 0) {
       $('.change-password-section').addClass('show-password-section');
       $('.credentials-update-section').addClass('expand-update-credential-section');

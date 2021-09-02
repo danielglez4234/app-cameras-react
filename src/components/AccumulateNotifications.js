@@ -31,8 +31,7 @@ class AccumulateNotifications extends Component {
         });
       })
       .catch(error => {
-        console.log('Error fetching and parsing data on the ORION context brocker', error);
-        console.log('ghhjhhj', error);
+        console.log('Error fetching and parsing data on the ORION context brocker', error);        
       });
   }
 

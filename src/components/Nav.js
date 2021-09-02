@@ -105,7 +105,6 @@ class Nav extends Component {
   showEditDelteButtons = () =>{
 
     $(".deleteUpdate-cameraButtons-box").toggleClass('show-deleteUpdate-camerabuttons');
-    $('.moreInfoCameraButton').toggleClass('border-bottom-left-radius-0 border-top-left-radius-0');
   }
 
   hideNavBar = () => {

@@ -55,7 +55,7 @@ class CreateCamera extends Component {
     // window.removeEventListener('beforeunload', this.deleteSubscription);
     // window.addEventListener('beforeunload', this.deleteSubscription);
     // this.createSubscription();
-    this.deleteSubscription(this.state.subscriptionId);
+    // this.deleteSubscription(this.state.subscriptionId);
     setTimeout(function(){
       _this.dropDownMenuGroup();
     }, 1000);
@@ -110,7 +110,6 @@ class CreateCamera extends Component {
 
 
   deleteSubscription = () => {
-    console.log(this.state.subscriptionId + " dentro delete");
     axios.delete("http://161.72.123.211:1026/v2/subscriptions/" + this.state.subscriptionId, body, { headers: options	})
       .then(response => {
         console.log("subscription was reset successfully");
