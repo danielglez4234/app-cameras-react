@@ -1513,6 +1513,8 @@ input:focus, textarea:focus, select:focus{
 .group-options-box{
   display:inline-block;
   margin-top:1px;
+  background-color: #6cb1b3;
+  margin-left: 3px;
 }
 
 .iconSpan-select{
