@@ -5,7 +5,7 @@ const regex = {
   id:                  /^[A-Za-zÀ-ú0-9]{3,10}$/, //only letters, no spaces, 3 to 10 character, no special characters and no numbers allowed
   name:                /^[A-Za-zÀ-ú0-9\s]{3,40}$/, //letters and numbers with spaces, 3 to 40 characters and no special characters allowed
   group:               /^[A-Za-z0-9]{3,20}$/, //letters and numbers, 3 to 20 characters and no special characters allowed
-  url:                 /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\\+.~#?&=]*)/, // In short, it only allows a valid format starting with https:// or http:// and the follow characters (except for invalid characters in a url like ''"" or !¡?¿)
+  url:                 /(rtsp:\/\/|https?:\/\/(www\.)?)[-a-zA-Z0-9@:%._\\+~#=]{1,256}[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\\+.\/~#?&=]*)/, // In short, it only allows a valid format starting with https:// or http:// and the follow characters (except for invalid characters in a url like ''"" or !¡?¿)
   detectCrendentials:  /[@]/, // if the url have an "@" it means that have credentials set on the url itself
   user:                /^[A-Za-z0-9\s]{3,50}$/, //letters and numbers, 3 to 50 characters and no special characters allowed and no accents
   pwd:                 /^(?=.*[a-zA-ZÀ-ú0-9\d].*)[a-zA-Z\d!@#$%&*]{3,}$/, //letters, numbers and special characterç, no spaces, at least 3 character
@@ -42,7 +42,7 @@ var $errorGroup                 = $('<div class="contein_error_message"><div cla
 $('#groupCamera').after($errorGroup);
 $($errorGroup).hide();
 
-var $errorUrl                   = $('<div class="contein_error_message margin-top-15px"><div class="error_message">Please provide a valid URL. example: http://... or https://...</div></div>');
+var $errorUrl                   = $('<div class="contein_error_message margin-top-15px"><div class="error_message">Please provide a valid URL. example: http://..., https://... or rtsp://</div></div>');
 var $errorUrlEmpty              = $('<div class="contein_error_message margin-top-15px"><div class="error_message">The URL field cannot be empty!.</div></div>');
 var $errorCheckCredentialsInUrl = $('<div class="contein_error_message margin-top-15px"><div class="error_message">A "@" has been detected, this may mean that you have put a username and password in the URL, if the url requires credentials please activate the credentials field.</div></div>');
 $('#urlCamera').after($errorCheckCredentialsInUrl)
