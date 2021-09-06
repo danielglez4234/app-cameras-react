@@ -24,7 +24,7 @@ const Videos = ({ name, warningDelete, closeWaringDelete, showMenuItems, coverCa
       </button>
         <img src={ warningIcon } alt="expand" className="warning-delete-warning-icon" />
         <p className="warning-delete-text">Are you sure you want to Delete <b>{name.id}</b>?</p>
-        <p className="warning-delete-text warning-delete-text-secundary">Onces deleted you cant turn back.</p>
+        <p className="warning-delete-text warning-delete-text-secundary">Once deleted you cant turn back.</p>
         <a className="warning-delete-button" href={`/delete?id=${name.id}`}>
           <img src={ deleteIcon } alt="expand" className="deleteCameraButtonIcon" />
         </a>
