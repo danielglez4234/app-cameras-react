@@ -10,6 +10,7 @@ body
   color: white !important;
 }
 
+.overflow_scroll{overflow:scroll !important;}
 
 .opacity-on{opacity: 1 !important}
 .opacity-on-Move-right{opacity: 1 !important; right: 0px !important;}
@@ -525,13 +526,13 @@ height: 100%;
 .rep_prub_cont{
   height: 100%;
   width: 100%;
-  padding: 10px 0px 0px 10px;
+  padding: 10px 10px 0px 10px;
   text-align: center;
   text-align-last: center;
   z-index: -5;
   box-shadow: inset 0px 0px 4px black;
   background-color: #3f464c;
-  overflow-y: scroll;
+  overflow-y: hidden;
 }
 
 .rep_prub_form{

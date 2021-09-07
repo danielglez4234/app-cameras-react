@@ -77,7 +77,14 @@ class ContainerVideo extends Component {
 
         $('.video_stream').addClass('adjustWidthVideo-x5')
                           .removeClass('adjustWidthVideo-x1 adjustWidthVideo-x2 adjustWidthVideo-x3 adjustWidthVideo-x7');
+      }else if(countvideos === 7 || countvideos === 8 || countvideos === 9){
+        $('.rep_prub').addClass('width-height-7')
+                      .removeClass('width-height-1 width-height-2 width-height-3 width-height-5');
+
+        $('.video_stream').addClass('adjustWidthVideo-x7')
+                          .removeClass('adjustWidthVideo-x1 adjustWidthVideo-x2 adjustWidthVideo-x3 adjustWidthVideo-x5');
       }else{
+        $('.rep_prub_cont').addClass('overflow_scroll');
         $('.rep_prub').addClass('width-height-7')
                       .removeClass('width-height-1 width-height-2 width-height-3 width-height-5');
 
